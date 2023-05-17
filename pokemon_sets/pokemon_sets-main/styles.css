@@ -1,0 +1,153 @@
+@font-face {
+    font-family: 'MyFont';
+    src: url('pixel.otf') format('opentype');
+}
+
+* {
+    font-family: 'MyFont';
+    font-size: 5vmin;
+    text-shadow: 0.5px 0.5px #A5A5AD;
+    padding: 1px;
+}
+
+@media screen and (min-width: 1200px) {
+    * {
+        font-size: 20px;
+    }
+}  
+
+
+div > p {
+    padding-left: 5px;
+}
+
+body {
+    width: 500px;
+    height: 500px;
+    background-color: #292929;
+    background-size: 20px 20px;
+    background-image:
+    linear-gradient(to right, #181818 1px, transparent 1px),
+    linear-gradient(to bottom, #181818 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+#title{
+    padding: 10px;
+    color: white;
+    background-image: linear-gradient(black, grey);
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-bottom: 1px solid black;
+}
+
+#search_wrapper{
+    width: fit-content;
+    margin-right: 20px;
+    float: left;
+}
+#display_name{
+    color: white;
+    margin-right: 5em;
+    text-align: left;
+    text-transform: uppercase;
+}
+.set_card{
+    padding-top: 0px;
+    padding-bottom: 4px;
+
+    width: 400px;
+    background-color: #525263;
+    background-size: 20px 20px;
+    background-image:
+    linear-gradient(to right, #424252 1px, transparent 1px),
+    linear-gradient(to bottom, #424252 1px, transparent 1px);
+    margin: 5px;
+    position: relative;
+}
+
+.title_bar{
+    background-color: black;
+    border-top: 1.5px solid #29c6ad;
+    border-bottom: 1.5px solid #29c6ad;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+
+.set_name_button{
+    background-color: transparent;
+    flex-grow: 1;
+    color: white;
+    text-align: left;
+    border: none;
+}
+
+.set_name_button:hover{
+    background-color: #525263;
+}
+
+
+
+
+.export_button{
+    background-color: transparent;
+    color: white;
+    justify-items: end;
+    border: none;
+}
+
+
+
+
+.export_button:hover{
+    color: #29c6ad;
+}
+
+.evs_field, .ivs_field{
+    color: #5A5252;
+    text-shadow: 0.5px 0.5px #A5A5AD;
+    padding-right: 5px;
+    margin: 0px;
+    line-height: 0px;
+
+    border-top: 1.5px solid #949494;
+
+    border-bottom: 1.5px solid #949494;
+    
+    background-color: #E7E7E7;
+    background-size: 20px 20px;
+    background-image:
+    linear-gradient(to right, #D6D6D6 1.5px, transparent 1px),
+    linear-gradient(to bottom, #D6D6D6 1.5px, transparent 1px);
+}
+
+.evs_field > * , .ivs_field > *{
+    display: inline-block;
+}
+
+.big_sprite{
+    max-height: 1em;
+    float: right;
+}
+.nature, .item, .ability, .level, .moves, .tera_type_content, .teraType{
+    color: white;
+    text-shadow: 1px 1px #A5A5AD;
+    padding-right: 5px;
+    margin: 0px;
+}
+.tera_type_content, .teraType{
+    display: inline-block;
+}
+
+
+.set_content {
+    display: none;
+    background-color: #525263;
+    background-size: 20px 20px;
+    background-image:
+    linear-gradient(to right, #424252 1px, transparent 1px),
+    linear-gradient(to bottom, #424252 1px, transparent 1px);
+    text-align: left;
+    overflow: visible;
+}
