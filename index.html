@@ -1,14 +1,61 @@
 <!DOCTYPE html>
 <html>
- 
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <title>Recommended Sets</title>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
- 
 <body>
-    <a href = "https://b0004.github.io/personal_portfolio/pokemon_sets/pokemon_sets-main">Pokemon Sets</a>
-    <script src="script.js"></script>
+    <header>
+        <h1>My Portfolio</h1><br>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Brandon</h2>
+        <p>Welcome to my portfolio website! I am a passionate developer who loves to explore the vast world of programming. My interests include web development, machine learning, and software engineering.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li>
+                <h3>
+                    <a href="https://b0004.github.io/personal_portfolio/pokemon_sets/pokemon_sets-main/">Pokemon Sets</a>
+                </h3>
+                <p>A Pokémon set builder is a tool or feature within a Pokémon-related website or application that allows trainers to create and customize their own Pokémon sets or teams for competitive battles. It provides a convenient way to plan and strategize the moves, abilities, items, and EV (Effort Value) spreads for each Pokémon on the team.</p>
+            </li>
+            <li>
+                <h3>Coming soon</h3>
+                <p>Coming Soon.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out to me using the form below or through my social media profiles.</p>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your email">
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Your message"></textarea>
+
+            <input type="submit" value="Send">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 My Portfolio. All rights reserved.</p>
+    </footer>
 </body>
- 
 </html>

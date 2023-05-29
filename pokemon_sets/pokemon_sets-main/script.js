@@ -81,7 +81,7 @@ function show_sets(name){
     */
     
 }
-show_sets("Great Tusk");
+show_sets("Abomasnow");
 
 function new_card(name, set_name){
     // card
