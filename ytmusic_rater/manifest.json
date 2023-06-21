@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Music Playlist Rater",
+  "version": "0.0.1",
+  "description": "Add a rating to a song from a playlist in YouTube Music",
+
+  "icons": {
+    "16": "images/s-16.png",
+    "32": "images/s-32.png",
+    "48": "images/s-48.png",
+    "128": "images/s-128.png"
+  },
+
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": [
+        "https://music.youtube.com/playlist?list=*"
+      ]
+    }
+  ]
+}
