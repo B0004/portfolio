@@ -1,3 +1,3 @@
 # Personal Portfolio - Brandon Kao
 
-b0004.github.io/personal_portfolio/
+[Personal Portfolio](https://b0004.github.io/personal_portfolio/)
