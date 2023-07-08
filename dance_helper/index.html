@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Helper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>hello</h1>
+    <div class="video-container">
+        <video id = "id-video" controls width="250">
+            <source src="hello.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="times">
+        <div id = "id-current-time">
+            0:00
+        </div>
+        <div id = "chorus-start-container">
+            <button id="id-chorus-start">0:00</button>
+            start time:<input type="number" id="input-chorus-start">
+            <button id="id-chorus-start-go">go start</button>
+        </div>
+        <div id = "chorus-end-container">
+            <button id="id-chorus-end">0:00</button>
+            end time:<input type="number" id="input-chorus-end">
+            <button id="id-chorus-end-go">go end</button>
+        </div>
+        <button onclick="start_create()">create</button>
+    </div>
+    <div class="frames-container">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

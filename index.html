@@ -1,71 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Portfolio</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Caveat&family=Loved+by+the+King&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>my portfolio</title>
 </head>
 <body>
-    <header>
-        <h1>My Portfolio</h1><br>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+	<div class="page_container">
+		<div>
+			<div class="wave"></div>
+			<div class="wave"></div>
+			<div class="wave"></div>
+		 </div>
 
-    <section id="about">
-        <h2>About Brandon</h2>
-        <p>Welcome to my portfolio website! I am a passionate developer who loves to explore the vast world of programming. My interests include web development, machine learning, and software engineering.</p>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-            <li>
-                <h3>
-                    <a href="https://b0004.github.io/personal_portfolio/pokemon_sets/pokemon_sets-main/">Pokemon Sets</a>
-                </h3>
-                <p>A Pokémon set builder is a tool or feature within a Pokémon-related website or application that allows trainers to create and customize their own Pokémon sets or teams for competitive battles. It provides a convenient way to plan and strategize the moves, abilities, items, and EV (Effort Value) spreads for each Pokémon on the team.</p>
-                <div class = "ss_container">
-                    <img src = "images/garchomp.png" class = "ss" alt = "example image">
-                    <img src = "images/lea.png" class = "ss" alt = "example image">
-                    <img src = "images/scizor.png" class = "ss" alt = "example image">
-                </div>
-            </li>
-<br><br><br>
-            <li>
-                <h3>YouTube Music Playlist Rater</h3>
-                <p>
-                    The provided code enables users to rate songs in a YouTube Music playlist by dynamically creating dropdown menus next to each track, allowing users to select a rating from "S" to "F". The selected rating is stored locally, ensuring it persists across page refreshes, and the dropdown menus update their styles to reflect the chosen rating. This feature enhances the playlist experience by allowing users to organize and remember their preferences for each song.</p>
-                <div class = "ss_container">
-                    <img src = "images/kenshi.png" class = "ss" alt = "example image">
-                </div>
-            </li>
-        </ul>
-    </section>
-
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Feel free to reach out to me using the form below or through my social media profiles.</p>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Your name">
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Your email">
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" placeholder="Your message"></textarea>
-
-            <input type="submit" value="Send">
-        </form>
-    </section>
-
-    <footer>
-        <p>&copy; 2023 My Portfolio. All rights reserved.</p>
-    </footer>
+		<div class="side_panel left_panel">
+			<div class="title panel_title left_panel_title">
+				my projects
+			</div>
+			<div class="button_container left_button_container">
+				<button class="left_buttons chat_buttons" id="0">fortune teller</button>
+				<button class="left_buttons chat_buttons" id="1">pokemon showdown set builder</button>
+				<button class="left_buttons chat_buttons" id="2">dance breakdown</button>
+				<button class="left_buttons chat_buttons" id="3">YouTube music rating</button>
+			</div>
+		</div>
+		<div class="middle_container">
+			<div class="title middle_title">
+				brandon's portfolio
+			</div>
+			<div class="chat_container">
+				hi! welcome to my portfolio! my name is brandon and i'm a front-end web developer. check out some of my projects and know more about me!
+			</div>
+			<div class="fish_container">
+				<img src = fish_head.png alt = "fish???" id="fish_img">
+			</div>
+		</div>
+		<div class="side_panel right_panel">
+			<div class="title panel_title right_panel_title">
+				about brandon 
+			</div>
+			<div class="button_container right_button_container">
+				<button class="right_buttons chat_buttons" id="4">education</button>
+				<button class="right_buttons chat_buttons" id="5">experiences</button>
+				<button class="right_buttons chat_buttons" id="6">more about me</button>
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
 </body>
 </html>

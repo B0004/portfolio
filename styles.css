@@ -1,158 +1,88 @@
-/* General Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    color: black;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    padding: 20px;
-  }
-  
-  h1 {
-    margin: 0;
-    font-size: 30px;
-    color: #ffffff;
-  }
-  
-  nav ul {
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav ul li {
-    display: inline;
-  }
-  
-  nav ul li a {
-    color: #ffffff;
-    padding: 10px;
-  }
-  
-  section {
-    padding: 30px;
-    padding-top: 5px;
-    background-color:rgba(246, 233, 255, 0.97);
-    margin-bottom: 30px;
+@import "wave.css";
+body{
+  font-family: Arial, Helvetica, sans-serif
+}
 
-    line-height: 2;
+.page_container *{
+  color: white;
+  padding: 15px;
+  justify-content: center;
+}
 
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  h2 {
-    font-size: 24px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  h3 {
-    margin: 0;
-    font-size: 20px;
-    color: black;
-  }
-  
-  footer {
-    background-color: #001a33;
-    padding: 10px;
-    color: #ffffff;
-    text-align: center;
-  }
-  
-  /* Space-themed Styling */
-  body {
-    background-image: url('images/monster.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  header {
-    background-image: linear-gradient(to bottom, rgba(0, 26, 51, 0.8), rgba(0, 26, 51, 0.2)), url('images/monster.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  h1 {
-    font-size: 40px;
-  }
-  
-  nav ul li a {
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
-  
-  nav ul li a:hover {
-    color: #ffcc00;
-  }
+.page_container{
+  display: flex;
+  justify-content: space-between;
+  height: 95vh;
+  z-index: 5;
+}
 
-  h3 a{
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
-  h3 a:hover {
-    color: #7300ff4b;
-  }
-  
+.side_panel{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-shrink: 0;
+}
 
-  
-  h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  
-  footer {
-    font-size: 14px;
-  }
-  
-  /* Form Styling */
-  form {
-    margin-top: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #333333;
-    border-radius: 5px;
-    background-color: #ffffff;
-    color: #333333;
-  }
-  
-  input[type="submit"] {
-    background-color: #ffcc00;
-    color: #333333;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #a17100;
-  }
-  
-  .ss_container{
-    display: flex;
-    justify-content: space-between;
-  }
+.button_container{
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
-  .ss {
-    object-fit: contain;
-    padding: 5px;
-    max-height: 400px;
-  }
+.middle_container{
+  display: flex;
+  flex-direction: column;
+  flex-grow:1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat_container{
+  font-family: 'Caveat', cursive;
+  font-size: 2em;
+}
+.fish_container{
+  justify-self: flex-end;
+}
+
+.title{
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Amatic SC', cursive;
+  text-decoration: bold;
+  flex-shrink: 0;
+}
+
+button {
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 25px;
+  text-decoration: underline 0.15em rgba(0, 0, 0, 0);
+  transition: all 0.3s;
+  font-size: 1.5em;
+  font-family: 'Loved by the King', cursive;
+  white-space: nowrap;
+}
+
+button:hover {
+  color: lightblue;
+  background-color: transparent;
+  text-decoration-color: lightblue;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+.is_bouncing{
+  animation: bounce 0.1s infinite;
+}
+
+.has_border{
+  border: 5px solid pink;
+}

@@ -1,0 +1,59 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 1;
+}
+
+.frames-container *{
+    margin-inline: auto; /*make sure the container itself is centered*/
+    width: 90%; /*90% of the screen*/
+    max-width: 1000px;
+}
+
+.video-container{
+    display: flex;
+    justify-content: center;
+}
+  
+video {
+    width: 100%; /*100 percent of the container*/
+}
+
+.times{
+    border: 3px solid red;
+    display: flex;
+    align-items: center;
+    width: 90%; /*90% of the screen*/
+    max-width: 1000px;
+    justify-content: center;
+    margin-inline: auto; /*make sure the container itself is centered*/
+}
+
+.frames-container{
+    border: 3px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%; /*90% of the screen*/
+    max-width: 1000px;
+    justify-content: center;
+    margin-inline: auto; /*make sure the container itself is centered*/
+}
+
+.frames{
+    border: 3px solid blue;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%; /*90% of the screen*/
+    max-width: 1000px;
+    justify-content: center;
+    margin-inline: auto; /*make sure the container itself is centered*/
+}
+
+.labels{
+    color: red;
+    align-self: center;
+}
