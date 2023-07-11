@@ -1,56 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="styles.css">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>brandon's portfolio</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="new_style.css">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Caveat&family=Loved+by+the+King&display=swap" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>my portfolio</title>
-</head>
-<body>
-	<div class="page_container">
-		<div>
-			<div class="wave"></div>
-			<div class="wave"></div>
-			<div class="wave"></div>
-		 </div>
+        <link rel="icon" type="image/x-icon" href="assets/fish_favicon.png">
 
-		<div class="side_panel left_panel">
-			<div class="title panel_title left_panel_title">
-				my projects
-			</div>
-			<div class="button_container left_button_container">
-				<button class="left_buttons chat_buttons" id="0">fortune teller</button>
-				<button class="left_buttons chat_buttons" id="1">pokemon showdown set builder</button>
-				<button class="left_buttons chat_buttons" id="2">dance breakdown</button>
-				<button class="left_buttons chat_buttons" id="3">YouTube music rating</button>
-			</div>
-		</div>
-		<div class="middle_container">
-			<div class="title middle_title">
-				brandon's portfolio
-			</div>
-			<div class="chat_container">
-				hi! welcome to my portfolio! my name is brandon and i'm a front-end web developer. check out some of my projects and know more about me!
-			</div>
-			<div class="fish_container">
-				<img src = fish_head.png alt = "fish???" id="fish_img">
-			</div>
-		</div>
-		<div class="side_panel right_panel">
-			<div class="title panel_title right_panel_title">
-				about brandon 
-			</div>
-			<div class="button_container right_button_container">
-				<button class="right_buttons chat_buttons" id="4">education</button>
-				<button class="right_buttons chat_buttons" id="5">experiences</button>
-				<button class="right_buttons chat_buttons" id="6">more about me</button>
-			</div>
-		</div>
-	</div>
-	<script src="script.js"></script>
-</body>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Rubik&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="page-container">
+            <div class="intro-container">
+                <div class="intro-content">
+                    <div class="intro-words">
+                        <div class="wrapper">
+                            <div class="intro-title title">
+                                brandon kao
+                            </div>
+                            <div class="intro-bio">
+                                hi! welcome to my portfolio! my name is brandon and i'm a front-end web developer. check out some of my projects and learn more about me!
+                            </div>
+                        </div>
+                        <div class="intro-nav links">
+                            <ul>
+                                <li><a href="">about me</a></li>
+                                <li><a href="">resume</a></li>
+                                <li id = project-expansion><a href="#project-section">some projects</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="fish-container">
+                        <img src="assets/fish_body.png">
+                    </div>
+                </div>
+
+            </div>
+            <div class="projects-container">
+                <hr class="project-divider" id="project-section">
+                <div class="project-container">
+                    <div class="project-img">
+                        <img src="assets/fortune_head.png">
+                    </div>
+                    <div class="project-description-container">
+                        <div class="wrapper">
+                            <div class="project-title title">
+                                fortune teller
+                            </div>
+                            <div class="project-description">
+                                a fortune telling web app featuring an astrology love compatibility calculator, a fortune cookie simulator, and a palm reading fortune teller.
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            role? date?
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="project-divider">
+                <div class="project-container">
+                    <div class="project-img">
+                        <img src="assets/pokemon_head.png">
+                    </div>
+                    <div class="project-description-container">
+                        <div class="wrapper">
+                            <div class="project-title title">
+                                pokemon showdown set builder
+                            </div>
+                            <div class="project-description">
+                                a google chrome extension made for competitive pokemon battles on pokemon showdown, provides trainers with the latest meta sets of moves, abilities, items, and EV (Effort Value) spreads and makes teams automatically.
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            role? date?
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="project-divider">
+                <div class="project-container">
+                    <div class="project-img">
+                        <img src="assets/dance_head.png">
+                    </div>
+                    <div class="project-description-container">
+                        <div class="wrapper">
+                            <div class="project-title title">
+                                dance breakdown
+                            </div>
+                            <div class="project-description">
+                                a web app designed to help dancers learn difficult choreographies by marking a video with a screen capture on every beat count to break down the choreography.
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            role? date?
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="project-divider">
+                <div class="project-container">
+                    <div class="project-img">
+                        <img src="assets/youtube_head.png">
+                    </div>
+                    <div class="project-description-container">
+                        <div class="wrapper">
+                            <div class="project-title title">
+                                YouTube music rating
+                            </div>
+                            <div class="project-description">
+                                a google chrome extension that enables users to rate songs in a YouTube Music playlist by dynamically creating dropdown menus next to each song and provide users to select a rating from 'S' to 'F'.
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            role? date?
+                        </div>
+                    </div>
+                </div>
+                <hr class="project-divider">
+
+            </div>
+            <div class="footer-container">
+                <div class="connect-container">
+                    <div class="footer-title title">
+                        let's connect
+                    </div>
+                    <div class="footer-nav links">
+                        <ul>
+                            <li id="email"><p>brandonkao4@gmail.com</p></li>
+                            <li id="linkedin"><a href="https://www.linkedin.com/in/brandonkao4" target="_blank">linkedin</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">built by brandon kao @ 2023</div>
+            </div>
+        </div>
+        <script src="" async defer></script>
+    </body>
 </html>

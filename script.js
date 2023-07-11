@@ -11,8 +11,8 @@ const chatTextArray = [
   "my hobbies and who i am!"
 ];
 
-const pop = new Audio("bubble_pop.mp3");
-const pufferfish = new Audio("pufferfish_longer.mp3");
+const pop = new Audio("assets/bubble_pop.mp3");
+const pufferfish = new Audio("assets/pufferfish_longer.mp3");
 
 
 var i = 0;

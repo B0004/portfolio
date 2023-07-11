@@ -1,0 +1,143 @@
+body{
+    background-color: #161616;
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-family: Rubik;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+
+    background: linear-gradient(315deg, rgb(10, 10, 10), rgb(30, 30, 30) , rgb(15, 15, 15), rgb(0, 0, 0));
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+  
+html {
+    scroll-behavior: smooth;
+}
+
+body *{
+}
+
+.title{
+    color: #FFF;
+    font-family: Amatic SC;
+    font-size: 5rem;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.intro-title{
+    padding-bottom: 5%;
+}
+
+.links *{
+    color: #FFF;
+    padding: none;
+    list-style: none;
+    list-style-image: url('assets/side_arrow.svg');
+}
+
+#project-expansion{
+    list-style-image: url('assets/down_arrow.svg');
+}
+
+
+
+.project-img{
+    border-radius: 1.25rem;
+    border: 3px solid #FFF;
+    width: 33.83975rem;
+    height: 22.625rem;
+    overflow: hidden;
+}
+
+.project-img > img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.project-divider{
+    border-top: 1px solid white;
+    width: 100%;
+
+}
+
+.page-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.intro-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro-content{
+    display: flex;
+    gap: 8%;
+    justify-content: center;
+}
+
+.intro-words{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    width: 50%;
+    gap: 5%;
+}
+
+.intro-nav{
+    justify-self: end;
+    margin-top: 10%;
+}
+
+.projects-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.project-container{
+    margin-left: 3%;
+    margin-right: 3%;
+    display: flex;
+}
+
+.project-img{
+    flex-shrink: 0;
+}
+
+.project-description-container{
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 1;
+}
+
+.connect-container{
+    margin: 5% 10% 10% 15%;
+}
+
+.copyright{
+    margin: auto;
+    text-align: center;
+    font-size: 75%;
+}
