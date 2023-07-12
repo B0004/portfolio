@@ -25,7 +25,7 @@ body{
     }
 }
 
-  
+
 html {
     scroll-behavior: smooth;
 }
@@ -41,19 +41,45 @@ body *{
     font-weight: 400;
 }
 
-.intro-title{
-    padding-bottom: 5%;
+.intro-words{
+    max-width: 28%;
 }
 
-.links *{
+.intro-title{
+    padding-bottom: 5%;
+    color: #FFF;
+    font-family: Amatic SC;
+    font-size: 8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+li, a{
     color: #FFF;
     padding: none;
     list-style: none;
     list-style-image: url('assets/side_arrow.svg');
+
+    transition: all 0.3s;
+}
+
+li:hover{
+    transform: translateX(5px);
 }
 
 #project-expansion{
     list-style-image: url('assets/down_arrow.svg');
+}
+
+#project-expansion:hover{
+    list-style-image: url('assets/down_arrow.svg');
+    transform: translateY(5px);
+}
+
+a:hover{
+    color: grey;
 }
 
 
