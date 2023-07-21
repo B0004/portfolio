@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "poochyena team builder",
+    "version": "0.0.1",
+    "description": "automatically build teams on pokemon showdown",
+
+    "content_scripts": [
+        {
+          "js": ["script.js", "data/sets.js", "data/usage.js", "data/pokedex.js"],
+          "css": ["styles.css"],
+          "matches": [
+            "https://play.pokemonshowdown.com/teambuilder"
+          ]
+        }
+      ]
+  }
