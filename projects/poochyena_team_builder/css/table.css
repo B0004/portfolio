@@ -1,0 +1,11 @@
+.cur {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.table{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
