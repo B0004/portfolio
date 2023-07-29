@@ -1,3 +1,15 @@
+.cur {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.table{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 .field{
     color: black;
     font-size: 0.8rem;
@@ -9,7 +21,7 @@
     border: 3px ridge silver;
     padding: 3px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
 
 }
 
@@ -21,10 +33,13 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     border: 4px ridge silver;
+    border-radius: 3%;
     padding: 6px;
 
     height: 21rem;
     width: 15rem;
+
+    transition: all 0.2s;
 }
 
 
@@ -41,7 +56,7 @@
 .div11 { grid-area: 8 / 3 / 9 / 5; }
 
 .set-name{
-    font-size: 1rem;
+    font-size: 1rem;    
 }
 
 .topb{
@@ -61,28 +76,61 @@
     flex-direction: column;
     justify-content: space-around;
     gap: 4px;
-    font-size: 0.5rem;
+    font-size: 0.4rem;
+    width: 3.5rem;
 }
 
-img{
-    max-width: 100%;
-    max-height: 100%;
+.div7{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.4rem;
 }
 
-.ou, .ou *{
-    border-color: gold;
-    color: white;
+.export-container{
+    display: none;
 }
 
-.ou .field{
-    background-color: rgba(0, 0, 0, 0.8);
-}
 
-.uber, .uber *{
+.tier-uber, .tier-uber * {
     border-color: purple;
-    color: black;
 }
 
-.uber .field{
-    background-color: rgba(255, 255, 0, 0.7);
+.tier-ag, .tier-ag * {
+    border-color: red;
 }
+
+.tier-ou, .tier-ou * {
+    border-color: black;
+}
+
+.tier-ou > .set-name{
+    border-color: gold;
+}
+
+
+.tier-uu, .tier-uu * {
+    border-color: blue;
+}
+
+.tier-ru, .tier-ru * {
+    border-color: yellow;
+}
+
+.tier-nu, .tier-nu * {
+    border-color: green;
+}
+
+.tier-pu, .tier-pu * {
+    border-color: pink;
+}
+
+.tier-zu, .tier-zu * {
+    border-color: brown;
+}
+
+
+.card-container:hover{
+    background-color: white;
+    border-radius: 0%;
+}
+
