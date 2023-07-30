@@ -1,32 +1,167 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="head.css">
+<head>
+    <title>Dynamic Divs with Charts using Chart.js</title>
 
+</head>
+<body>
+    <div class="my-body" id="my-body">
 
-    </head>
-    <body>
-        <div class="mon-name">
-
+        <div class="header" id="my-header">
+            <div class="mon-name">Pawniard</div>
+            <div class="usage"></div>
+            <div class="logo">
+            </div>
         </div>
-        <div class="usage">
-
-        </div>
-        <div class="logo">
-            <a href="https://pokemondb.net/pokedex/poochyena"><img src="https://img.pokemondb.net/sprites/black-white/normal/poochyena.png" alt="Poochyena"></a>
-        </div>
-            
-        
-        <script src="" async defer></script>
-    </body>
+    
+        <div class="table" id="card-table">
+                <div class="tier-zu card-container">
+                    <div class="field div1 set-name">
+                        ZU Swords Dance
+                    </div>
+                    <div class="field div2 topb">
+                        <div class="build-name">item:</div>
+                        <div class="build">Eviolite</div>
+                    </div>
+                    <div class="field div3 topb">
+                        <div class="build-name">ability:</div>
+                        <div class="build">Defiant</div>
+                    </div>
+                    <div class="field div4 topb">
+                        <div class="build-name">nature</div>
+                        <div class="build">Adamant</div>
+                    </div>
+                    <div class="field div5 topb">
+                        <div class="build-name">tera type</div>
+                        <div class="build">Dark</div>
+                    </div>
+                    <div class="field div6 numbers">
+                        <div class="stat">
+                            HP: 0
+                        </div>
+                        <div class="stat">
+                            Attack: 252
+                        </div>
+                        <div class="stat">
+                            Defense: 0
+                        </div>
+                        <div class="stat">
+                            Sp.Atk: 0
+                        </div>
+                        <div class="stat">
+                            Sp.Def: 4
+                        </div>
+                        <div class="stat">
+                            Speed: 252
+                        </div>
+                    </div>
+                    <div class="field div7">
+                        <div class="canvas_wrapper">
+                            <canvas class="stat_radar" id="pawniard-zu-swords-dance" style="display: block; box-sizing: border-box; height: 300px; width: 300px;" width="495" height="495"></canvas>
+                        </div>
+                    </div>
+                    <div class="field div8">
+                        Swords Dance
+                    </div>
+                    <div class="field div9">
+                        Night Slash
+                    </div>
+                    <div class="field div10">
+                        Iron Head
+                    </div>
+                    <div class="field div11">
+                        Sucker Punch
+                    </div>
+                    <p class="export-container">
+                        
+                    Pawniard @ Eviolite
+                    Ability: Defiant
+                    Tera Type: Dark
+                    EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+                    IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+                    Adamant Nature
+                    - Swords Dance
+                    - Night Slash
+                    - Iron Head
+                    - Sucker Punch
+                    
+                    </p>
+                </div>
+                
+                <div class="tier-lc card-container">
+                    <div class="field div1 set-name">
+                        LC Offensive
+                    </div>
+                    <div class="field div2 topb">
+                        <div class="build-name">item:</div>
+                        <div class="build">Eviolite</div>
+                    </div>
+                    <div class="field div3 topb">
+                        <div class="build-name">ability:</div>
+                        <div class="build">Defiant</div>
+                    </div>
+                    <div class="field div4 topb">
+                        <div class="build-name">nature</div>
+                        <div class="build">Jolly</div>
+                    </div>
+                    <div class="field div5 topb">
+                        <div class="build-name">tera type</div>
+                        <div class="build">Fire</div>
+                    </div>
+                    <div class="field div6 numbers">
+                        <div class="stat">
+                            HP: 0
+                        </div>
+                        <div class="stat">
+                            Attack: 156
+                        </div>
+                        <div class="stat">
+                            Defense: 36
+                        </div>
+                        <div class="stat">
+                            Sp.Atk: 0
+                        </div>
+                        <div class="stat">
+                            Sp.Def: 116
+                        </div>
+                        <div class="stat">
+                            Speed: 196
+                        </div>
+                    </div>
+                    <div class="field div7">
+                        <div class="canvas-wrapper" style="display: flex;">
+                        </div>
+                    </div>
+                    <div class="field div8">
+                        Iron Head
+                    </div>
+                    <div class="field div9">
+                        Low Sweep
+                    </div>
+                    <div class="field div10">
+                        Sucker Punch
+                    </div>
+                    <div class="field div11">
+                        Swords Dance
+                    </div>
+                    <p class="export-container">
+                        
+                    Pawniard @ Eviolite
+                    Ability: Defiant
+                    Tera Type: Fire
+                    EVs: 0 HP / 156 Atk / 36 Def / 0 SpA / 116 SpD / 196 Spe
+                    IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+                    Jolly Nature
+                    - Iron Head
+                    - Low Sweep
+                    - Sucker Punch
+                    - Swords Dance
+                    
+                    </p>
+                </div>
+                </div>
+    </div>
+    <script src="chart.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
