@@ -7,7 +7,7 @@
     "content_scripts": [
         {
           "js": ["scripts/script.js", "data/sets.js", "data/usage.js", "data/pokedex.js", "scripts/calculate_stat.js", "scripts/chart.js", "scripts/carousel.js"],
-          "css": ["css/table.css", "css/card.css"],
+          "css": ["css/table.css", "css/card.css", "css/header.css"],
           "matches": [
             "https://play.pokemonshowdown.com/teambuilder"
           ]

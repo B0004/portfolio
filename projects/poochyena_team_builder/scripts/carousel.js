@@ -12,6 +12,7 @@ function rotateCarousel() {
   var angle = theta * selectedIndex * -1;
   carousel.style.transform = 'translateZ(' + -radius + 'px) ' + 
     rotateFn + '(' + angle + 'deg)';
+    console.log(selectedIndex);
 }
 
 var prevButton = document.querySelector('.previous-button');
@@ -28,8 +29,10 @@ nextButton.addEventListener( 'click', function() {
 
 function changeCarousel() {
   refreshData();
-  console.log("2222222");
+  
   theta = 360 / cellCount;
+
+  Math.min((360 / cellCount), )
   var cellSize = isHorizontal ? cellWidth : cellHeight;
   radius = Math.round( ( cellSize / 2) / Math.tan( Math.PI / cellCount ) );
   for ( var i=0; i < cells.length; i++ ) {

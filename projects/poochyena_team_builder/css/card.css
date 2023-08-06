@@ -42,7 +42,15 @@
     font-family: 'Futura Std', sans-serif;
 
     padding: 10px;
-    margin: 10px;                    
+    margin: 10px;              
+    
+    transition: all 0.3s;
+}
+
+.card:hover{
+    border-radius: 0px;
+    box-shadow: 0rem 1rem 3em cyan;
+    background-image: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8));
 }
 
 .title{
@@ -85,7 +93,8 @@
     height: 100%;
     width: 100%;
     margin: auto;
-
-    transition: all 0.3s;
 }
 
+.false{
+    display: none;
+}

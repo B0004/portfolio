@@ -1,30 +1,37 @@
 @import url('https://fonts.cdnfonts.com/css/futura-std-4');
 
+#room-rooms > div {
+    margin: 0px;
+    padding: 0px;
+
+    height: 100%;
+
+}
+
 #my-body{
+    font-family: 'Futura Std', sans-serif;
+
     background-image: url("https://i.imgur.com/7ZY1oG3.jpg");
     background-size:clip;
     background-position: center top;
-    min-height: 100vh;
+    height: 100%;
 
     display: flex;
+    justify-content: space-around;
     align-items: center;
-    justify-content: end;
-
     overflow-y: hidden;
     overflow-x: auto;
 
-    perspective: 1000px;
 }
 
-
-#my-header{
-    padding: 10px;
-    border: 10px ridge silver;
-    background-color: rgba(255, 255, 255, .6);
-    background-image: linear-gradient(rgba(218, 218, 255, 0.8), rgba(255, 255, 255, .8));
-    font-family: 'Futura Std', sans-serif;
-    padding: 10px;
-    margin: 10px;
+#scene{
+    height: 100%;
+    perspective: 1000px;
+    width: 16rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 15rem;
 }
 
 .to-bold{
@@ -32,7 +39,7 @@
 }
 
 #card-table{
-    width: 100%;
+    width: fit-content;
     height: 100%;
 
     display: flex;
@@ -43,16 +50,18 @@
     position: absolute;
     transform: translateZ(-288px);
     transform-style: preserve-3d;
-    transition: transform 1s;
+    transition: transform 0.3s;
 }
-
 
 
 /* carousel options */
 .card {
     position: absolute;
-    transition: transform 1s, opacity 1s;
-  }
+}
+
+#card-0 .stat-radar{
+    transition: all 0.1s;
+}
 
 .card:nth-child(1) { transform: rotateY(0deg) translateZ(288px); }
 .card:nth-child(2) { transform: rotateY(12deg) translateZ(288px); }

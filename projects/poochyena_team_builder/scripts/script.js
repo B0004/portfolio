@@ -18,21 +18,34 @@ document.querySelector("#room-rooms > div").innerHTML =
 `
 <div class="my-body" id="my-body">
 
-    <div class="table" id="card-table">
+    <div class="scene" id="scene">
+        <div class="table" id="card-table">
+        </div>
     </div>
 
-    <div class="my-header" id="my-header">
-        <div class="mon-name">
-            ${pokemon_name}
+    <div class="my-header" id="my-header">   
+                
+        <div class="header-top">
+            <div class="mon-name">
+                ${pokemon_name}
+            </div>
+            <div class="usage">
+
+            </div>
         </div>
-        <div class="usage">
+        <div class="header-mid">
+            <div class="carousel-options">
+                <p>
+                    <button class="previous-button">Previous</button>
+                    <button class="next-button">Next</button>
+                </p>
+            </div>
         </div>
 
-        <div class="carousel-options">
-            <p>
-                <button class="previous-button">Previous</button>
-                <button class="next-button">Next</button>
-            </p>
+        <div class="header-bot">
+            <div class="set-list" id="set-list">
+    
+            </div>
         </div>
     </div>
 </div>
@@ -40,6 +53,13 @@ document.querySelector("#room-rooms > div").innerHTML =
     var cur_mon = "";
     const table = document.getElementById("card-table");
     const my_header = document.getElementById("my-header");
+    const set_list = document.getElementById("set-list");
+
+    function clearBody(){
+        table.innerHTML = "";
+        set_list.innerHTML = "";
+    }
+
     function get_set(){
         
         //if new mon selected, fill table
@@ -52,7 +72,7 @@ document.querySelector("#room-rooms > div").innerHTML =
         }
         else{
             cur_mon = "";
-            table.innerHTML = "";
+            clearBody();
             if (document.querySelector("#card-table")){
                 document.querySelector("#card-table").innerHTML = ""
             }
@@ -62,6 +82,7 @@ document.querySelector("#room-rooms > div").innerHTML =
             if (document.querySelector(".usage")){
                 document.querySelector(".usage").innerHTML = ""
             }
+
             card_count = 0;
         }
     }
@@ -69,11 +90,14 @@ document.querySelector("#room-rooms > div").innerHTML =
     //{"level":100,"ability":"Sturdy","item":"Choice Band","nature":"Adamant","evs":{"hp":4,"at":252,"df":252},"moves":["Avalanche","Body Press","Heavy Slam","Earthquake"]},
     
     function fill_table(){
+
         card_count = 0;
         table.innerHTML = "";
+        set_list.innerHTML = "";
         pokemon_name = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input").value;
 
         cur_mon = pokemon_name;
+        document.querySelector(".usage").style.display = "block";
         if (ou_usage[pokemon_name]){
             usage_html = `OU usage rate: <span class=to-bold ou-stat>${ou_usage[pokemon_name][1]}%</span>, rank <span class=to-bold ou-stat>${ou_usage[pokemon_name][0]}`;
         }
@@ -85,6 +109,7 @@ document.querySelector("#room-rooms > div").innerHTML =
         }
         else{
             usage_html = "";
+            document.querySelector(".usage").style.display = "none";
         }
 
         document.querySelector(".mon-name").textContent = pokemon_name;
@@ -233,9 +258,20 @@ document.querySelector("#room-rooms > div").innerHTML =
 
             var radar_id = (pokemon_name + "-" + set).replaceAll(/[!\"#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '').toLowerCase().replaceAll(' ','-');
             let tier = "tier-" + set.split(' ')[0].toLowerCase();
+
+            // add set name to header
+            set_list.innerHTML += `
+            <div class="set-list-name ${tier}" id="set-${card_count}">
+                ${set}
+            </div>
+            `;
+
+
+            var check = ("teraType" in info);
+        
         
             let card_template = `
-            <div class="${tier} card">
+            <div class="${tier} card" id="card-${card_count}">
                     <div class="set-name title field">
                         ${set}
                     </div>
@@ -255,7 +291,7 @@ document.querySelector("#room-rooms > div").innerHTML =
                             ${info.ability}
                         </div>
                     </div>
-                    <div class="tera field">
+                    <div class="tera field ${check}">
                         <div class="subtitle">
                             Tera Type:
                         </div>
@@ -323,15 +359,7 @@ document.querySelector("#room-rooms > div").innerHTML =
                         ${export_template}
                     </p>
                 </div>
-            `.replace(`
-            <div class="tera field">
-                <div class="subtitle">
-                    Tera Type:
-                </div>
-                <div class="content">
-                    undefined
-                </div>
-            </div>`, '');
+            `
 
             table.innerHTML += card_template;
 
@@ -418,10 +446,14 @@ document.querySelector("#room-rooms > div").innerHTML =
 
         };
         // once every mon
-
+        if (card_count < 3){
+            table.innerHTML += `
+            <div class="card false">
+            </div>
+            `
+        }
         
         onOrientationChange();
-        table.addEventListener("wheel", scrollTable());
         
         store_id.forEach((id, index) => {
             new Chart(document.getElementById(id), store_config[index]);
@@ -431,9 +463,8 @@ document.querySelector("#room-rooms > div").innerHTML =
             document.getElementById(id).style.width = "100%";
             document.getElementById(id).style.height = "100%";
         });
+
     }
-
-
 
 function get_header(){
     //click the box to get the bar to show up
@@ -456,7 +487,18 @@ table.addEventListener("click", (event) => {
         input_box.value = to_export;
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
     }
+
 })
+
+my_header.addEventListener("click", (event) => {
+    const p2 = event.target.closest('.set-list-name')
+    if(p2){
+        selectedIndex = parseInt(p2.id.replace('set-',''));
+        rotateCarousel();
+    }
+})
+
+
 
 const team_wrapper = document.querySelector("#room-teambuilder");
 

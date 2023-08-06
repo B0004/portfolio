@@ -1,0 +1,30 @@
+#my-header{
+    border: 10px ridge silver;
+    background-color: rgba(255, 255, 255, .6);
+    background-image: linear-gradient(rgba(218, 218, 255, 0.8), rgba(255, 255, 255, .8));
+    font-family: 'Futura Std', sans-serif;
+    padding: 0px;
+    margin: 25px;
+
+    max-height: 90%;
+    overflow: auto;
+}
+
+#my-header > *{
+    padding: 10px;
+}
+
+#set-list{
+    padding: 0px;
+    margin: 0px;
+}
+
+.set-list-name{
+    font-family: 'Futura Std', sans-serif;
+    padding: 10px;
+}
+
+.set-list-name:hover{
+    background-color: rgba(200, 200, 200, .6);
+    font-family: 'Futura Std', sans-serif;
+}
