@@ -1,167 +1,458 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-<head>
-    <title>Dynamic Divs with Charts using Chart.js</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="card.css">
+        <link rel="stylesheet" href="table.css">
 
-</head>
-<body>
-    <div class="my-body" id="my-body">
+    </head>
+    <body>
+        <div class="my-body" id="my-body">
 
-        <div class="header" id="my-header">
-            <div class="mon-name">Pawniard</div>
-            <div class="usage"></div>
-            <div class="logo">
+            <div class="my-header" id="my-header">
+                <div class="mon-name">Kyogre</div>
+                <div class="usage"></div>
+        
+                <div class="carousel-options">
+                    <p>
+                      <label>
+                        Cells
+                        <input class="cells-range" type="range" min="3" max="15" value="9" />
+                      </label>
+                    </p>
+                    <p>
+                      <button class="previous-button">Previous</button>
+                      <button class="next-button">Next</button>
+                    </p>
+                    <p>
+                      Orientation:
+                      <label>
+                        <input type="radio" name="orientation" value="horizontal" checked />
+                        horizontal
+                      </label>
+                      <label>
+                        <input type="radio" name="orientation" value="vertical" />
+                        vertical
+                      </label>
+                    </p>
+                </div>
             </div>
-        </div>
-    
-        <div class="table" id="card-table">
-                <div class="tier-zu card-container">
-                    <div class="field div1 set-name">
-                        ZU Swords Dance
-                    </div>
-                    <div class="field div2 topb">
-                        <div class="build-name">item:</div>
-                        <div class="build">Eviolite</div>
-                    </div>
-                    <div class="field div3 topb">
-                        <div class="build-name">ability:</div>
-                        <div class="build">Defiant</div>
-                    </div>
-                    <div class="field div4 topb">
-                        <div class="build-name">nature</div>
-                        <div class="build">Adamant</div>
-                    </div>
-                    <div class="field div5 topb">
-                        <div class="build-name">tera type</div>
-                        <div class="build">Dark</div>
-                    </div>
-                    <div class="field div6 numbers">
-                        <div class="stat">
-                            HP: 0
-                        </div>
-                        <div class="stat">
-                            Attack: 252
-                        </div>
-                        <div class="stat">
-                            Defense: 0
-                        </div>
-                        <div class="stat">
-                            Sp.Atk: 0
-                        </div>
-                        <div class="stat">
-                            Sp.Def: 4
-                        </div>
-                        <div class="stat">
-                            Speed: 252
-                        </div>
-                    </div>
-                    <div class="field div7">
-                        <div class="canvas_wrapper">
-                            <canvas class="stat_radar" id="pawniard-zu-swords-dance" style="display: block; box-sizing: border-box; height: 300px; width: 300px;" width="495" height="495"></canvas>
-                        </div>
-                    </div>
-                    <div class="field div8">
-                        Swords Dance
-                    </div>
-                    <div class="field div9">
-                        Night Slash
-                    </div>
-                    <div class="field div10">
-                        Iron Head
-                    </div>
-                    <div class="field div11">
-                        Sucker Punch
-                    </div>
-                    <p class="export-container">
-                        
-                    Pawniard @ Eviolite
-                    Ability: Defiant
-                    Tera Type: Dark
-                    EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
-                    IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-                    Adamant Nature
-                    - Swords Dance
-                    - Night Slash
-                    - Iron Head
-                    - Sucker Punch
-                    
-                    </p>
-                </div>
+        
+            <div class="table" id="card-table" style="transform: translateZ(-424px) rotateY(0deg);">
+                    <div class="tier-uber card">
+                            <div class="set-name title field">
+                                Uber Choice Scarf
+                            </div>
+                            <div class="item field">
+                                <div class="subtitle">
+                                    Item: 
+                                </div>
+                                <div class="content">
+                                    Choice Scarf
+                                </div>
+                            </div>
+                            <div class="ability field">
+                                <div class="subtitle">
+                                    Ability:
+                                </div>
+                                <div class="content">
+                                    Drizzle
+                                </div>
+                            </div>
+                            <div class="tera field">
+                                <div class="subtitle">
+                                    Tera Type:
+                                </div>
+                                <div class="content">
+                                    Water
+                                </div>
+                            </div>
+                            <div class="nature field">
+                                <div class="subtitle">
+                                    Nature:
+                                </div>
+                                <div class="content">
+                                    Timid
+                                </div>
+                            </div>
+                            <div class="ev-col field">
+                                <div class="subtitle ev-subtitle">
+                                    EVs:
+                                </div>
+                                <div class="content ev-content">
+                                    <div class="ev">HP: 0</div>
+                                    <div class="ev">Attack: 0</div>
+                                    <div class="ev">Defense: 4</div>
+                                    <div class="ev">Sp.Atk: 252</div>
+                                    <div class="ev">Sp.Def: 0</div>
+                                    <div class="ev">Speed: 252</div>
+                                </div>
+                            </div>
+                            <div class="radar field">
+                                <canvas class="stat-radar" id="kyogre-uber-choice-scarf" style="display: block; box-sizing: border-box; height: 251px; width: 251px;" width="414" height="415"></canvas>
+                            </div>
+                            <div class="move field move1">
+                                <div class="subtitle">
                 
-                <div class="tier-lc card-container">
-                    <div class="field div1 set-name">
-                        LC Offensive
-                    </div>
-                    <div class="field div2 topb">
-                        <div class="build-name">item:</div>
-                        <div class="build">Eviolite</div>
-                    </div>
-                    <div class="field div3 topb">
-                        <div class="build-name">ability:</div>
-                        <div class="build">Defiant</div>
-                    </div>
-                    <div class="field div4 topb">
-                        <div class="build-name">nature</div>
-                        <div class="build">Jolly</div>
-                    </div>
-                    <div class="field div5 topb">
-                        <div class="build-name">tera type</div>
-                        <div class="build">Fire</div>
-                    </div>
-                    <div class="field div6 numbers">
-                        <div class="stat">
-                            HP: 0
-                        </div>
-                        <div class="stat">
-                            Attack: 156
-                        </div>
-                        <div class="stat">
-                            Defense: 36
-                        </div>
-                        <div class="stat">
-                            Sp.Atk: 0
-                        </div>
-                        <div class="stat">
-                            Sp.Def: 116
-                        </div>
-                        <div class="stat">
-                            Speed: 196
-                        </div>
-                    </div>
-                    <div class="field div7">
-                        <div class="canvas-wrapper" style="display: flex;">
-                        </div>
-                    </div>
-                    <div class="field div8">
-                        Iron Head
-                    </div>
-                    <div class="field div9">
-                        Low Sweep
-                    </div>
-                    <div class="field div10">
-                        Sucker Punch
-                    </div>
-                    <div class="field div11">
-                        Swords Dance
-                    </div>
-                    <p class="export-container">
+                                </div>
+                                <div class="content">
+                                    Origin Pulse
+                                </div>
+                            </div>
+                            <div class="move field move2">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Ice Beam
+                                </div>
+                            </div>
+                            <div class="move field move3">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Water Spout
+                                </div>
+                            </div>
+                            <div class="move field move4">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Thunder
+                                </div>
+                            </div>
+                            <p class="export-container">
+                                
+                        Kyogre @ Choice Scarf
+                        Ability: Drizzle
+                        Tera Type: Water
+                        EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
+                        IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+                        Timid Nature
+                        - Origin Pulse
+                        - Ice Beam
+                        - Water Spout
+                        - Thunder
                         
-                    Pawniard @ Eviolite
-                    Ability: Defiant
-                    Tera Type: Fire
-                    EVs: 0 HP / 156 Atk / 36 Def / 0 SpA / 116 SpD / 196 Spe
-                    IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-                    Jolly Nature
-                    - Iron Head
-                    - Low Sweep
-                    - Sucker Punch
-                    - Swords Dance
+                            </p>
+                        </div>
                     
-                    </p>
-                </div>
-                </div>
-    </div>
-    <script src="chart.js"></script>
-    <script src="script.js"></script>
-</body>
+                    <div class="tier-uber card">
+                            <div class="set-name title field">
+                                Uber Choice Specs
+                            </div>
+                            <div class="item field">
+                                <div class="subtitle">
+                                    Item: 
+                                </div>
+                                <div class="content">
+                                    Choice Specs
+                                </div>
+                            </div>
+                            <div class="ability field">
+                                <div class="subtitle">
+                                    Ability:
+                                </div>
+                                <div class="content">
+                                    Drizzle
+                                </div>
+                            </div>
+                            <div class="tera field">
+                                <div class="subtitle">
+                                    Tera Type:
+                                </div>
+                                <div class="content">
+                                    Water
+                                </div>
+                            </div>
+                            <div class="nature field">
+                                <div class="subtitle">
+                                    Nature:
+                                </div>
+                                <div class="content">
+                                    Modest
+                                </div>
+                            </div>
+                            <div class="ev-col field">
+                                <div class="subtitle ev-subtitle">
+                                    EVs:
+                                </div>
+                                <div class="content ev-content">
+                                    <div class="ev">HP: 0</div>
+                                    <div class="ev">Attack: 0</div>
+                                    <div class="ev">Defense: 4</div>
+                                    <div class="ev">Sp.Atk: 252</div>
+                                    <div class="ev">Sp.Def: 0</div>
+                                    <div class="ev">Speed: 252</div>
+                                </div>
+                            </div>
+                            <div class="radar field">
+                                <canvas class="stat-radar" id="kyogre-uber-choice-specs" style="display: block; box-sizing: border-box; height: 234px; width: 234px;" width="386" height="386"></canvas>
+                            </div>
+                            <div class="move field move1">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Origin Pulse
+                                </div>
+                            </div>
+                            <div class="move field move2">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Ice Beam
+                                </div>
+                            </div>
+                            <div class="move field move3">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Water Spout
+                                </div>
+                            </div>
+                            <div class="move field move4">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Thunder
+                                </div>
+                            </div>
+                            <p class="export-container">
+                                
+                        Kyogre @ Choice Specs
+                        Ability: Drizzle
+                        Tera Type: Water
+                        EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
+                        IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+                        Modest Nature
+                        - Origin Pulse
+                        - Ice Beam
+                        - Water Spout
+                        - Thunder
+                        
+                            </p>
+                        </div>
+                    
+                    <div class="tier-uber card">
+                            <div class="set-name title field">
+                                Uber Bulky Calm Mind
+                            </div>
+                            <div class="item field">
+                                <div class="subtitle">
+                                    Item: 
+                                </div>
+                                <div class="content">
+                                    Leftovers
+                                </div>
+                            </div>
+                            <div class="ability field">
+                                <div class="subtitle">
+                                    Ability:
+                                </div>
+                                <div class="content">
+                                    Drizzle
+                                </div>
+                            </div>
+                            <div class="tera field">
+                                <div class="subtitle">
+                                    Tera Type:
+                                </div>
+                                <div class="content">
+                                    Fairy
+                                </div>
+                            </div>
+                            <div class="nature field">
+                                <div class="subtitle">
+                                    Nature:
+                                </div>
+                                <div class="content">
+                                    Bold
+                                </div>
+                            </div>
+                            <div class="ev-col field">
+                                <div class="subtitle ev-subtitle">
+                                    EVs:
+                                </div>
+                                <div class="content ev-content">
+                                    <div class="ev">HP: 248</div>
+                                    <div class="ev">Attack: 0</div>
+                                    <div class="ev">Defense: 252</div>
+                                    <div class="ev">Sp.Atk: 0</div>
+                                    <div class="ev">Sp.Def: 8</div>
+                                    <div class="ev">Speed: 0</div>
+                                </div>
+                            </div>
+                            <div class="radar field">
+                                <canvas class="stat-radar" id="kyogre-uber-bulky-calm-mind" style="display: block; box-sizing: border-box; height: 162px; width: 162px;" width="267" height="267"></canvas>
+                            </div>
+                            <div class="move field move1">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Surf
+                                </div>
+                            </div>
+                            <div class="move field move2">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Ice Beam
+                                </div>
+                            </div>
+                            <div class="move field move3">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Calm Mind
+                                </div>
+                            </div>
+                            <div class="move field move4">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Protect
+                                </div>
+                            </div>
+                            <p class="export-container">
+                                
+                        Kyogre @ Leftovers
+                        Ability: Drizzle
+                        Tera Type: Fairy
+                        EVs: 248 HP / 0 Atk / 252 Def / 0 SpA / 8 SpD / 0 Spe
+                        IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+                        Bold Nature
+                        - Surf
+                        - Ice Beam
+                        - Calm Mind
+                        - Protect
+                        
+                            </p>
+                        </div>
+                    
+                    <div class="tier-uber card">
+                            <div class="set-name title field">
+                                Uber Offensive Calm Mind
+                            </div>
+                            <div class="item field">
+                                <div class="subtitle">
+                                    Item: 
+                                </div>
+                                <div class="content">
+                                    Leftovers
+                                </div>
+                            </div>
+                            <div class="ability field">
+                                <div class="subtitle">
+                                    Ability:
+                                </div>
+                                <div class="content">
+                                    Drizzle
+                                </div>
+                            </div>
+                            <div class="tera field">
+                                <div class="subtitle">
+                                    Tera Type:
+                                </div>
+                                <div class="content">
+                                    Ground
+                                </div>
+                            </div>
+                            <div class="nature field">
+                                <div class="subtitle">
+                                    Nature:
+                                </div>
+                                <div class="content">
+                                    Modest
+                                </div>
+                            </div>
+                            <div class="ev-col field">
+                                <div class="subtitle ev-subtitle">
+                                    EVs:
+                                </div>
+                                <div class="content ev-content">
+                                    <div class="ev">HP: 248</div>
+                                    <div class="ev">Attack: 0</div>
+                                    <div class="ev">Defense: 8</div>
+                                    <div class="ev">Sp.Atk: 252</div>
+                                    <div class="ev">Sp.Def: 0</div>
+                                    <div class="ev">Speed: 0</div>
+                                </div>
+                            </div>
+                            <div class="radar field">
+                                <canvas class="stat-radar" id="kyogre-uber-offensive-calm-mind" style="display: block; box-sizing: border-box; height: 64px; width: 64px;" width="105" height="105"></canvas>
+                            </div>
+                            <div class="move field move1">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Origin Pulse
+                                </div>
+                            </div>
+                            <div class="move field move2">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Ice Beam
+                                </div>
+                            </div>
+                            <div class="move field move3">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Calm Mind
+                                </div>
+                            </div>
+                            <div class="move field move4">
+                                <div class="subtitle">
+                
+                                </div>
+                                <div class="content">
+                                    Thunder
+                                </div>
+                            </div>
+                            <p class="export-container">
+                                
+                        Kyogre @ Leftovers
+                        Ability: Drizzle
+                        Tera Type: Ground
+                        EVs: 248 HP / 0 Atk / 8 Def / 252 SpA / 0 SpD / 0 Spe
+                        IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+                        Modest Nature
+                        - Origin Pulse
+                        - Ice Beam
+                        - Calm Mind
+                        - Thunder
+                        
+                            </p>
+                        </div>
+                    </div>
+        </div>
+
+        
+        
+        <!-- <script src="sets.js"></script> -->
+        <script src="script.js"></script>
+        <!-- <script src="chart.js"></script> -->
+    </body>
 </html>

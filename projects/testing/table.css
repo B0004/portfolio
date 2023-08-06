@@ -1,58 +1,38 @@
-@import url('https://fonts.cdnfonts.com/css/futura-std-4');
-
-#my-body{
-    background-image: url("https://i.imgur.com/7ZY1oG3.jpg");
+.my-body{
+    background-image: url("ice.jpg");
     background-size:clip;
     background-position: center top;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
 
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: end;
-
-    overflow-y: hidden;
-    overflow-x: auto;
-
-    perspective: 1000px;
 }
 
-
-#my-header{
-    padding: 10px;
-    border: 10px ridge silver;
-    background-color: rgba(255, 255, 255, .6);
-    background-image: linear-gradient(rgba(218, 218, 255, 0.8), rgba(255, 255, 255, .8));
-    font-family: 'Futura Std', sans-serif;
-    padding: 10px;
-    margin: 10px;
-}
-
-.to-bold{
-    font-weight: bold;
-}
-
-#card-table{
-    width: 100%;
-    height: 100%;
-
+.table{
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
 
-    position: absolute;
     transform: translateZ(-288px);
     transform-style: preserve-3d;
     transition: transform 1s;
 }
 
+* { box-sizing: border-box; }
 
 
-/* carousel options */
+
+
 .card {
-    position: absolute;
-    transition: transform 1s, opacity 1s;
-  }
+  position: absolute;
+  transition: transform 1s, opacity 1s;
+}
+
 
 .card:nth-child(1) { transform: rotateY(0deg) translateZ(288px); }
 .card:nth-child(2) { transform: rotateY(12deg) translateZ(288px); }
@@ -84,3 +64,13 @@
 .card:nth-child(28) { transform: rotateY(324deg) translateZ(288px); }
 .card:nth-child(29) { transform: rotateY(336deg) translateZ(288px); }
 .card:nth-child(30) { transform: rotateY(348deg) translateZ(288px); }
+
+
+
+
+.carousel-options {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background: hsla(0, 0%, 100%, 0.8);
+}
