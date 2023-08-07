@@ -34,12 +34,7 @@ document.querySelector("#room-rooms > div").innerHTML =
             </div>
         </div>
         <div class="header-mid">
-            <div class="carousel-options">
-                <p>
-                    <button class="previous-button">Previous</button>
-                    <button class="next-button">Next</button>
-                </p>
-            </div>
+
         </div>
 
         <div class="header-bot">
@@ -48,6 +43,12 @@ document.querySelector("#room-rooms > div").innerHTML =
             </div>
         </div>
     </div>
+
+    <div class="my-settings">
+        <input type="checkbox" id="darkmode-toggle"/>
+        <label for="darkmode-toggle">
+    </div>
+
 </div>
 `
     var cur_mon = "";
@@ -498,6 +499,10 @@ my_header.addEventListener("click", (event) => {
     }
 })
 
+document.getElementById("darkmode-toggle").addEventListener("click", function(){
+    document.getElementById("my-body").classList.toggle("is-dark");
+    console.log(document.getElementById("my-body").classList);
+});
 
 
 const team_wrapper = document.querySelector("#room-teambuilder");

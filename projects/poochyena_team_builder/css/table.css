@@ -10,6 +10,7 @@
 
 #my-body{
     font-family: 'Futura Std', sans-serif;
+    color: black;
 
     background-image: url("https://i.imgur.com/7ZY1oG3.jpg");
     background-size:clip;
@@ -33,6 +34,15 @@
     align-items: center;
     padding-left: 15rem;
 }
+
+.my-settings{
+    align-self: start;
+    margin: 20px;
+    flex-shrink: 10;
+}
+
+/* toggle dark mode */
+
 
 .to-bold{
     font-weight: bold;

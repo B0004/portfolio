@@ -15,18 +15,6 @@ function rotateCarousel() {
     console.log(selectedIndex);
 }
 
-var prevButton = document.querySelector('.previous-button');
-prevButton.addEventListener( 'click', function() {
-  selectedIndex--;
-  rotateCarousel();
-});
-
-var nextButton = document.querySelector('.next-button');
-nextButton.addEventListener( 'click', function() {
-  selectedIndex++;
-  rotateCarousel();
-});
-
 function changeCarousel() {
   refreshData();
   
