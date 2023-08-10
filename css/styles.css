@@ -118,26 +118,19 @@ a:hover{
 
 .project-img:hover{
   cursor: pointer;
-
-  border-radius: 1.25rem;
-  border: 3px solid #FFF;
-  width: 33.83975rem;
-  height: 22.625rem;
-  overflow: hidden;
 }
 
 .expand{
   display: grid;
   grid-template-rows: 0fr;
   transition: all 0.3s;
-
 }
 
 .details{
   overflow: hidden;
 }
 
-.project-img:hover ~ .project-description-container .expand{
+.project-link-wrapper:hover ~ .project-description-container .expand{
   grid-template-rows: 1fr; 
 }
 
