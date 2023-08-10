@@ -1,4 +1,9 @@
-
+:root {
+    --white-blue-9: rgba(237, 243, 255, 0.9);
+    --white-9: rgba(255, 255, 255, .9);
+    --white-blue-95: rgba(237, 243, 255, 0.95);
+    --white-95: rgba(255, 255, 255, .95);
+}
                 
 
 .card {
@@ -34,9 +39,9 @@
     justify-items: center;
 
 
-    background-image: linear-gradient(rgba(218, 230, 255, 0.9), rgba(255, 255, 255, .9));
+    background-image: linear-gradient(var(--white-blue-9), var(--white-9));
     border-radius: 16px;
-    box-shadow: 0rem 1rem 3em black;
+    box-shadow: 0rem 1rem 3em rgb(255, 255, 255);
 
     padding: 10px;
     margin: 10px;              
@@ -47,7 +52,7 @@
 .card:hover{
     border-radius: 0px;
     box-shadow: 0rem 1rem 3em cyan;
-    background-image: linear-gradient(rgba(255, 255, 255, .95), rgba(255, 255, 255, .95));
+    background-color: var(--white-95);
     cursor: pointer;
 }
 

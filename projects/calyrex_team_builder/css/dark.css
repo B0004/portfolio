@@ -10,7 +10,7 @@
   position: relative;
   display: block;
   border-radius: 20px;
-  background-image: linear-gradient(rgba(231, 231, 255, 0.8), rgba(243, 241, 255, 0.6));
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(234, 247, 255, 0.9));
   box-shadow: 0rem 0rem 1em rgba(0, 0, 0, 0.24);
   cursor: pointer;
 }

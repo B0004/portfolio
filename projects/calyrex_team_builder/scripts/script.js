@@ -23,7 +23,13 @@ document.querySelector("#room-rooms > div").innerHTML =
         </div>
     </div>
 
-    <div class="my-header" id="my-header">   
+    <div class="my-header" id="my-header">
+    
+        <div class="my-settings">
+            <input type="checkbox" id="darkmode-toggle"/>
+            <label for="darkmode-toggle">
+            <button class="tutorial-button">?</button>
+        </div>
                 
         <div class="header-top">
             <div class="mon-name">
@@ -42,11 +48,6 @@ document.querySelector("#room-rooms > div").innerHTML =
     
             </div>
         </div>
-    </div>
-
-    <div class="my-settings">
-        <input type="checkbox" id="darkmode-toggle"/>
-        <label for="darkmode-toggle">
     </div>
 
 </div>
@@ -99,23 +100,47 @@ document.querySelector("#room-rooms > div").innerHTML =
 
         cur_mon = pokemon_name;
         document.querySelector(".usage").style.display = "block";
-        if (ou_usage[pokemon_name]){
-            usage_html = `OU usage rate: <span class=to-bold ou-stat>${ou_usage[pokemon_name][1]}%</span>, rank <span class=to-bold ou-stat>${ou_usage[pokemon_name][0]}`;
+        // if (ou_usage[pokemon_name]){
+        //     usage_html = `OU usage rate: <span class=to-bold ou-stat>${ou_usage[pokemon_name][1]}%</span>, rank <span class=to-bold ou-stat>${ou_usage[pokemon_name][0]}`;
+        // }
+        // else if (uu_usage[pokemon_name]){
+        //     usage_html = `UU usage rate: <span class=to-bold uu-stat>${uu_usage[pokemon_name][1]}%</span>, rank <span class=to-bold uu-stat>${uu_usage[pokemon_name][0]}`;
+        // }
+        // else if (ru_usage[pokemon_name]){
+        //     usage_html = `RU usage rate: <span class=to-bold ru-stat>${ru_usage[pokemon_name][1]}%</span>, rank <span class=to-bold ru-stat>${ru_usage[pokemon_name][0]}`;
+        // }
+        // else{
+        //     usage_html = "";
+        //     document.querySelector(".usage").style.display = "none";
+        // }
+
+        if (pokemon_name in zu_usage){
+            usage_html = `ZU usage rate: <span class="to-bold">${zu_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${zu_usage[pokemon_name][0]}</span>`;
         }
-        else if (uu_usage[pokemon_name]){
-            usage_html = `UU usage rate: <span class=to-bold uu-stat>${uu_usage[pokemon_name][1]}%</span>, rank <span class=to-bold uu-stat>${uu_usage[pokemon_name][0]}`;
+        else if (pokemon_name in pu_usage){
+            usage_html = `PU usage rate: <span class="to-bold">${pu_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${pu_usage[pokemon_name][0]}</span>`;
         }
-        else if (ru_usage[pokemon_name]){
-            usage_html = `RU usage rate: <span class=to-bold ru-stat>${ru_usage[pokemon_name][1]}%</span>, rank <span class=to-bold ru-stat>${ru_usage[pokemon_name][0]}`;
+        else if (pokemon_name in nu_usage){
+            usage_html = `NU usage rate: <span class="to-bold">${nu_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${nu_usage[pokemon_name][0]}</span>`;
+        }
+        else if (pokemon_name in ru_usage){
+            usage_html = `RU usage rate: <span class="to-bold">${ru_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${ru_usage[pokemon_name][0]}</span>`;
+        }
+        else if (pokemon_name in uu_usage){
+            usage_html = `UU usage rate: <span class="to-bold">${uu_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${uu_usage[pokemon_name][0]}</span>`;
+        }
+        else if (pokemon_name in ou_usage){
+            usage_html = `OU usage rate: <span class="to-bold">${ou_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${ou_usage[pokemon_name][0]}</span>`;
+        }
+        else if (pokemon_name in ubers_usage){
+            usage_html = `Ubers usage rate: <span class="to-bold">${ubers_usage[pokemon_name][1]}%</span>, rank <span class="to-bold ru-stat">${ubers_usage[pokemon_name][0]}</span>`;
         }
         else{
-            usage_html = "";
-            document.querySelector(".usage").style.display = "none";
+            usage_html = '';
         }
 
         document.querySelector(".mon-name").textContent = pokemon_name;
         document.querySelector(".usage").innerHTML = usage_html;
-
 
         var set_col = dex[pokemon_name];
 
@@ -499,9 +524,16 @@ my_header.addEventListener("click", (event) => {
     }
 })
 
+document.addEventListener("change", (event) => {
+    const p2 = event.target.closest('.set-list-name')
+    if(p2){
+        selectedIndex = parseInt(p2.id.replace('set-',''));
+        rotateCarousel();
+    }
+})
+
 document.getElementById("darkmode-toggle").addEventListener("click", function(){
     document.getElementById("my-body").classList.toggle("is-dark");
-    console.log(document.getElementById("my-body").classList);
 });
 
 
