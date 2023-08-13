@@ -1,0 +1,136 @@
+*{
+
+}
+
+body{
+    background-color: grey;
+}
+
+.pad{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 95vh;
+    overflow: none;
+}
+
+.part{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 8rem;
+}
+
+.left{
+    justify-content: center;
+}
+
+#history{
+    background-color: rgb(199, 199, 199);
+}
+
+.middle{
+    justify-content: center;
+}
+
+.deck-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8rem;
+}
+
+.small-card{
+    height: 16rem;
+    width: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    border: 3px solid black;
+    border-radius: 5px;
+
+    box-shadow: 2px 5px black, 4px 10px black, 6px 15px black, 8px 20px black;
+
+    font-size: 1rem;
+    font-family: 'Borel', cursive;
+    font-weight: bold;
+
+    transition: all 0.1s;
+    transition-timing-function: linear;
+}
+
+.small-card:hover{
+    transform: translateY(10px);
+    box-shadow: 2px -5px rgb(0, 0, 0), 4px 0px black, 6px 5px black, 8px 10px black;
+
+}
+
+
+
+#deck-1{
+    background-color: rgb(192, 255, 192);
+}
+
+#deck-2{
+    background-color: rgb(245, 255, 179);
+}
+
+#deck-3{
+    background-color: rgb(232, 192, 255);
+
+}
+span{
+    text-align: center;
+}
+
+.main-card{
+    height: 20rem;
+    width: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 240);
+
+    border: 5px solid black;
+    border-radius: 15px;
+    box-shadow: 10px 25px 0px black;
+
+    font-family: 'Architects Daughter', cursive;
+}
+
+#main-question{
+    font-size: 3rem;
+}
+
+.card:hover{
+    cursor: pointer;
+}
+
+.right{
+    justify-content: space-between;
+    flex-shrink: 5;
+}
+
+.settings-bar{
+    margin: 3rem;
+    width: 10rem;
+    height: 2rem;
+}
+
+.cat{
+    margin: 3rem;
+    height: 10rem;
+    width: 10rem;
+    text-align: center;
+}
+
+img{
+    width: 100%;
+}
+
+#avatar-cat{
+    width: 80%;
+    cursor: pointer;
+}
