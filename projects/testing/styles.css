@@ -1,0 +1,93 @@
+.card{
+    border: 3px solid black;
+    border-radius: 8px;
+
+    transition: all 0.5s;
+    background-image: url("assets/black_cat.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.card.deck,.card.history{
+    width: 100px;
+    height: 200px;
+
+    padding: 20px 5px 0px 5px;
+
+    box-shadow: 5px 10px black;
+
+    font-size: 1rem;
+    font-family: 'Borel', cursive;
+    font-weight: bold;
+}
+
+.card.deck:hover{
+    cursor: pointer;
+    transform: translateY(5px);
+}
+
+.t1::before{
+    content: "who";
+}
+
+.t2::before{
+    content: "meaningful";
+}
+.t3::before{
+    content: "super deep";
+}
+
+.t1{
+    position: absolute;
+    top: 100px;
+    left: 500px;
+    background-color: rgb(192, 255, 192);}
+
+.t2{
+    position: absolute;
+    top: 100px;
+    left: 700px;
+    background-color: rgb(245, 255, 179);
+}
+
+.t3{
+    position: absolute;
+    top: 100px;
+    left: 900px;
+    background-color: rgb(232, 192, 255);
+}
+
+.display{
+    rotate: 90deg;
+    transform: rotateY(180deg);
+    width: 300px;
+    height: 600px;
+}
+
+.display.t1{
+    translate: 100px 100px;
+}
+
+.display.t2{
+    translate: -100px 100px;
+}
+
+.display.t3{
+    translate: -300px 100px;
+}
+
+.history{
+    background-color: rgb(199, 199, 199);
+}
+
+.history.t1{
+    translate: -300px 300px;
+}
+
+.history.t2{
+    translate: -500px 300px;
+}
+
+.history.t3{
+    translate: -700px 300px;
+}

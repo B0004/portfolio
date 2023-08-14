@@ -1,136 +1,129 @@
 *{
-
+    margin: 0px;
+    padding: 0px;
 }
 
-body{
-    background-color: grey;
-}
-
-.pad{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 95vh;
-    overflow: none;
-}
-
-.part{
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 8rem;
-}
-
-.left{
-    justify-content: center;
-}
-
-#history{
-    background-color: rgb(199, 199, 199);
-}
-
-.middle{
-    justify-content: center;
-}
-
-.deck-bar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8rem;
-}
-
-.small-card{
-    height: 16rem;
-    width: 8rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    border: 3px solid black;
-    border-radius: 5px;
-
-    box-shadow: 2px 5px black, 4px 10px black, 6px 15px black, 8px 20px black;
-
-    font-size: 1rem;
-    font-family: 'Borel', cursive;
-    font-weight: bold;
-
-    transition: all 0.1s;
-    transition-timing-function: linear;
-}
-
-.small-card:hover{
-    transform: translateY(10px);
-    box-shadow: 2px -5px rgb(0, 0, 0), 4px 0px black, 6px 5px black, 8px 10px black;
-
-}
-
-
-
-#deck-1{
-    background-color: rgb(192, 255, 192);
-}
-
-#deck-2{
-    background-color: rgb(245, 255, 179);
-}
-
-#deck-3{
-    background-color: rgb(232, 192, 255);
-
-}
-span{
-    text-align: center;
-}
-
-.main-card{
-    height: 20rem;
-    width: 40rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(255, 255, 240);
-
-    border: 5px solid black;
-    border-radius: 15px;
-    box-shadow: 10px 25px 0px black;
-
-    font-family: 'Architects Daughter', cursive;
-}
-
-#main-question{
-    font-size: 3rem;
-}
+.card{
+    transition: all 0.3s;
+    transform-style: preserve-3d;
+}    
 
 .card:hover{
     cursor: pointer;
 }
 
-.right{
-    justify-content: space-between;
-    flex-shrink: 5;
-}
+.card.deck,.card.history{
+    border: 3px solid black;
 
-.settings-bar{
-    margin: 3rem;
-    width: 10rem;
-    height: 2rem;
-}
+    width: 100px;
+    height: 200px;
+    
+    box-shadow: 10px 20px black;
 
-.cat{
-    margin: 3rem;
-    height: 10rem;
-    width: 10rem;
-    text-align: center;
-}
+    font-size: 1rem;
+    font-family: 'Borel', cursive;
+    font-weight: bold;
+}   
 
-img{
+.card.deck:hover{
+    transform: translateY(5px);
+}    
+
+
+.front,.back{
+    padding-top: 10px;
+    padding-left: 5px;
+    backface-visibility: hidden;
+    position: absolute;
+    height: 100%;
     width: 100%;
 }
 
-#avatar-cat{
-    width: 80%;
-    cursor: pointer;
+.front{
+    background-image: url("../assets/black_cat.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.t2>.front{
+    font-size: 0.9rem;
+}
+
+.back{
+    background-color: white;
+    transform: rotateY(180deg);
+    border: 5px solid black;
+
+    writing-mode: vertical-rl;
+    font-family: 'Architects Daughter', cursive;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+    box-shadow: -10px 10px black;
+    
+}
+
+h2{
+    margin: 20px;
+}
+
+
+.t1{
+    position: absolute;
+    top: 100px;
+    left: 500px;
+    background-color: rgb(192, 255, 192);}
+
+.t2{
+    position: absolute;
+    top: 100px;
+    left: 700px;
+    background-color: rgb(245, 255, 179);
+}    
+
+.t3{
+    position: absolute;
+    top: 100px;
+    left: 900px;
+    background-color: rgb(232, 192, 255);
+}    
+
+
+.display{
+    rotate: -90deg;
+    transform: rotateY(180deg);
+    width: 300px;
+    height: 600px;
+}
+
+
+.display.t1{
+    translate: 100px 100px;
+}
+
+.display.t2{
+    translate: -100px 100px;
+}
+
+.display.t3{
+    translate: -300px 100px;
+}
+
+.history{
+    background-color: rgb(199, 199, 199);
+}
+
+.history.t1{
+    translate: -300px 300px;
+}
+
+.history.t2{
+    translate: -500px 300px;
+}
+
+.history.t3{
+    translate: -700px 300px;
 }
