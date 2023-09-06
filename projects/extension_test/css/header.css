@@ -1,0 +1,58 @@
+
+
+.my-header{
+    display: flex;
+    flex-direction: column;
+    max-width: 25rem;
+    max-height: 90%;
+    overflow-x: hidden;
+    padding: 1rem;
+}
+
+.mon-name{
+    font-size: 1.2rem;
+}
+
+.header-bot{
+    overflow-y: auto;
+    margin-left: 0.5rem;
+}
+
+.carousel-options > p{
+    display: flex;
+    justify-content: space-around;
+}
+.set-list-name, .header-top{
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(244, 242, 255, 0.9));
+    border-radius: 6px;
+    box-shadow: 0rem 0.5rem 0.5em rgba(255, 255, 255, 0.5);
+    
+    transition: all 0.3s;
+}
+
+.set-list-name:hover{
+    cursor: pointer;
+    box-shadow: 0rem 0rem 1em 0.5em rgba(0, 255, 255, 0.429);
+    transform: translateX(-0.5rem);
+
+    background-image: linear-gradient(rgba(243, 243, 255, 1), rgba(255, 255, 255, 1));
+
+}
+
+.my-settings{
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.tutorial-button{
+    margin-left: 100px;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    color: #89dcff;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(234, 247, 255, 0.9));
+    border: none;
+}
+

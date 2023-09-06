@@ -1,0 +1,86 @@
+
+.header{
+  display: flex;
+  justify-content: end;
+}
+
+.my-settings > label {
+  width:50px;
+  height:20px;
+  position: relative;
+  display: block;
+  border-radius: 20px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(234, 247, 255, 0.9));
+  box-shadow: 0rem 0rem 1em rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+
+.my-settings > label:after {
+  content: "";
+  width:12px;
+  height: 12px;
+  position: absolute;
+  top:4.2px;
+  left:4px;
+  background: linear-gradient(180deg,#89dcff,#d8eaff);
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.my-settings > input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.my-settings > input:checked + label {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.555), rgba(0, 0, 0, 0.815));
+
+}
+.my-settings > input:checked + label:after {
+  left:45px;
+  transform: translateX(-100%);
+  background: linear-gradient(180deg,#360068,#7f00ed);
+}
+.my-settings > label, label:after {
+  transition: 0.3s
+}
+.my-settings > label:active:after{ 
+  width: 26px; 
+}
+
+/* actual dark mode */
+
+.is-dark#my-body{
+  background-image: url("https://i.imgur.com/rVHuNFC.jpg");
+  color: white;
+}
+
+.is-dark .set-list-name, .is-dark .header-top{
+  background-image: linear-gradient(rgba(9, 0, 35, 0.85), rgba(0, 0, 0, 0.85));
+  border-radius: 6px;
+  box-shadow: 0rem 0.5rem 0.5em rgba(0, 0, 0, 0.813);
+  
+  transition: all 0.3s;
+}
+
+.is-dark .set-list-name:hover{
+  cursor: pointer;
+  box-shadow: 0rem 0rem 1em 0.5em rgba(72, 0, 255, 0.696);
+
+  background-image: linear-gradient(rgba(9, 0, 35, 0.95), rgba(0, 0, 0, 0.95));
+}
+
+.is-dark .card{
+  background-image: linear-gradient(rgba(9, 0, 35, 0.9), rgba(0, 0, 0, 0.9));
+  box-shadow: 0rem 0.5rem 0.5em rgba(0, 0, 0, 0.813);
+}
+
+.is-dark .card:hover{
+  box-shadow: 0rem 0rem 1em 0.5em rgba(72, 0, 255, 0.696);
+  background-image: linear-gradient(rgba(9, 0, 35, 0.95), rgba(0, 0, 0, 0.95));
+}
+
+.is-dark .field{
+  box-shadow: 0rem 0em 1.5em rgba(255, 255, 255, 0.2);
+}

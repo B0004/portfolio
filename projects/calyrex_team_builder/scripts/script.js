@@ -13,6 +13,7 @@ var usage_html = ""
 
 var card_count = 0;
 
+
 //replace chatroom with table and make header
 document.querySelector("#room-rooms > div").innerHTML = 
 `
@@ -61,8 +62,11 @@ document.querySelector("#room-rooms > div").innerHTML =
         table.innerHTML = "";
         set_list.innerHTML = "";
     }
-
+    
     function get_set(){
+        console.log(l);
+
+        
         
         //if new mon selected, fill table
         if (document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input")){
