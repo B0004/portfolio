@@ -518,7 +518,6 @@ table.addEventListener("click", (event) => {
         input_box.value = to_export;
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
     }
-
 })
 
 my_header.addEventListener("click", (event) => {

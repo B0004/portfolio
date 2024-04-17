@@ -99,7 +99,7 @@ function newPokemonChosen(pokemonName){
    
         console.log('---');
    
-        pad.appendChild(createCard(setName, setItem, setAbility, setNature, setEVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
+        innerPad.appendChild(createCard(setName, setItem, setAbility, setNature, setEVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
     }
    
 }
@@ -107,10 +107,15 @@ function newPokemonChosen(pokemonName){
 
 // Function to be called when mutations are observed (works!!!)
 var currentPokemon = "";
-const pad = document.querySelector("#room-rooms");
+const outerPad = document.querySelector("#room-rooms");
+const innerPad = document.createElement("div");
+innerPad.setAttribute('id', 'inner-pad');
+
+outerPad.innerHTML = '';
+outerPad.appendChild(innerPad);
 
 function newPokemonChosen(pokemonName){
-    pad.textContent = '';
+    innerPad.innerHTML = '';
     var setList = SETDEX_SV[pokemonName];
     for (setName in setList){
         let setObject = setList[setName];
@@ -130,11 +135,30 @@ function newPokemonChosen(pokemonName){
    
         console.log('---');
    
-        pad.appendChild(createCard(setName, setItem, setAbility, setNature, setEVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
+        innerPad.appendChild(createCard(setName, setItem, setAbility, setNature, setEVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
     }
 }
 
+function landingPage(){
+    innerPad.innerHTML = 
+    `<div class="extension-landing">
+        <h1>Lapras Team Builder</h1>
+        <h2>Loaded!</h2>
+        <a href="https://pokemondb.net/pokedex/lapras"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/lapras.gif" alt="Lapras"></a>
+        <ol>
+            <li><b>Proceed</b> to the teambuilder section</li>
+            <li><b>Select</b> a pokemon to see its competitive sets</li>
+            <li><b>Click</b> on a card to auto-fill!</li>
+        </ol>
+    </div>`
+}
+
+landingPage();
 const callback = function(mutationsList, observer) {
+    if (mutationsList.some(mutation => mutation.target.id === 'inner-pad' && mutation.type === 'childList')) {
+        console.log('Ignored mutation in inner-pad');
+        return; // Do nothing if inner-pad is the source of mutations
+    }
     const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
     if (pokemonNameInputBox != null){
         console.log(pokemonNameInputBox.value);
@@ -148,7 +172,8 @@ const callback = function(mutationsList, observer) {
         }
     }
     else{
-        pad.textContent = 'none chosen';
+        landingPage();
+        currentPokemon = '';
         console.log('none chosen');
     }
 };
@@ -162,6 +187,4 @@ const targetNode = document.body; // or any other element you want to observe
 // Start observing the target element with the configured options
 observer.observe(targetNode, config);
 
-
-// Gather Variables--------------------------------------
 
