@@ -1,3 +1,6 @@
+userbar = document.querySelector('.userbar');
+username = document.querySelector('.username');
+header = document.querySelector('.header');
 var pokemon_name = "no pokemon selected";
 
 const room = document.querySelector("#room-teambuilder");
@@ -64,9 +67,7 @@ document.querySelector("#room-rooms > div").innerHTML =
     }
     
     function get_set(){
-        console.log(l);
-
-        
+        console.log('gotttttt');
         
         //if new mon selected, fill table
         if (document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input")){
@@ -543,11 +544,42 @@ document.getElementById("darkmode-toggle").addEventListener("click", function(){
 
 const team_wrapper = document.querySelector("#room-teambuilder");
 
-const mutationObserver = new MutationObserver(entries => {
-    //check for pokemon selection box, if can find box, fill table
-    get_set();
-})
+// Function to be called when mutations are observed
+var currentPokemon = "";
+const pad = document.querySelector("#room-rooms");
 
-mutationObserver.observe(team_wrapper, {childList: true, subtree: true})
+function newPokemonChosen(pokemonName){
+    pad.textContent = pokemonName;
+}
 
+const callback = function(mutationsList, observer) {
+    const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
+    if (pokemonNameInputBox != null){
+        console.log(pokemonNameInputBox.value);
+        if (currentPokemon != pokemonNameInputBox.value){
+            currentPokemon = pokemonNameInputBox.value;
+            console.log('update sets');
+            get_set();
+            
+        }
+        else{
+            console.log('chosen pokemon did not change');
+        }
+    }
+    else{
+        console.log('none chosen');
+    }
+};
+
+// Create a MutationObserver instance and pass the callback function
+const observer = new MutationObserver(callback);
+
+// Options for the observer (which mutations to observe)
+const config = { attributes: false, childList: true, subtree: true };
+
+// Select the element to observe
+const targetNode = document.body; // or any other element you want to observe
+
+// Start observing the target element with the configured options
+observer.observe(targetNode, config);
 

@@ -1,0 +1,12 @@
+div[role=button]{
+    background-color: #004B47 !important;
+}
+
+div[role=button] *{
+    background-color: #004B47;
+}
+
+.KKOvEb{
+    background-color: #242424;
+    color: white;
+}

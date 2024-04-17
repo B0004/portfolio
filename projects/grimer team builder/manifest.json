@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "grimer's team builder",
+  "version": "1.0.0.1",
+  "description": "automatically builds teams from latest trends and meta data on the pokemon showdown team builder website",
+
+  "content_scripts": [
+    {
+      "js": ["moves.js", "gen9.js", "script.js"],
+      "css": ["styles.css"],
+      "matches": [
+        "https://play.pokemonshowdown.com/*"
+      ]
+    }
+  ]
+}

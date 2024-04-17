@@ -1,0 +1,113 @@
+:root {
+    --c1: #ECF6FF;
+    --t2: #999999;
+    --t4: #444444;
+
+}
+#room-rooms {
+
+    * {
+        box-sizing: border-box;
+        font-family: "Roboto Mono", monospace;
+    }
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+    small{
+        font-size: 0.65rem;
+        color: var(--t4);
+    }
+
+    body{
+        background-color: grey;
+    }
+
+    #room-rooms{
+        display: flex !important;
+        width: 100%;
+        background-color: red !important;
+    }
+
+
+    .card {
+        list-style-type: none;
+        background-color: white;
+        width: 350px;
+
+        padding-inline-start: 0;
+        padding-top: 10px;
+        padding-bottom: 5px;
+
+        border-radius: 2%;
+        border: 3px solid var(--c1);
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05));
+
+        margin: 5px;
+    }
+
+    .card{
+
+        .title{
+            font-size: 1.1rem;
+        }
+        
+        hr {
+            width: 80%;
+        }
+        
+        li{
+            height: 24px;
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+        }
+        
+        .field-title{
+            width: 100px;
+            text-align: end;
+            padding-right: 10px;
+        }
+        
+        .item img{
+            height: 1.5rem;
+        }
+        .evs{
+            color: black;
+            font-size: 0.85rem;
+        }
+        
+        li.move{
+            background-color: var(--c1);
+            
+        }
+        
+        li.move > img{
+            margin-left: 30px;
+        }
+        
+        li.move-detail > img{
+            margin-left: 65px;
+            padding-right: 0;
+        }
+        
+        li.move-detail > span{
+            margin-left: 4px;
+        }
+        
+        li.move-detail > span > small{
+            display: block;
+            text-align: center;
+        }
+        
+        li.move-detail > span > small:first-child{
+            padding-left: 2px;
+            color: var(--t2);
+        }
+        
+        img{
+            padding-right: 5px;
+        }
+    }
+
+}
