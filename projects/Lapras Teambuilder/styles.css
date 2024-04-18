@@ -1,5 +1,6 @@
 :root {
     --c1: #ECF6FF;
+    --c2: #9ECEFF;
     --t2: #999999;
     --t4: #444444;
 
@@ -29,11 +30,16 @@
         background-color: red !important;
     }
 
+    #inner-pad{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
 
     .card {
         list-style-type: none;
         background-color: white;
-        width: 350px;
+        width: 330px;
 
         padding-inline-start: 0;
         padding-top: 10px;
@@ -41,9 +47,24 @@
 
         border-radius: 2%;
         border: 3px solid var(--c1);
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05));
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
         margin: 5px;
+        transition: all 0.3s;
+    }
+
+    .card:hover{
+        cursor: pointer;
+        border-color: var(--c2);
+    }
+
+    hr{
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover hr {
+        width: 90%; 
+        border-color: black;
     }
 
     .card{
@@ -54,6 +75,7 @@
         
         hr {
             width: 80%;
+            border-color: var(--t2);
         }
         
         li{
@@ -116,4 +138,5 @@
     text-align: center;
     list-style-position: inside;
     line-height: 2rem;
+    width: 100%;
 }

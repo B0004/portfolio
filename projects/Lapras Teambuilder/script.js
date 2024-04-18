@@ -41,6 +41,9 @@ function formatEVs(ev){
         }
         return (str.slice(0,-3));
     }
+    else{
+        return '';
+    }
 }
 
 
@@ -48,12 +51,13 @@ function formatEVs(ev){
 
 
 
-function createCard(title, item, ability, nature, evs, teraType, move1, move2, move3, move4){
+function createCard(name, title, item, ability, nature, evs, ivs, teraType, move1, move2, move3, move4){
     if (!teraType){
         teraType = '';
     }
     let card = document.createElement("OL");
     card.classList.add('card')
+    //create cards
     let cardContent =
         `<li class="title">${title}</li>
         <hr>
@@ -71,6 +75,21 @@ function createCard(title, item, ability, nature, evs, teraType, move1, move2, m
         <li class="move"><img src="https://play.pokemonshowdown.com/sprites/types/${moveDex[move4].type}.png" alt="move icon"> <span>${move4}</span></li>
         <li class="move-detail"><img src="https://play.pokemonshowdown.com/sprites/categories/${moveDex[move4].category}.png" alt="type icon"><span><small>Power</small><small>${moveDex[move4].power || '-'}</small></span><span><small>Accuracy</small><small>${moveDex[move4].accuracy}</small></span></li>`
     card.innerHTML=cardContent;
+
+    //create data
+    let strExport = 
+        `${name} @ ${item}
+        Ability: ${ability}
+        Tera Type: ${teraType}
+        EVs: ${evs}
+        IVs: ${ivs}
+        ${nature} Nature
+        - ${move1}
+        - ${move2}
+        - ${move3}
+        - ${move4}`;
+    //add data
+    card.dataset.export = strExport;
     return card;
 }
 
@@ -80,62 +99,27 @@ function createCard(title, item, ability, nature, evs, teraType, move1, move2, m
 // Function to be called when mutations are observed
 
 function newPokemonChosen(pokemonName){
-    var setList = SETDEX_SV[pokemonName];
-    for (setName in setList){
-        let setObject = setList[setName];
-        let setItem = setObject.item;
-        let setItemImgLink = getImgLink("item", setItem);
-        let setAbility = setObject.ability;
-        let setNature = setObject.nature;
-        let setEVs = formatEVs(setObject.evs);
-        let setTeraType = setObject.teraType;
-        let setMove1 = setObject.moves[0];
-        let setMove2 = setObject.moves[1];
-        let setMove3 = setObject.moves[2];
-        let setMove4 = setObject.moves[3];
-   
-   
-        console.log(moveDex[setMove1].accuracy);
-   
-        console.log('---');
-   
-        innerPad.appendChild(createCard(setName, setItem, setAbility, setNature, setEVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
-    }
-   
-}
-
-
-// Function to be called when mutations are observed (works!!!)
-var currentPokemon = "";
-const outerPad = document.querySelector("#room-rooms");
-const innerPad = document.createElement("div");
-innerPad.setAttribute('id', 'inner-pad');
-
-outerPad.innerHTML = '';
-outerPad.appendChild(innerPad);
-
-function newPokemonChosen(pokemonName){
     innerPad.innerHTML = '';
     var setList = SETDEX_SV[pokemonName];
-    for (setName in setList){
-        let setObject = setList[setName];
-        let setItem = setObject.item;
-        let setItemImgLink = getImgLink("item", setItem);
-        let setAbility = setObject.ability;
-        let setNature = setObject.nature;
-        let setEVs = formatEVs(setObject.evs);
-        let setTeraType = setObject.teraType;
-        let setMove1 = setObject.moves[0];
-        let setMove2 = setObject.moves[1];
-        let setMove3 = setObject.moves[2];
-        let setMove4 = setObject.moves[3];
-   
-   
-        console.log(moveDex[setMove1].accuracy);
-   
-        console.log('---');
-   
-        innerPad.appendChild(createCard(setName, setItem, setAbility, setNature, setEVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
+    if (setList === undefined) {
+        poopMon();
+    }
+    else{
+        for (setName in setList){
+            let setObject = setList[setName];
+            let setItem = setObject.item;
+            let setAbility = setObject.ability;
+            let setNature = setObject.nature;
+            let setEVs = formatEVs(setObject.evs);
+            let setIVs = formatEVs(setObject.ivs);
+            let setTeraType = setObject.teraType;
+            let setMove1 = setObject.moves[0];
+            let setMove2 = setObject.moves[1];
+            let setMove3 = setObject.moves[2];
+            let setMove4 = setObject.moves[3];
+
+            innerPad.appendChild(createCard(pokemonName, setName, setItem, setAbility, setNature, setEVs, setIVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
+        }
     }
 }
 
@@ -153,6 +137,30 @@ function landingPage(){
     </div>`
 }
 
+function poopMon(){
+    innerPad.innerHTML = 
+    `<div class="extension-landing">
+        <h1>No Competitive Sets Were Found</h1>
+        <h2>Sorry!</h2>
+        <a href="https://pokemondb.net/pokedex/magikarp"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/magikarp.gif" alt="Magikarp"></a>
+        <h2>This might be because</h2>
+        <ol>
+            <li>This pokemon was newly introduced and our data isn't updated yet</li>
+            <li>This pokemon is not competively relavent</li>
+        </ol>
+    </div>`
+}
+
+
+// Function to be called when mutations are observed (works!!!)
+var currentPokemon = "";
+const outerPad = document.querySelector("#room-rooms");
+const innerPad = document.createElement("div");
+innerPad.setAttribute('id', 'inner-pad');
+
+outerPad.innerHTML = '';
+outerPad.appendChild(innerPad);
+
 landingPage();
 const callback = function(mutationsList, observer) {
     if (mutationsList.some(mutation => mutation.target.id === 'inner-pad' && mutation.type === 'childList')) {
@@ -160,7 +168,7 @@ const callback = function(mutationsList, observer) {
         return; // Do nothing if inner-pad is the source of mutations
     }
     const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
-    if (pokemonNameInputBox != null){
+    if ((pokemonNameInputBox != null) && (document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))){
         console.log(pokemonNameInputBox.value);
         if (currentPokemon != pokemonNameInputBox.value){
             currentPokemon = pokemonNameInputBox.value;
@@ -169,6 +177,13 @@ const callback = function(mutationsList, observer) {
         }
         else{
             console.log('chosen pokemon did not change');
+            console.log(document.querySelector('a.roomtab[href="/teambuilder"]'));
+            if (!(document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))) {
+                //moved away from tab
+                landingPage();
+                currentPokemon = '';
+                console.log('moved away from tab');
+            } 
         }
     }
     else{
@@ -187,4 +202,13 @@ const targetNode = document.body; // or any other element you want to observe
 // Start observing the target element with the configured options
 observer.observe(targetNode, config);
 
+innerPad.addEventListener("click", (event) => {
+    let clickedCard = event.target.closest('.card');
+    
+    if(clickedCard){
+        document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setmenu > button:nth-child(2)").click();
+        document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > textarea").value = clickedCard.dataset.export;
+        document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
+    }
+})
 
