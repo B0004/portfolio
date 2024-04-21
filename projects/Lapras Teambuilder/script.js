@@ -1,12 +1,3 @@
-
-
-
-
-
-
-// Gather Variables--------------------------------------
-
-
 function getImgLink(type, str){
     if (type === "item"){
         return "https://www.serebii.net/itemdex/sprites/" + str.replace(/ /g, '').toLowerCase() + ".png";
@@ -14,7 +5,6 @@ function getImgLink(type, str){
 
 
 }
-
 
 function formatEVs(ev){
     let str = '';
@@ -47,9 +37,31 @@ function formatEVs(ev){
 }
 
 
-
-
-
+function multiplyValues(obj1, obj2) {
+    let result = {};
+    for (let key in obj1) {
+        if (obj2.hasOwnProperty(key)) {
+        result[key] = obj1[key] * obj2[key];
+        }
+    }
+    return result;
+}
+  
+function lookUpWeakness(pokemon){
+    console.log('pokemon: ' + pokemon);
+    console.log('pokedex: ' + pokedex);
+    console.log('pokedex[]: ' + pokedex[pokemon]);
+    var pokemonTypes = pokedex[pokemon].types;
+    if (pokemonTypes.length == 1){
+        let type = pokemonTypes[0].toLowerCase();
+        return weaknessChart[type];
+    }
+    else if (pokemonTypes.length == 2){
+        let type1 = pokemonTypes[0].toLowerCase();
+        let type2 = pokemonTypes[1].toLowerCase();
+        return multiplyValues(weaknessChart[type1], weaknessChart[type2]);
+    }
+}
 
 function createCard(name, title, item, ability, nature, evs, ivs, teraType, move1, move2, move3, move4){
     if (!teraType){
@@ -93,13 +105,85 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
     return card;
 }
 
+function updateTypeTable(teamList){
+    typeAside.style.display = "block";
 
+    var weaknessCount = {
+        "normal": 0,
+        "fire": 0,
+        "water": 0,
+        "electric": 0,
+        "grass": 0,
+        "ice": 0,
+        "fighting": 0,
+        "poison": 0,
+        "ground": 0,
+        "flying": 0,
+        "psychic": 0,
+        "bug": 0,
+        "rock": 0,
+        "ghost": 0,
+        "dragon": 0,
+        "dark": 0,
+        "steel": 0,
+        "fairy": 0
+      }
+      var resistCount = {
+        "normal": 0,
+        "fire": 0,
+        "water": 0,
+        "electric": 0,
+        "grass": 0,
+        "ice": 0,
+        "fighting": 0,
+        "poison": 0,
+        "ground": 0,
+        "flying": 0,
+        "psychic": 0,
+        "bug": 0,
+        "rock": 0,
+        "ghost": 0,
+        "dragon": 0,
+        "dark": 0,
+        "steel": 0,
+        "fairy": 0
+      }
+    
+  // loop over pokemon
+  for (let member of teamList){
+    let weak = (lookUpWeakness(member));
+    // loop over each type
+    for (let i in weak){
+      if (weak[i] < 1){
+        resistCount[i]++;
+      }
+      else if (weak[i] > 1){
+        weaknessCount[i]++;
+      }
+    }
+  }
 
+  const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
+    const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
+
+  var rkeys = Object.keys(resistCount);
+  rkeys.forEach((type, i) => {
+    resistedTypes[i].textContent = resistCount[type];
+    resistedTypes[i].parentElement.style.backgroundColor = greenGradient[resistCount[type]];
+  });
+  
+  var wkeys = Object.keys(weaknessCount);
+  wkeys.forEach((type, i) => {
+    weakToTypes[i].textContent = weaknessCount[type];
+    weakToTypes[i].parentElement.style.backgroundColor = redGradient[weaknessCount[type]];
+  });
+  
+}
 
 // Function to be called when mutations are observed
-
 function newPokemonChosen(pokemonName){
-    innerPad.innerHTML = '';
+
+    cardPad.innerHTML = '';
     var setList = SETDEX_SV[pokemonName];
     if (setList === undefined) {
         poopMon();
@@ -118,13 +202,20 @@ function newPokemonChosen(pokemonName){
             let setMove3 = setObject.moves[2];
             let setMove4 = setObject.moves[3];
 
-            innerPad.appendChild(createCard(pokemonName, setName, setItem, setAbility, setNature, setEVs, setIVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
+            cardPad.appendChild(createCard(pokemonName, setName, setItem, setAbility, setNature, setEVs, setIVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
         }
     }
+
+    var pokemonElements = document.querySelectorAll('.pokemon');
+    var pokemonArray = [];
+    pokemonElements.forEach(element => {
+        pokemonArray.push(element.textContent.toLowerCase().replace(/[\s-]/g, ''))
+    });
+    updateTypeTable(pokemonArray);
 }
 
 function landingPage(){
-    innerPad.innerHTML = 
+    cardPad.innerHTML = 
     `<div class="extension-landing">
         <h1>Lapras Team Builder</h1>
         <h2>Loaded!</h2>
@@ -135,10 +226,13 @@ function landingPage(){
             <li><b>Click</b> on a card to auto-fill!</li>
         </ol>
     </div>`
+
+    typeAside.innerHTML = typeTableTemplate;
+    typeAside.style.display = "none";
 }
 
 function poopMon(){
-    innerPad.innerHTML = 
+    cardPad.innerHTML = 
     `<div class="extension-landing">
         <h1>No Competitive Sets Were Found</h1>
         <h2>Sorry!</h2>
@@ -152,24 +246,36 @@ function poopMon(){
 }
 
 
-// Function to be called when mutations are observed (works!!!)
+
+// Starting function
 var currentPokemon = "";
 const outerPad = document.querySelector("#room-rooms");
-const innerPad = document.createElement("div");
+
+const innerPad = document.createElement('div');
+const cardPad = document.createElement("div");
+const typeAside = document.createElement("aside");
+
+cardPad.setAttribute('id', 'card-pad');
 innerPad.setAttribute('id', 'inner-pad');
+typeAside.setAttribute('id', 'type-weakness-tab');
+typeAside.innerHTML = typeTableTemplate;
+
+const greenGradient = ['#FFFFFF', '#E6F9E6', '#CCF3CC', '#B3EDB3', '#99E699', '#80E080', '#00CC00'];
+const redGradient = ['#FFFFFF', '#FFE6E6', '#FFCCCC', '#FFB3B3', '#FF9999', '#FF8080', '#FF0000'];
 
 outerPad.innerHTML = '';
+innerPad.appendChild(cardPad);
+innerPad.appendChild(typeAside);
 outerPad.appendChild(innerPad);
 
 landingPage();
 const callback = function(mutationsList, observer) {
-    if (mutationsList.some(mutation => mutation.target.id === 'inner-pad' && mutation.type === 'childList')) {
-        console.log('Ignored mutation in inner-pad');
-        return; // Do nothing if inner-pad is the source of mutations
+    if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
+        console.log('Ignored mutation in card-pad');
+        return; // Do nothing if card-pad is the source of mutations
     }
     const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
     if ((pokemonNameInputBox != null) && (document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))){
-        console.log(pokemonNameInputBox.value);
         if (currentPokemon != pokemonNameInputBox.value){
             currentPokemon = pokemonNameInputBox.value;
             console.log('update sets');
@@ -177,7 +283,6 @@ const callback = function(mutationsList, observer) {
         }
         else{
             console.log('chosen pokemon did not change');
-            console.log(document.querySelector('a.roomtab[href="/teambuilder"]'));
             if (!(document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))) {
                 //moved away from tab
                 landingPage();
@@ -202,7 +307,7 @@ const targetNode = document.body; // or any other element you want to observe
 // Start observing the target element with the configured options
 observer.observe(targetNode, config);
 
-innerPad.addEventListener("click", (event) => {
+cardPad.addEventListener("click", (event) => {
     let clickedCard = event.target.closest('.card');
     
     if(clickedCard){

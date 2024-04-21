@@ -12,7 +12,7 @@
 
   "content_scripts": [
     {
-      "js": ["moves.js", "gen9.js", "script.js"],
+      "js": ["data/moves.js", "data/gen9.js", "data/pokedex.js", "data/typeChart.js", "script.js"],
       "css": ["styles.css"],
       "matches": [
         "https://play.pokemonshowdown.com/*"

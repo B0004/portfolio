@@ -24,22 +24,27 @@
         background-color: grey;
     }
 
-    #room-rooms{
-        display: flex !important;
-        width: 100%;
-        background-color: red !important;
-    }
-
     #inner-pad{
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
+    #type-weakness-tab > *{
+        position: sticky;
+        top: 5px;
+    }
+
+    #card-pad{
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        justify-content: center;
+    }
 
     .card {
         list-style-type: none;
         background-color: white;
-        width: 330px;
+        width: 350px;
 
         padding-inline-start: 0;
         padding-top: 10px;
@@ -139,4 +144,19 @@
     list-style-position: inside;
     line-height: 2rem;
     width: 100%;
+}
+
+#type-weakness-tab{
+    background-color: white;
+    border-radius: 2%;
+    width: fit-content;
+}
+
+#resistance-weakness-table{
+    background-color: var(--c1);
+    td {
+        text-align: center;
+        background-color: white;
+        vertical-align: center;
+    }
 }
