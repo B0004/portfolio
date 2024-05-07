@@ -365,7 +365,7 @@ const typeTableTemplate =
 `<table id="resistance-weakness-table">
     <tr>
         <th>Type</th>
-        <th>Resistance</th>
+        <th>Resisted</th>
         <th>Weakness</th>
     </tr>
     <tr>

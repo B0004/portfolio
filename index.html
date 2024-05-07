@@ -1,208 +1,117 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>brandon's portfolio</title>
+        <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/styles.css">
-
-        <link rel="icon" type="image/x-icon" href="assets/fish_favicon.png">
+        <link rel="stylesheet" href="styles.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Rubik&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jersey+10&family=League+Gothic&family=Micro+5&family=VT323&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="page-container">
-            <div class="intro-container">
-                <div class="intro-content">
-                    <div class="intro-words">
-                        <div class="wrapper">
-                            <div class="intro-title title">
-                                brandon kao
-                            </div>
-                            <div class="intro-bio">
-                                hi! welcome to my portfolio! my name is brandon and i'm a front-end web developer. check out some of my projects and learn more about me!
-                            </div>
-                        </div>
-                        <div class="intro-nav links">
-                            <ul>
-                                <li><a href="about_me.html">about me</a></li>
-                                <li><a href="assets\Brandon_Kao_Resume.pdf"  target="_blank">resume</a></li>
-                                <li id = project-expansion><a href="#project-section">some projects</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="fish-container">
-                        <img src="assets/fish_body.png">
-                    </div>
-                </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header>
+            <span id="current-time"></span>
+            <ul>
+                <li>
+                    <a href="">Projects</a>
+                </li>
+                <li>
+                    <a href="">About</a>
+                </li>
+                <li>
+                    <a href="">Resume</a>
+                </li>
+            </ul>
+        </header>
+        <section id="landing-page">
 
-            </div>
-            <div class="projects-container">
+            <p>你好 Hello, I'm</p>
+            <h1>Brandon Kao</h1>
+            <p>I want to create functional and accessible tools to help people :)</p>
+            
+            <fieldset>
+                <label for="web-dev">
+                <input type="radio" id="web-dev" name="project-type-input" value="Web Development" checked>
+                Web Development
+                </label>
+            
+                <label for="machine-learning">
+                <input type="radio" id="machine-learning" name="project-type-input" value="Machine Learning">
+                Machine Learning
+                </label>
+            
+                <label for="research">
+                <input type="radio" id="research" name="project-type-input" value="Research">
+                Research
+                </label>
+            </fieldset>
 
-                <hr class="project-divider" id="project-section">
-                <div class="project-container">
-                    <a href="https://cse110-sp23-group20.github.io/fortune-teller/source/home-page/" class = project-link-wrapper target="_blank">
-                        <div class="project-img">
-                            <img src="assets/fortune_head.png">
-                        </div>
-                    </a>
-                    <div class="project-description-container">
-                        <div class="wrapper">
-                            <div class="project-title title">
-                                fortune teller
-                            </div>
-                            <div class="project-description">
-                                a fortune telling web app featuring an astrology love compatibility calculator, a fortune cookie simulator, and a palm reading fortune teller.
-                            </div>
-                            <div class="expand">
-                                <div class="project-description details">
-                                    <p>
-                                        this was my first time working with others in an official team setting using proper software development practices.
-                                    </p>
-                                    <p>
-                                        the collaboration went incredibly well according to agile development, i was able to receive blueprints on time from the designer and learn a lot from more experienced engineers during pair programming sessions
-                                    </p>
-                                    <p>
-                                        it ended up winning 3rd place out of 30 teams. it wasn't the best finish, but given how a lot of us were beginners, i'm very proud of both the end result and the development process.
-                                    </p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            CSS developer, 2023
-                        </div>
-                    </div>
-                </div>
-                
-                <hr class="project-divider" id="project-section">
 
-                <hr class="project-divider">
-                <div class="project-container">
-                    <a href="https://chrome.google.com/webstore/detail/calyrex-team-builder/mekpikflbianjccpjmepcedmgloglppa/related" class = project-link-wrapper target="_blank">
-                        <div class="project-img">
-                            <img src="assets/pokemon_head.png">
-                        </div>
-                    </a>
-                    <div class="project-description-container">
-                        <div class="wrapper">
-                            <div class="project-title title">
-                                pokemon showdown set builder
-                            </div>
-                            <div class="project-description">
-                                a google chrome extension made for competitive pokemon battles on pokemon showdown, provides trainers with the latest meta sets of moves, abilities, items, and EV (Effort Value) spreads and makes teams automatically.
-                            </div>
-                            <div class="expand">
-                                <div class="project-description details">
-                                    <p>
-                                        this was the first project that i attempted by myself when i first started learning web dev, and is my personal favorite one lol (by a long shot). i started my first draft before i even knew what a flexbox was.
-                                    </p>
-                                    <p>
-                                        my two favorite features are the radar chart using chart.js and the 3d carousel animation. i think radar charts are a very cool way of presenting different stats, but had to take a step back when i learned that there's no native way to implement it using simple CSS. chart.js was the first external package that i learned (first of many) and i'm very proud of the result.
-                                    </p>
-                                    <p>
-                                        the first 3 drafts all layed all the cards flat out on the side, or were implemented as collapsibles. but one day when i was browsing youtube, i came across this 3d carousel animation and was blown away by how cool it was, so i felt like i had to implemented it, which i agree is not the best practice when making a product lol. but hey, i'm just learning and playing around here, so why not. it turns out that the 3d carousel alerted the user when the set is changed or has reloaded and let them know that there's other cards to choose from before they see the menu on the side, so it ended up making the product more discoverable
-                                    </p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            main developer, 2023
-                        </div>
-                    </div>
-                </div>
 
-                <hr class="project-divider">
-                <div class="project-container">
-                    <a href="https://b0004.github.io/personal_portfolio/projects/curious_cat/" class = project-link-wrapper target="_blank">
-                        <div class="project-img">
-                            <img src="assets/cat.png">
-                        </div>
-                    </a>
-                    <div class="project-description-container">
-                        <div class="wrapper">
-                            <div class="project-title title">
-                                curious cat
-                            </div>
-                            <div class="project-description">
-                                a simple card game to where you answer questions with your friends.
-                            </div>
-                            <div class="expand">
-                                <div class="project-description details">
-                                    <p>
-                                        this is totally not a rip-off of a certain existing game that went viral during quarantine...
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            main developer, 2023
-                        </div>
-                    </div>
-                </div>
+            <div id="moving-city"></div>
 
-                <hr class="project-divider">
-                <div class="project-container">
-                    <div class="project-img">
-                        <img src="assets/dance_head.png">
-                    </div>
-                    <div class="project-description-container">
-                        <div class="wrapper">
-                            <div class="project-title title">
-                                dance breakdown
-                            </div>
-                            <div class="project-description">
-                                a web app designed to help dancers learn difficult choreographies by marking a video with a screen capture on every beat count to break down the choreography.
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            main developer, 2023
-                        </div>
-                    </div>
-                </div>
+        </section>
 
-                <hr class="project-divider">
-                <div class="project-container">
-                    <div class="project-img">
-                        <img src="assets/youtube_head.png">
-                    </div>
-                    <div class="project-description-container">
-                        <div class="wrapper">
-                            <div class="project-title title">
-                                YouTube music rating
-                            </div>
-                            <div class="project-description">
-                                a google chrome extension that enables users to rate songs in a YouTube Music playlist by dynamically creating dropdown menus next to each song and provide users to select a rating from 'S' to 'F'.
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            main developer, 2023
-                        </div>
-                    </div>
-                </div>
-                <hr class="project-divider">
+        <section id="projects">
 
-            </div>
-            <div class="footer-container">
-                <div class="connect-container">
-                    <div class="footer-title title">
-                        let's connect
-                    </div>
-                    <div class="footer-nav links">
-                        <ul>
-                            <li id="email"><p>brandonkao4@gmail.com</p></li>
-                            <li id="linkedin"><a href="https://www.linkedin.com/in/brandonkao4" target="_blank">linkedin</a></li>
-                        </ul>
-                    </div>
+            <!-- Lapras -->
+            <article class="project-banner">
+                <div class="word-wrapper">
+                    <h2>Pokemon Showdown Team Builder</h2>
+                    <p>Google Chrome extension providing competitive Pokémon builds for automatic completion in online simulator Pokémon Showdown.</p>
                 </div>
-                <div class="copyright">built by brandon kao @ 2023</div>
-            </div>
-        </div>
-        <script src="js/script.js" async defer></script>
+                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
+            </article>
+
+            <!-- fortune -->
+            <article class="project-banner">
+                <div class="word-wrapper">
+                    <h2>Fortune Teller</h2>
+                    <p>Looking into the future through horoscope, palm reading, and fortune cookie features. </p>
+                </div>
+                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
+            </article>
+            
+            <!-- cat -->
+            <article class="project-banner">
+                <div class="word-wrapper">
+                    <h2>Curious Cat</h2>
+                    <p>Bonding game to facilitate the process of getting to know someone on a deeper level. </p>
+                </div>
+                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
+            </article>
+            
+            <!-- dance -->
+            <article class="project-banner">
+                <div class="word-wrapper">
+                    <h2>Dance Helper</h2>
+                    <p>Assissts dancers with learning and annotating difficult choreographies</p>
+                </div>
+                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
+            </article>
+
+            <!-- eula -->
+            <article class="project-banner">
+                <div class="word-wrapper">
+                    <h2>Image Cutter</h2>
+                    <p>Cutting large images into convenient A4 sized pieces for printing cutouts</p>
+                </div>
+                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
+            </article>
+
+        </section>
+        
+        <script src="script.js" async defer></script>
     </body>
 </html>
