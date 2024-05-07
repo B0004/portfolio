@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="styles.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jersey+10&family=League+Gothic&family=Micro+5&family=VT323&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Micro+5&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -34,83 +34,91 @@
                 </li>
             </ul>
         </header>
-        <section id="landing-page">
-
-            <p>你好 Hello, I'm</p>
-            <h1>Brandon Kao</h1>
-            <p>I want to create functional and accessible tools to help people :)</p>
-            
-            <fieldset>
-                <label for="web-dev">
-                <input type="radio" id="web-dev" name="project-type-input" value="Web Development" checked>
-                Web Development
-                </label>
-            
-                <label for="machine-learning">
-                <input type="radio" id="machine-learning" name="project-type-input" value="Machine Learning">
-                Machine Learning
-                </label>
-            
-                <label for="research">
-                <input type="radio" id="research" name="project-type-input" value="Research">
-                Research
-                </label>
-            </fieldset>
-
-
+        <div class="parallax">
 
             <div id="moving-city"></div>
 
-        </section>
-
-        <section id="projects">
-
-            <!-- Lapras -->
-            <article class="project-banner">
-                <div class="word-wrapper">
-                    <h2>Pokemon Showdown Team Builder</h2>
-                    <p>Google Chrome extension providing competitive Pokémon builds for automatic completion in online simulator Pokémon Showdown.</p>
+            <section id="landing-page" class="parallax">
+                <div class="content">
+                    <p>你好 Hello, I'm</p>
+                    <h1>Brandon Kao</h1>
+                    <p>I want to create functional and accessible tools to help people :)</p>
+                    
+                    <fieldset>
+                        <label for="web-dev">
+                        <input type="radio" id="web-dev" name="project-type-input" value="Web Development" checked>
+                        Web Development
+                        </label>
+                    
+                        <label for="machine-learning">
+                        <input type="radio" id="machine-learning" name="project-type-input" value="Machine Learning">
+                        Machine Learning
+                        </label>
+                    
+                        <label for="research">
+                        <input type="radio" id="research" name="project-type-input" value="Research">
+                        Research
+                        </label>
+                    </fieldset>
                 </div>
-                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
-            </article>
+    
+            </section>
+        
+            <section id="projects">
+                <hr>
+                <!-- Lapras -->
+                <article class="project-banner">
+                    <div class="word-wrapper">
+                        <h2>Pokemon Showdown Team Builder</h2>
+                        <p>Google Chrome extension providing competitive Pokémon builds for automatic completion in online simulator Pokémon Showdown.</p>
+                    </div>
+                    <img src="assets/pokemon.png" alt="Pokemon Showdown Team Builder">
+                </article>
+        
+                <hr>
+                <!-- fortune -->
+                <article class="project-banner">
+                    <div class="word-wrapper">
+                        <h2>Fortune Teller</h2>
+                        <p>Looking into the future through horoscope, palm reading, and fortune cookie features. </p>
+                    </div>
+                    <img src="assets/fortune.png" alt="Fortune Teller">
+                </article>
+                
+                <hr>
+                
+                <!-- dance -->
+                <article class="project-banner">
+                    <div class="word-wrapper">
+                        <h2>Dance Helper</h2>
+                        <p>Assissts dancers with learning and annotating difficult choreographies</p>
+                    </div>
+                    <img src="assets/dance.png" alt="Dance Helper">
+                </article>
+                <hr>
 
-            <!-- fortune -->
-            <article class="project-banner">
-                <div class="word-wrapper">
-                    <h2>Fortune Teller</h2>
-                    <p>Looking into the future through horoscope, palm reading, and fortune cookie features. </p>
-                </div>
-                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
-            </article>
-            
-            <!-- cat -->
-            <article class="project-banner">
-                <div class="word-wrapper">
-                    <h2>Curious Cat</h2>
-                    <p>Bonding game to facilitate the process of getting to know someone on a deeper level. </p>
-                </div>
-                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
-            </article>
-            
-            <!-- dance -->
-            <article class="project-banner">
-                <div class="word-wrapper">
-                    <h2>Dance Helper</h2>
-                    <p>Assissts dancers with learning and annotating difficult choreographies</p>
-                </div>
-                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
-            </article>
+                <!-- cat -->
+                <article class="project-banner">
+                    <div class="word-wrapper">
+                        <h2>Curious Cat</h2>
+                        <p>Bonding game to facilitate the process of getting to know someone on a deeper level. </p>
+                    </div>
+                    <img src="assets/cat.png" alt="Cat Game">
+                </article>
+                <hr>
 
-            <!-- eula -->
-            <article class="project-banner">
-                <div class="word-wrapper">
-                    <h2>Image Cutter</h2>
-                    <p>Cutting large images into convenient A4 sized pieces for printing cutouts</p>
-                </div>
-                <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
-            </article>
+                <!-- eula -->
+                <!-- <article class="project-banner">
+                    <div class="word-wrapper">
+                        <h2>Image Cutter</h2>
+                        <p>Cutting large images into convenient A4 sized pieces for printing cutouts</p>
+                    </div>
+                    <img src="assets/laptop.png" alt="Pokemon Showdown Team Builder">
+                </article>
+                <hr> -->
+            </section>
+        </div>
 
-        </section>
         
         <script src="script.js" async defer></script>
     </body>

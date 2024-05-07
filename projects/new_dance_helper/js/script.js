@@ -112,8 +112,7 @@ var beatDuration =  0;
 function createMap(){
     console.log('cleared');
     //delete current map
-    map.innerHTML = "";
-    console.log(map.innerHTML);
+    //map.innerHTML = "";
 
     startTime = parseFloat(startTime);
     endTime = parseFloat(endTime);
@@ -124,7 +123,7 @@ function createMap(){
 
     var bpm = 60/beatDuration;
     var letterLength = beatNumber/32;
-
+console.log(beatNumber);
     //create each letter box
     for (let i = 0, index = 0; i < letterLength; i++) {
         let letter = alphabet[i];

@@ -7,6 +7,8 @@ function showTime() {
     
 }
 
+
+
 // function checkHour(){
 //     var date = new Date(); // Get the current date and time
 //     var hours = date.getHours(); // Get the current hour in 24-hour format
