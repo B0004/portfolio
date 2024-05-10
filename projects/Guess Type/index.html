@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <h2>Guess Pokemon!</h2>
+
+        <img id="pokemon-img" src="https://img.pokemondb.net/sprites/black-white/anim/normal/charizard.gif" alt="Pokemon Image">
+
+        <h1 id="name">Pokemon Name</h1>
+
+        <div class="control-row">
+            <button id="skip">Skip</button>
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Normal.png" alt="Normal">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Fire.png" alt="Fire">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Water.png" alt="Water">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Electric.png" alt="Electric">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Grass.png" alt="Grass">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Ice.png" alt="Ice">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Fighting.png" alt="Fighting">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Poison.png" alt="Poison">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Ground.png" alt="Ground">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Flying.png" alt="Flying">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Psychic.png" alt="Psychic">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Bug.png" alt="Bug">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Rock.png" alt="Rock">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Ghost.png" alt="Ghost">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Dragon.png" alt="Dragon">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Dark.png" alt="Dark">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel">
+            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Fairy.png" alt="Fairy">
+            <button id="submit">Submit</button>
+        </div>
+
+        <div class="grid-container">
+            <!-- Button elements with value attributes and images -->
+            <button id="Normal" class="type-button" value="Normal"><img src="https://play.pokemonshowdown.com/sprites/types/Normal.png" alt="Normal"></button>
+            <button id="Fire" class="type-button" value="Fire"><img src="https://play.pokemonshowdown.com/sprites/types/Fire.png" alt="Fire"></button>
+            <button id="Water" class="type-button" value="Water"><img src="https://play.pokemonshowdown.com/sprites/types/Water.png" alt="Water"></button>
+            <button id="Electric" class="type-button" value="Electric"><img src="https://play.pokemonshowdown.com/sprites/types/Electric.png" alt="Electric"></button>
+            <button id="Grass" class="type-button" value="Grass"><img src="https://play.pokemonshowdown.com/sprites/types/Grass.png" alt="Grass"></button>
+            <button id="Ice" class="type-button" value="Ice"><img src="https://play.pokemonshowdown.com/sprites/types/Ice.png" alt="Ice"></button>
+            <button id="Fighting" class="type-button" value="Fighting"><img src="https://play.pokemonshowdown.com/sprites/types/Fighting.png" alt="Fighting"></button>
+            <button id="Poison" class="type-button" value="Poison"><img src="https://play.pokemonshowdown.com/sprites/types/Poison.png" alt="Poison"></button>
+            <button id="Ground" class="type-button" value="Ground"><img src="https://play.pokemonshowdown.com/sprites/types/Ground.png" alt="Ground"></button>
+            <button id="Flying" class="type-button" value="Flying"><img src="https://play.pokemonshowdown.com/sprites/types/Flying.png" alt="Flying"></button>
+            <button id="Psychic" class="type-button" value="Psychic"><img src="https://play.pokemonshowdown.com/sprites/types/Psychic.png" alt="Psychic"></button>
+            <button id="Bug" class="type-button" value="Bug"><img src="https://play.pokemonshowdown.com/sprites/types/Bug.png" alt="Bug"></button>
+            <button id="Rock" class="type-button" value="Rock"><img src="https://play.pokemonshowdown.com/sprites/types/Rock.png" alt="Rock"></button>
+            <button id="Ghost" class="type-button" value="Ghost"><img src="https://play.pokemonshowdown.com/sprites/types/Ghost.png" alt="Ghost"></button>
+            <button id="Dragon" class="type-button" value="Dragon"><img src="https://play.pokemonshowdown.com/sprites/types/Dragon.png" alt="Dragon"></button>
+            <button id="Dark" class="type-button" value="Dark"><img src="https://play.pokemonshowdown.com/sprites/types/Dark.png" alt="Dark"></button>
+            <button id="Steel" class="type-button" value="Steel"><img src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel"></button>
+            <button id="Fairy" class="type-button" value="Fairy"><img src="https://play.pokemonshowdown.com/sprites/types/Fairy.png" alt="Fairy"></button>
+        </div>
+
+        <script src="indexedPokedex.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

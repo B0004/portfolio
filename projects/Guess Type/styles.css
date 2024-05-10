@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+/* background: radial-gradient(circle, rgba(131,227,255,1) 0%, rgba(158,255,223,1) 100%); */
+}
+
+.control-row{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.control-row > button{
+    height: 50px;
+    font-size: 24px;
+    color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.control-row > img{
+    width: 48px; /* Set a fixed width for the buttons */
+    height: 21px; 
+    object-fit: cover;
+}
+
+.disappear{
+    display: none;
+}
+
+#skip{
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    background-color: red;
+}
+
+#submit{
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    background-color: green;
+}
+
+#pokemon-img{
+    min-height: 100px;
+    max-height: 150px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
+    width: 100%;
+    
+}
+.type-button {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    overflow: hidden; /* Ensures no part of the image spills over the button's boundaries */
+
+    background-color: royalblue;
+    border: 1px solid lightsteelblue;
+}
+.type-button img {
+    border: 4px outset steelblue;
+    width: 96px; /* Set a fixed width for the buttons */
+    height: 36px; 
+    object-fit: cover; /* Ensures the image covers the button area without distorting aspect ratio */
+}
+
+.chosen{
+    background-color: cornflowerblue;
+    border: 1px solid white;
+}
+
+.chosen > img{
+    border: 4px inset gray;
+}
