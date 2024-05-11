@@ -2,6 +2,11 @@
     margin: 0;
     padding: 0;
     border: none;
+
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body{
@@ -10,6 +15,9 @@ body{
     justify-content: space-around;
     align-items: center;
     height: 100vh;
+    background-image: url('base.png');
+    background-clip: cover;
+    background-position: center;
 /* background: radial-gradient(circle, rgba(131,227,255,1) 0%, rgba(158,255,223,1) 100%); */
 }
 
@@ -72,13 +80,13 @@ body{
     align-items: center; /* Centers content vertically */
     overflow: hidden; /* Ensures no part of the image spills over the button's boundaries */
 
-    background-color: royalblue;
+    background-color: grey;
     border: 1px solid lightsteelblue;
 }
 .type-button img {
     border: 4px outset steelblue;
-    width: 96px; /* Set a fixed width for the buttons */
-    height: 36px; 
+    width: 64px; /* Set a fixed width for the buttons */
+    height: 24px; 
     object-fit: cover; /* Ensures the image covers the button area without distorting aspect ratio */
 }
 
@@ -90,3 +98,41 @@ body{
 .chosen > img{
     border: 4px inset gray;
 }
+
+.modal {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .modal header, .modal footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+  }
+  
+  .modal section {
+    padding: 1em;
+  }
+  
+  .modal section p {
+    margin-top: 0;
+  }
+  
+  label {
+    display: block;
+    margin: 0.5em 0;
+  }
+  
+  .close {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  
+  footer button {
+    padding: 0.5em 1em;
+    margin-right: 0.5em;
+  }
+  

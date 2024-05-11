@@ -11,9 +11,37 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap" rel="stylesheet">
     </head>
     <body>
-
+        <button id="openBtn">Open Form</button>
+        <dialog id="popup" class="modal">
+            <form method="dialog">
+                <header>
+                <h2>Settings</h2>
+                <button type="button" class="close" aria-label="Close">&times;</button>
+                </header>
+                <section>
+                <p>Choose Image Type:</p>
+                <label><input type="radio" name="choice" value="false" checked>Modern Static Images</label>
+                <label><input type="radio" name="choice" value="true">Animated Gen 5 Sprites</label>
+                </section>
+                <section>
+                <p>Which Generations:</p>
+                <label><input type="checkbox" name="interest" value="1" checked>Gen I</label>
+                <label><input type="checkbox" name="interest" value="2">Gen II</label>
+                <label><input type="checkbox" name="interest" value="3">Gen III</label>
+                <label><input type="checkbox" name="interest" value="4">Gen IV</label>
+                <label><input type="checkbox" name="interest" value="5">Gen V</label>
+                </section>
+                <footer>
+                <button type="submit">Submit</button>
+                <button type="button" onclick="document.getElementById('popup').close();">Cancel</button>
+                </footer>
+            </form>
+        </dialog>
         <h2>Guess Pokemon!</h2>
 
         <img id="pokemon-img" src="https://img.pokemondb.net/sprites/black-white/anim/normal/charizard.gif" alt="Pokemon Image">
@@ -21,25 +49,25 @@
         <h1 id="name">Pokemon Name</h1>
 
         <div class="control-row">
-            <button id="skip">Skip</button>
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Normal.png" alt="Normal">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Fire.png" alt="Fire">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Water.png" alt="Water">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Electric.png" alt="Electric">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Grass.png" alt="Grass">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Ice.png" alt="Ice">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Fighting.png" alt="Fighting">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Poison.png" alt="Poison">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Ground.png" alt="Ground">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Flying.png" alt="Flying">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Psychic.png" alt="Psychic">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Bug.png" alt="Bug">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Rock.png" alt="Rock">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Ghost.png" alt="Ghost">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Dragon.png" alt="Dragon">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Dark.png" alt="Dark">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel">
-            <img class="disappear" src="https://play.pokemonshowdown.com/sprites/types/Fairy.png" alt="Fairy">
+            <button id="skip">Show Type</button>
+            <img class="disappear Normal" src="https://play.pokemonshowdown.com/sprites/types/Normal.png" alt="Normal">
+            <img class="disappear Fire" src="https://play.pokemonshowdown.com/sprites/types/Fire.png" alt="Fire">
+            <img class="disappear Water" src="https://play.pokemonshowdown.com/sprites/types/Water.png" alt="Water">
+            <img class="disappear Electric" src="https://play.pokemonshowdown.com/sprites/types/Electric.png" alt="Electric">
+            <img class="disappear Grass" src="https://play.pokemonshowdown.com/sprites/types/Grass.png" alt="Grass">
+            <img class="disappear Ice" src="https://play.pokemonshowdown.com/sprites/types/Ice.png" alt="Ice">
+            <img class="disappear Fighting" src="https://play.pokemonshowdown.com/sprites/types/Fighting.png" alt="Fighting">
+            <img class="disappear Poison" src="https://play.pokemonshowdown.com/sprites/types/Poison.png" alt="Poison">
+            <img class="disappear Ground" src="https://play.pokemonshowdown.com/sprites/types/Ground.png" alt="Ground">
+            <img class="disappear Flying" src="https://play.pokemonshowdown.com/sprites/types/Flying.png" alt="Flying">
+            <img class="disappear Psychic" src="https://play.pokemonshowdown.com/sprites/types/Psychic.png" alt="Psychic">
+            <img class="disappear Bug" src="https://play.pokemonshowdown.com/sprites/types/Bug.png" alt="Bug">
+            <img class="disappear Rock" src="https://play.pokemonshowdown.com/sprites/types/Rock.png" alt="Rock">
+            <img class="disappear Ghost" src="https://play.pokemonshowdown.com/sprites/types/Ghost.png" alt="Ghost">
+            <img class="disappear Dragon" src="https://play.pokemonshowdown.com/sprites/types/Dragon.png" alt="Dragon">
+            <img class="disappear Dark" src="https://play.pokemonshowdown.com/sprites/types/Dark.png" alt="Dark">
+            <img class="disappear Steel" src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel">
+            <img class="disappear Fairy" src="https://play.pokemonshowdown.com/sprites/types/Fairy.png" alt="Fairy">            
             <button id="submit">Submit</button>
         </div>
 
@@ -63,6 +91,7 @@
             <button id="Dark" class="type-button" value="Dark"><img src="https://play.pokemonshowdown.com/sprites/types/Dark.png" alt="Dark"></button>
             <button id="Steel" class="type-button" value="Steel"><img src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel"></button>
             <button id="Fairy" class="type-button" value="Fairy"><img src="https://play.pokemonshowdown.com/sprites/types/Fairy.png" alt="Fairy"></button>
+
         </div>
 
         <script src="indexedPokedex.js"></script>
