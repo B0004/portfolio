@@ -45,7 +45,7 @@
     .card {
         list-style-type: none;
         background-color: white;
-        width: 350px;
+        width: 330px;
 
         padding-inline-start: 0;
         padding-top: 10px;
@@ -88,7 +88,7 @@
             height: 24px;
             display: flex;
             align-items: center;
-            padding: 15px 25px;
+            padding: 15px 15px;
         }
         
         .field-title{

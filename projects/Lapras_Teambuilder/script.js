@@ -48,9 +48,6 @@ function multiplyValues(obj1, obj2) {
 }
   
 function lookUpWeakness(pokemon){
-    console.log('pokemon: ' + pokemon);
-    console.log('pokedex: ' + pokedex);
-    console.log('pokedex[]: ' + pokedex[pokemon]);
     var pokemonTypes = pokedex[pokemon].types;
     if (pokemonTypes.length == 1){
         let type = pokemonTypes[0].toLowerCase();
@@ -162,9 +159,8 @@ function updateTypeTable(teamList){
       }
     }
   }
-
   const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
-    const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
+const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
 
   var rkeys = Object.keys(resistCount);
   rkeys.forEach((type, i) => {
@@ -186,7 +182,12 @@ function newPokemonChosen(pokemonName){
     cardPad.innerHTML = '';
     var setList = SETDEX_SV[pokemonName];
     if (setList === undefined) {
-        poopMon();
+        if (pokemonName){
+            poopMon();
+        }
+        else{
+            landingPage();
+        }
     }
     else{
         for (setName in setList){
@@ -268,9 +269,11 @@ innerPad.appendChild(cardPad);
 innerPad.appendChild(typeAside);
 outerPad.appendChild(innerPad);
 
+
 landingPage();
 const callback = function(mutationsList, observer) {
     if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
+        console.log('innerpad: ' ,innerPad);
         console.log('Ignored mutation in card-pad');
         return; // Do nothing if card-pad is the source of mutations
     }
