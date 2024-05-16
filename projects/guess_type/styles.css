@@ -12,6 +12,8 @@
 :root{
   --button-background: rgba(44, 71, 112, 0.6);
   --button-checked-background: rgba(33, 50, 80, 0.9);
+  --button-skip-background: rgba(255, 0, 0, 0.8);
+  --button-submit-background: rgba(0, 155, 0, 0.8);
 }
 
 body{
@@ -54,6 +56,13 @@ body{
     animation-duration: 2s; /* Adjust duration as needed */
   }
 
+#openBtn{
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  background-image: url('gear.svg');
+}
+
 .control-row{
     display: flex;
     width: 100%;
@@ -81,13 +90,13 @@ body{
 #skip{
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-    background-color: red;
+    background-color: var(--button-skip-background);
 }
 
 #submit{
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
-    background-color: green;
+    background-color: var(--button-submit-background)
 }
 
 #pokemon-img{
@@ -135,7 +144,9 @@ body{
 .modal {
     border: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  }
+    display: fixed;
+    margin: auto;
+    }
   
   .modal header, .modal footer {
     display: flex;
