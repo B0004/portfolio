@@ -226,6 +226,13 @@ submit.addEventListener('click', function () {
     if (haveSameTypes(a, b)){
         newMon();
     }    
+    else{
+        //wrong guess
+        body.classList.add('wrong-background');
+        body.addEventListener('animationend', () => {
+            body.classList.remove('wrong-background');
+        });
+    }
 
     //resets buttons
     resetButtons();

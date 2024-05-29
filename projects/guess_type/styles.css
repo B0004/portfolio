@@ -41,7 +41,7 @@ body{
   /* Animation class */
   .animate-background {
     animation-name: changeBackground;
-    animation-duration: 2s; /* Adjust duration as needed */
+    animation-duration: 1s; /* Adjust duration as needed */
   }
 
   @keyframes changeBackground2 {
@@ -54,6 +54,16 @@ body{
   .red-background {
     animation-name: changeBackground2;
     animation-duration: 2s; /* Adjust duration as needed */
+  }
+  @keyframes changeBackground3 {
+    0% { background-image: url('blue.jpg');}
+    50% { background-image: url('wrong_frame.jpg'); }
+    100% { background-image: url('blue.jpg');}
+  }
+  /* Animation class */
+  .wrong-background {
+    animation-name: changeBackground3;
+    animation-duration: 1s; /* Adjust duration as needed */
   }
 
 #openBtn{
