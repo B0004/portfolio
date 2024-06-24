@@ -1,48 +1,63 @@
-function showTime() {
-    var date = new Date(); // Get the current date and time
-    var time = date.toLocaleTimeString(); // Convert time to a human-readable string
-    
-    document.getElementById('current-time').innerText = time; // Display the time in the timeDisplay element
-    setTimeout(showTime, 1000); // Update the time every second
-    
-}
-
-
-
-// function checkHour(){
-//     var date = new Date(); // Get the current date and time
-//     var hours = date.getHours(); // Get the current hour in 24-hour format
-    
-//     if (hours == 17) { // 17 is 5 PM in 24-hour format
-//         // Apply daytime colors
-//         console.log(hours, 'day');
-//         document.documentElement.style.setProperty('--t1', '#2D2D2D');
-//         document.documentElement.style.setProperty('--t2', '#1F86D1');
-//         document.documentElement.style.setProperty('--b1', '#C3EAFF');
-//         document.documentElement.style.setProperty('--b2', '#F0FAFF');
-//         document.querySelector('label:has(input[type="radio"]:checked)::before').style.backgroundImage = "url('assets/black_triangle.svg')";
+    function showTime() {
+        var date = new Date(); // Get the current date and time
+        var options = { hour: '2-digit', minute: '2-digit' }; // Options to get hours and minutes only
+        var time = date.toLocaleTimeString([], options); // Convert time to a human-readable string without seconds
         
-//     } else {
-//         console.log(hours, 'night');
-//         // Apply evening colors
-//         document.documentElement.style.setProperty('--t1', '#F4E7A3');
-//         document.documentElement.style.setProperty('--t2', '#F4E7A3');
-//         document.documentElement.style.setProperty('--b1', '#473591');
-//         document.documentElement.style.setProperty('--b2', '#1F86D1');
-//     }
-//     setTimeout(checkHour, 60000); // Update the hour every min
-// }
-
-showTime(); // Initial call to start the function
-// checkHour();
-
-var docWidth = document.documentElement.offsetWidth;
-
-[].forEach.call(
-  document.querySelectorAll('*'),
-  function(el) {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
+        document.getElementById('current-time').innerText = time; // Display the time in the timeDisplay element
+        setTimeout(showTime, 1000); // Update the time every second
+        
     }
-  }
-);
+    showTime(); // Initial call to start the function
+    // checkHour();
+
+    function updateGreeting() {
+        var date = new Date(); // Get the current date and time
+        var hour = date.getHours(); // Get the current hour
+        var greeting;
+        
+        if (hour >= 5 && hour < 12) {
+            greeting = "Good morning, I'm";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "Good afternoon, I'm";
+        } else {
+            greeting = "Good evening, I'm";
+        }
+    
+        document.querySelector('#landing .not-dog-container p').innerText = greeting; // Update the greeting
+        setTimeout(updateGreeting, 60000); // Update the greeting every minute
+    }
+    updateGreeting(); 
+
+// Select all radio buttons with name 'project-type-input'
+    // Get references to the radio buttons and project containers
+    const radioButtons = document.querySelectorAll('input[name="project-type-input"]');
+    const projectContainers = document.querySelectorAll('.project-container');
+
+    // Function to hide all project containers
+    function hideAllContainers() {
+        projectContainers.forEach(container => {
+            container.style.display = 'none';
+        });
+    }
+
+    // Function to show the selected project container
+    function showSelectedContainer() {
+        const selectedButton = document.querySelector('input[name="project-type-input"]:checked');
+        const selectedContainer = document.getElementById(selectedButton.value);
+        if (selectedContainer) {
+            selectedContainer.style.display = 'flex';
+        }
+    }
+
+    // Initial setup: hide all containers and show the one corresponding to the checked radio button
+    hideAllContainers();
+    showSelectedContainer();
+
+    // Add change event listener to each radio button
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', () => {
+            hideAllContainers();
+            showSelectedContainer();
+        });
+    });
+
