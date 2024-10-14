@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Reading Timer",
+    "version": "1.0",
+    "description": "Measure reading speed in WPM.",
+    "permissions": ["activeTab", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": "128.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["popup.js"]
+      }
+    ],
+    "icons": {
+      "128": "128.png"
+    }
+  }
+  
