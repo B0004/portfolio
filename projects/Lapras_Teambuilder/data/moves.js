@@ -2132,9 +2132,162 @@ const moveDex = {
         "accuracy": "—%",
         "generation": "II"
     },
-    "Hidden Power": {
+    "Hidden Power Normal": {
         "number": 237,
         "type": "Normal",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Fire": {
+        "number": 238,
+        "type": "Fire",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Water": {
+        "number": 239,
+        "type": "Water",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Electric": {
+        "number": 240,
+        "type": "Electric",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Grass": {
+        "number": 241,
+        "type": "Grass",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Ice": {
+        "number": 242,
+        "type": "Ice",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Fighting": {
+        "number": 243,
+        "type": "Fighting",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Poison": {
+        "number": 244,
+        "type": "Poison",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Ground": {
+        "number": 245,
+        "type": "Ground",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Flying": {
+        "number": 246,
+        "type": "Flying",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Psychic": {
+        "number": 247,
+        "type": "Psychic",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Bug": {
+        "number": 248,
+        "type": "Bug",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Rock": {
+        "number": 249,
+        "type": "Rock",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Ghost": {
+        "number": 250,
+        "type": "Ghost",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Dragon": {
+        "number": 251,
+        "type": "Dragon",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Dark": {
+        "number": 252,
+        "type": "Dark",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Steel": {
+        "number": 253,
+        "type": "Steel",
+        "category": "Special",
+        "pp": 15,
+        "power": 60,
+        "accuracy": "100%",
+        "generation": "II"
+    },
+    "Hidden Power Fairy": {
+        "number": 254,
+        "type": "Fairy",
         "category": "Special",
         "pp": 15,
         "power": 60,

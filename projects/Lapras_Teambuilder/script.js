@@ -62,7 +62,7 @@ function lookUpWeakness(pokemon){
 
 function createCard(name, title, item, ability, nature, evs, ivs, teraType, move1, move2, move3, move4){
     if (!teraType){
-        teraType = '';
+        teraType = 'None';
     }
     let card = document.createElement("OL");
     card.classList.add('card')
@@ -74,7 +74,9 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
         <li class="ability top"><span class="field-title">Ability: </span>${ability}</li>
         <li class="nature top"><span class="field-title">Nature: </span>${nature}</li>
         <li class="ev top"><span class="field-title">EVs: </span><small class="evs">${evs}</small></li>
-        <li class="tera top"><span class="field-title">Tera Type: </span> <img src="https://play.pokemonshowdown.com/sprites/types/${teraType}.png" alt="${teraType}"></li>
+        ${teraType !== 'None' ? `<li class="tera top"><span class="field-title">Tera Type: </span>
+            <img src="https://play.pokemonshowdown.com/sprites/types/${teraType}.png" alt="${teraType}">
+        </li>` : `<li class="tera top"><span class="field-title">Tera Type: </span> </li>`}  
         <li class="move"><img src="https://play.pokemonshowdown.com/sprites/types/${moveDex[move1].type}.png" alt="move icon"> <span>${move1}</span></li>
         <li class="move-detail"><img src="https://play.pokemonshowdown.com/sprites/categories/${moveDex[move1].category}.png" alt="type icon"><span><small>Power</small><small>${moveDex[move1].power || '-'}</small></span><span><small>Accuracy</small><small>${moveDex[move1].accuracy}</small></span></li>
         <li class="move"><img src="https://play.pokemonshowdown.com/sprites/types/${moveDex[move2].type}.png" alt="move icon"> <span>${move2}</span></li>
