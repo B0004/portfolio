@@ -1,10 +1,21 @@
 :root {
-    --c1: #ECF6FF;
+    --secondary-blue: #ECF6FF;
     --c2: #9ECEFF;
     --t2: #999999;
     --t4: #444444;
-
+    --card-background: white;
+    --ev-text: black;
 }
+
+html.dark {
+    --secondary-blue: #5A6570;
+    --c2: white;
+    --t2: #999999;
+    --t4: #DDDDDD;
+    --card-background: #222527;
+    --ev-text: #DDDDDD;
+}
+
 #room-rooms {
 
     * {
@@ -44,7 +55,7 @@
 
     .card {
         list-style-type: none;
-        background-color: white;
+        background-color: var(--card-background);
         width: 330px;
 
         padding-inline-start: 0;
@@ -52,7 +63,7 @@
         padding-bottom: 5px;
 
         border-radius: 2%;
-        border: 3px solid var(--c1);
+        border: 3px solid var(--secondary-blue);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
         margin: 5px;
@@ -70,7 +81,7 @@
     
     .card:hover hr {
         width: 90%; 
-        border-color: black;
+        border-color: var(--ev-text);
     }
 
     .card{
@@ -101,12 +112,12 @@
             height: 1.5rem;
         }
         .evs{
-            color: black;
+            color: var(--ev-text);
             font-size: 0.85rem;
         }
         
         li.move{
-            background-color: var(--c1);
+            background-color: var(--secondary-blue);
             
         }
         
@@ -148,28 +159,27 @@
 }
 
 #type-weakness-tab{
-    background-color: white;
-    border: 3px solid var(--c1);
+    background-color: var(--card-background);
+    border: 3px solid var(--secondary-blue);
     border-radius: 10px 0px 0px 10px;
     padding: 5px;
     padding-right: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: fit-content;
+    margin-top: 5px;
 }
 
 #resistance-weakness-table{
     border-radius: 5px 0px 0px 5px;
     padding: 3px;
-    background-color: var(--c1);
+    background-color: var(--secondary-blue);
 
     td {
         text-align: center;
-        background-color: white;
+        background-color: var(--card-background);
     }
 
     td > img{
         vertical-align: middle;
     }
-
-
 }

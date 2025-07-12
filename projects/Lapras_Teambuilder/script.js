@@ -106,6 +106,7 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
 
 function updateTypeTable(teamList){
     typeAside.style.display = "block";
+    console.log(teamList);
 
     var weaknessCount = {
         "normal": 0,
@@ -167,13 +168,13 @@ const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:
   var rkeys = Object.keys(resistCount);
   rkeys.forEach((type, i) => {
     resistedTypes[i].textContent = resistCount[type];
-    resistedTypes[i].parentElement.style.backgroundColor = greenGradient[resistCount[type]];
+    resistedTypes[i].parentElement.style.backgroundColor = green[resistCount[type]];
   });
   
   var wkeys = Object.keys(weaknessCount);
   wkeys.forEach((type, i) => {
     weakToTypes[i].textContent = weaknessCount[type];
-    weakToTypes[i].parentElement.style.backgroundColor = redGradient[weaknessCount[type]];
+    weakToTypes[i].parentElement.style.backgroundColor = red[weaknessCount[type]];
   });
   
 }
@@ -265,6 +266,12 @@ typeAside.innerHTML = typeTableTemplate;
 
 const greenGradient = ['#FFFFFF', '#E6F9E6', '#CCF3CC', '#B3EDB3', '#99E699', '#80E080', '#00CC00'];
 const redGradient = ['#FFFFFF', '#FFE6E6', '#FFCCCC', '#FFB3B3', '#FF9999', '#FF8080', '#FF0000'];
+const darkGreenGradient = ['#1A1A1A', '#4D6B4D', '#3B8F3B', '#2E6F2E', '#228922', '#1A7B1A', '#006600'];
+const darkRedGradient = ['#1A1A1A', '#6B4D4D', '#8F3B3B', '#6F2E2E', '#922222', '#7B1A1A', '#660000'];
+
+const isDarkMode = document.documentElement.classList.contains('dark');
+const green = isDarkMode ? darkGreenGradient : greenGradient;
+const red = isDarkMode ? darkRedGradient : redGradient;
 
 outerPad.innerHTML = '';
 innerPad.appendChild(cardPad);
