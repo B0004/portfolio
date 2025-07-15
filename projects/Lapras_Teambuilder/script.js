@@ -106,7 +106,7 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
 
 function updateTypeTable(teamList){
     typeAside.style.display = "block";
-    console.log(teamList);
+    //console.log(teamList);
 
     var weaknessCount = {
         "normal": 0,
@@ -283,17 +283,38 @@ outerPad.appendChild(innerPad);
 landingPage();
 const callback = function(mutationsList, observer) {
     //something happened here
-    console.log("somthingggggggggggggggggggggggggggggggggggggggg");
     
     if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
-        console.log('Ignored mutation in card-pad');
         return; // Do nothing if card-pad is the source of mutations
     }
     const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
+
+    var teamNameVariable = document.querySelector("#room-teambuilder > div > div > input");
+
+    if (teamNameVariable){
+        //print out the team from local storage from teamName
+        var showdown_teams = localStorage.getItem('showdown_teams');
+        var teamName = teamNameVariable.value;
+
+        const regex = new RegExp(`\\]${teamName}\\|([^\\n]+)`);
+
+// Apply the regex to the showdown_teams string
+const match = showdown_teams.match(regex);
+
+// Log the result
+if (match) {
+    console.log(match[1].trim());  // match[1] will contain the content after "]teamName"
+} else {
+    console.log("Team not found.");
+}
+    }
+
+
+
     if ((pokemonNameInputBox != null) && (document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))){
         if (currentPokemon != pokemonNameInputBox.value){
             currentPokemon = pokemonNameInputBox.value;
-            console.log('update sets');
+            //console.log('update sets');
             newPokemonChosen(currentPokemon);
         }
         else{
@@ -309,8 +330,9 @@ const callback = function(mutationsList, observer) {
     else{
         landingPage();
         currentPokemon = '';
-        console.log('none chosen');
+        //console.log('none chosen');
     }
+    
     
 };
 
@@ -332,3 +354,5 @@ cardPad.addEventListener("click", (event) => {
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
     }
 })
+
+
