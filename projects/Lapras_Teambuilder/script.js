@@ -254,6 +254,7 @@ function poopMon(){
 // Starting function
 var currentPokemon = "";
 const outerPad = document.querySelector("#room-rooms");
+var currentTeam = "";
 
 const innerPad = document.createElement('div');
 const cardPad = document.createElement("div");
@@ -281,8 +282,10 @@ outerPad.appendChild(innerPad);
 
 landingPage();
 const callback = function(mutationsList, observer) {
+    //something happened here
+    console.log("somthingggggggggggggggggggggggggggggggggggggggg");
+    
     if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
-        console.log('innerpad: ' ,innerPad);
         console.log('Ignored mutation in card-pad');
         return; // Do nothing if card-pad is the source of mutations
     }
@@ -308,6 +311,7 @@ const callback = function(mutationsList, observer) {
         currentPokemon = '';
         console.log('none chosen');
     }
+    
 };
 
 // Create a MutationObserver instance and pass the callback function
@@ -322,10 +326,9 @@ observer.observe(targetNode, config);
 cardPad.addEventListener("click", (event) => {
     let clickedCard = event.target.closest('.card');
     
-    if(clickedCard){
+    if(clickedCard){ //paste in the info
         document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setmenu > button:nth-child(2)").click();
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > textarea").value = clickedCard.dataset.export;
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
     }
 })
-
