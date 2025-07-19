@@ -215,7 +215,7 @@ function newPokemonChosen(pokemonName){
     pokemonElements.forEach(element => {
         pokemonArray.push(element.textContent.toLowerCase().replace(/[\s-]/g, ''))
     });
-    updateTypeTable(pokemonArray);
+    //updateTypeTable(pokemonArray);
 }
 
 function landingPage(){
@@ -279,36 +279,124 @@ innerPad.appendChild(cardPad);
 innerPad.appendChild(typeAside);
 outerPad.appendChild(innerPad);
 
+// Function to retrieve and update team data
+function updateTeams() {
+    // Get the showdown_teams from localStorage
+    const showdown_teams = localStorage.getItem('showdown_teams');
+    
+    // Check if showdown_teams exists in localStorage
+    if (!showdown_teams) {
+        console.log('showdown_teams not found in localStorage');
+        return;
+    }
+
+    // Split the showdown_teams string into individual team lines
+    const teamsArray = showdown_teams.split('\n');
+    console.log(teamsArray);
+    
+    const allTeams = {}; // Store all teams
+    
+    // Iterate over each team line
+    teamsArray.forEach(teamLine => {
+        if (!teamLine.trim()) return; // Skip empty lines
+        
+        // Regex to match the team format (FORMAT]TEAMNAME|Pokemon details...)
+        const match = teamLine.match(/([^\]]+)\](.*)/);
+        if (!match) return;
+
+        const format = match[1].trim(); // FORMAT
+        const teamDetails = match[2].trim(); // TEAMNAME|Pokemon details
+        
+        // Split the team name from the Pokémon details
+        const [teamName, pokemonData] = teamDetails.split('|');
+        
+        // Prepare a team object
+        const teamJson = {
+            teamName: teamName,
+            format: format,
+            pokemons: []
+        };
+
+        // Handle Pokémon details by splitting by "]"
+        const pokemonArray = pokemonData.split(']');
+        pokemonArray.forEach((pokemonData, index) => {
+            // For the first Pokémon, don't split by "]" and just use the full string
+            if (index === 0) {
+                const details = pokemonData.split('|');
+                teamJson.pokemons.push(parsePokemon(details, true)); // Pass true for the first Pokémon
+            } else {
+                const details = pokemonData.split('|');
+                teamJson.pokemons.push(parsePokemon(details, false)); // Pass false for subsequent Pokémon
+            }
+        });
+
+        // Add the parsed team to the allTeams object
+        allTeams[teamName] = teamJson;
+    });
+
+    // Log the parsed teams as a JSON object
+    //console.log(JSON.stringify(allTeams, null, 6));  // Pretty print the JSON object of all teams
+}
+
+// Helper function to parse Pokémon details
+function parsePokemon(details, isFirstPokemon) {
+    // Handle nickname logic
+    let nickname = details[0] || '';
+    let pokemonName = details[1] || '';
+
+    // If this is the first Pokémon and it has a nickname, the first field should be the nickname
+    if (isFirstPokemon) {
+        if (nickname) {
+            pokemonName = pokemonName || ''; // Ensure the second field is blank if there's no Pokémon name
+        } else {
+            nickname = '';  // If there's no nickname, leave it blank
+        }
+    } else {
+        // If there's no nickname, the first field should be the Pokémon name, and the nickname is blank
+        if (!nickname) {
+            nickname = ''; // Make sure nickname is blank
+        } else {
+            pokemonName = nickname; // If there's a nickname, assign it to the second field
+        }
+    }
+
+    // Ensure the details array has exactly 12 elements (handle missing fields)
+    const pokemon = {
+        nickname: nickname,
+        pokemonName: pokemonName,
+        item: details[2] || '',
+        ability: details[3] || '',
+        moveset: details[4] ? details[4].split(',') : [],
+        nature: details[5] || '',
+        evSpread: details[6] || '',
+        gender: details[7] || '',
+        ivSpread: details[8] || '',
+        shiny: details[9] || '',  // If shiny is present
+        level: details[10] || '',  // Level info
+        teraType: details[11] || ''  // Tera Type
+    };
+
+    return pokemon;
+}
+
+
 
 landingPage();
 const callback = function(mutationsList, observer) {
     //something happened here
-    
+
+    //check if new team
+    var teamNameVariable = document.querySelector("#room-teambuilder > div > div > input");
+    if (teamNameVariable){
+        //print out the team from local storage from teamName
+        currentTeam = teamNameVariable.value
+    }
+    updateTeams();
+
     if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
         return; // Do nothing if card-pad is the source of mutations
     }
     const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
-
-    var teamNameVariable = document.querySelector("#room-teambuilder > div > div > input");
-
-    if (teamNameVariable){
-        //print out the team from local storage from teamName
-        var showdown_teams = localStorage.getItem('showdown_teams');
-        var teamName = teamNameVariable.value;
-
-        const regex = new RegExp(`\\]${teamName}\\|([^\\n]+)`);
-
-// Apply the regex to the showdown_teams string
-const match = showdown_teams.match(regex);
-
-// Log the result
-if (match) {
-    console.log(match[1].trim());  // match[1] will contain the content after "]teamName"
-} else {
-    console.log("Team not found.");
-}
-    }
-
 
 
     if ((pokemonNameInputBox != null) && (document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))){
