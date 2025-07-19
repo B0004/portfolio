@@ -1,3 +1,21 @@
+const abilityModifierTable = {
+  dryskin: [["water", 0], ["fire", 1.25]],
+  eartheater: [["ground", 0]],
+  flashfire: [["fire", 0]],
+  heatproof: [["fire", 0.5]],
+  levitate: [["ground", 0]],
+  lightningrod: [["electric", 0]],
+  motordrive: [["electric", 0]],
+  purifyingsalt: [["ghost", 0.5]],
+  sapsipper: [["grass", 0]],
+  stormdrain: [["water", 0]],
+  thickfat: [["fire", 0.5], ["ice", 0.5]],
+  voltabsorb: [["electric", 0]],
+  waterabsorb: [["water", 0]],
+  waterbubble: [["fire", 0.5]],
+  wellbakedbody: [["fire", 0]]
+};
+
 const weaknessChart = {
     "normal": {
       "normal": 1,

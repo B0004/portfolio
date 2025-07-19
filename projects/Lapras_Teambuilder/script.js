@@ -1,3 +1,5 @@
+
+
 function getImgLink(type, str){
     if (type === "item"){
         return "https://www.serebii.net/itemdex/sprites/" + str.replace(/ /g, '').toLowerCase() + ".png";
@@ -46,9 +48,46 @@ function multiplyValues(obj1, obj2) {
     }
     return result;
 }
+
+function checkAbilityWeakness(ability){
+    if (ability){
+        var normalized = ability.toLowerCase().replace(/\s+/g, '');
+        if (normalized in abilityModifierTable) {
+            console.log('found');
+            return abilityModifierTable[normalized];
+        }
+    }
+}
+
+function getPokemonAbilityByName(pokemonName) {
+    // Access the current team using the currentTeam variable
+    if (!pokemonName){
+        return;
+    }
+    const team = allTeams[currentTeam];  // Use currentTeam to find the correct team
+
+    // If the team is found, search for the Pokémon by name
+    if (team) {
+        const pokemon = team.teamMembers.find(member => member.pokemonName.toLowerCase() === pokemonName.toLowerCase());
+
+        // If the Pokémon is found, return its ability
+        if (pokemon) {
+            return pokemon.ability;
+        } else {
+            console.log(`Pokemon ${pokemonName} not found in team ${currentTeam}`);
+            return null;  // Return null if the Pokémon is not found
+        }
+    } else {
+        console.log(`Team ${currentTeam} not found`);
+        return null;  // Return null if the team is not found
+    }
+}
   
 function lookUpWeakness(pokemon){
     var pokemonTypes = pokedex[pokemon].types;
+    
+    console.log(checkAbilityWeakness(getPokemonAbilityByName(pokemon)));
+
     if (pokemonTypes.length == 1){
         let type = pokemonTypes[0].toLowerCase();
         return weaknessChart[type];
@@ -105,8 +144,8 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
 }
 
 function updateTypeTable(teamList){
+
     typeAside.style.display = "block";
-    //console.log(teamList);
 
     var weaknessCount = {
         "normal": 0,
@@ -209,13 +248,11 @@ function newPokemonChosen(pokemonName){
             cardPad.appendChild(createCard(pokemonName, setName, setItem, setAbility, setNature, setEVs, setIVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
         }
     }
+        if (currentTeam){
+        updateTeams();
+    }
 
-    var pokemonElements = document.querySelectorAll('.pokemon');
-    var pokemonArray = [];
-    pokemonElements.forEach(element => {
-        pokemonArray.push(element.textContent.toLowerCase().replace(/[\s-]/g, ''))
-    });
-    //updateTypeTable(pokemonArray);
+
 }
 
 function landingPage(){
@@ -274,13 +311,15 @@ const isDarkMode = document.documentElement.classList.contains('dark');
 const green = isDarkMode ? darkGreenGradient : greenGradient;
 const red = isDarkMode ? darkRedGradient : redGradient;
 
+var allTeams = [];
+
 outerPad.innerHTML = '';
 innerPad.appendChild(cardPad);
 innerPad.appendChild(typeAside);
 outerPad.appendChild(innerPad);
 
 function processTeamsWithNames(teamsArray) {
-    return teamsArray.map(teamString => {
+    return teamsArray.reduce((acc, teamString) => {
         // Split the team string by "]" character
         const parts = teamString.split(']');
 
@@ -301,7 +340,7 @@ function processTeamsWithNames(teamsArray) {
             // Map the separated Pokémon details to the appropriate fields (12 fields)
             const teamMember = {
                 nickname: pokemonDetails[0] || '',
-                pokemonName: pokemonDetails[1] || pokemonDetails[0],
+                pokemonName: pokemonDetails[1].toLowerCase().replace(/[\s-]/g, '') || pokemonDetails[0].toLowerCase().replace(/[\s-]/g, ''),
                 item: pokemonDetails[2] || '',
                 ability: pokemonDetails[3] || '',
                 moveset: pokemonDetails[4] || '',
@@ -317,14 +356,30 @@ function processTeamsWithNames(teamsArray) {
             return teamMember;
         });
 
-        // Set the team name correctly from the first Pokémon
-        return {
-            teamName: nameOfTeam || '', // Use team name extracted from the first Pokémon
+        // Set the team name correctly from the first Pokémon and add the team to the accumulator
+        acc[nameOfTeam || ''] = {
             teamFormat: teamFormat,
             teamMembers: teamMembers
         };
-    });
+
+        return acc;
+    }, {}); // Initialize the accumulator as an empty object
 }
+
+
+function getPokemonNamesByTeamName(allTeams) {
+    // Find the team by the team name (using the teamName key directly)
+    const team = allTeams[currentTeam];  // Access the team directly by its name (currentTeam)
+
+    // If the team is found, map and return the pokemonName from each teamMember
+    if (team) {
+        return team.teamMembers.map(member => member.pokemonName);
+    } else {
+        // If the team is not found, return an empty array
+        return [];
+    }
+}
+
 
 
 // Function to retrieve and update team data
@@ -341,9 +396,16 @@ function updateTeams() {
     // Split the showdown_teams string into individual team lines
     const teamsArray = showdown_teams.split('\n');
     
-    const allTeams = processTeamsWithNames(teamsArray);
-    
+    allTeams = processTeamsWithNames(teamsArray);
     console.log(allTeams);
+
+    var pokemonNames = getPokemonNamesByTeamName(allTeams);
+    console.log(pokemonNames);
+
+    if (pokemonNames && currentTeam){
+        updateTypeTable(pokemonNames);
+    }
+
 }
 
 
@@ -359,11 +421,16 @@ const callback = function(mutationsList, observer) {
         //print out the team from local storage from teamName
         currentTeam = teamNameVariable.value
     }
-    updateTeams();
-
+    
     if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
         return; // Do nothing if card-pad is the source of mutations
     }
+    
+    if (mutationsList.some(mutation => mutation.target.id === 'typeAside' && mutation.type === 'childList')) {
+        return; // Do nothing if card-pad is the source of mutations
+    }    
+
+    
     const pokemonNameInputBox = document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setchart > div.setcol.setcol-icon > div.setcell.setcell-pokemon > input");
 
 
