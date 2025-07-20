@@ -177,8 +177,7 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
 function updateTypeTable(){
 
     //instead of of this, we're gonna
-    var teamList = getPokemonNamesByTeamName(allTeams);
-        if (!lookUpCurrentTeam() || !teamList) {
+        if (!lookUpCurrentTeam()) {
             typeAside.style.display = "none";
             return;
         }
@@ -231,13 +230,21 @@ function updateTypeTable(){
     var team = allTeams[currentTeam]?.teamMembers;
 
     if (!team || team.length === 0) {
+        console.log('return here');
         return; // If team is null, undefined, or empty, return early
     }
 
     for (const curMember of team) {
 
-        var curName = curMember.pokemonName;
-        console.log(curName);
+        if (!curMember || !curMember.pokemonName){
+                    console.log('return here');
+                    console.log(team);
+
+            continue;
+        }
+        else{
+            var curName = curMember.pokemonName;
+        }
         if (curName){
     
             var pokemonTypes = pokedex[curName].types;
@@ -277,6 +284,8 @@ function updateTypeTable(){
             }
         }
         else {
+                    console.log('return here');
+
             console.log(curMember, curName);
         }
 
@@ -424,6 +433,9 @@ function processTeamsWithNames(teamsArray) {
                 nameOfTeam = pokemonDetails[0]; // This is the team name for the first Pokémon
                 pokemonDetails.shift(); // Remove the team name from the first Pokémon's details
             }
+            if (pokemonDetails.length < 12){
+                return null;
+            }
 
             // Map the separated Pokémon details to the appropriate fields (12 fields)
             const teamMember = {
@@ -454,19 +466,6 @@ function processTeamsWithNames(teamsArray) {
     }, {}); // Initialize the accumulator as an empty object
 }
 
-
-function getPokemonNamesByTeamName(allTeams) {
-    // Find the team by the team name (using the teamName key directly)
-    const team = allTeams[currentTeam];  // Access the team directly by its name (currentTeam)
-
-    // If the team is found, map and return the pokemonName from each teamMember
-    if (team) {
-        return team.teamMembers.map(member => member.pokemonName);
-    } else {
-        // If the team is not found, return an empty array
-        return [];
-    }
-}
 
 
 
