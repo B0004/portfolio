@@ -49,6 +49,16 @@ function multiplyValues(obj1, obj2) {
     return result;
 }
 
+//typestrngths is the original table of multipliers, multiplers is like [fire, 0]
+function applyMultipliers(typeStrengths, multipliers) {
+    multipliers.forEach(([type, multiplier]) => {
+        if (typeStrengths[type] !== undefined) {
+            typeStrengths[type] *= multiplier;
+        }
+    });
+    return typeStrengths;
+}
+
 function checkAbilityWeakness(ability){
     if (ability){
         var normalized = ability.toLowerCase().replace(/\s+/g, '');
@@ -84,18 +94,34 @@ function getPokemonAbilityByName(pokemonName) {
 }
   
 function lookUpWeakness(pokemon){
+    console.log("looking up weakness of ");
+    console.log(pokemon);
     var pokemonTypes = pokedex[pokemon].types;
-    
-    console.log(checkAbilityWeakness(getPokemonAbilityByName(pokemon)));
+    var multiplyer = checkAbilityWeakness(getPokemonAbilityByName(pokemon));
 
-    if (pokemonTypes.length == 1){
-        let type = pokemonTypes[0].toLowerCase();
-        return weaknessChart[type];
+
+    if (multiplyer){ 
+        console.log(multiplyer, multiplyer.length);
+            if (pokemonTypes.length == 1){
+            let type = pokemonTypes[0].toLowerCase();
+            return applyMultipliers(weaknessChart[type], multiplyer);
+        }
+        else if (pokemonTypes.length == 2){
+            let type1 = pokemonTypes[0].toLowerCase();
+            let type2 = pokemonTypes[1].toLowerCase();
+            return applyMultipliers(multiplyValues(weaknessChart[type1], weaknessChart[type2]), multiplyer);
+        }
     }
-    else if (pokemonTypes.length == 2){
-        let type1 = pokemonTypes[0].toLowerCase();
-        let type2 = pokemonTypes[1].toLowerCase();
-        return multiplyValues(weaknessChart[type1], weaknessChart[type2]);
+    else{
+        if (pokemonTypes.length == 1){
+            let type = pokemonTypes[0].toLowerCase();
+            return weaknessChart[type];
+        }
+        else if (pokemonTypes.length == 2){
+            let type1 = pokemonTypes[0].toLowerCase();
+            let type2 = pokemonTypes[1].toLowerCase();
+            return multiplyValues(weaknessChart[type1], weaknessChart[type2]);
+        }
     }
 }
 
@@ -190,15 +216,17 @@ function updateTypeTable(teamList){
     
   // loop over pokemon
   for (let member of teamList){
-    let weak = (lookUpWeakness(member));
-    // loop over each type
-    for (let i in weak){
-      if (weak[i] < 1){
-        resistCount[i]++;
-      }
-      else if (weak[i] > 1){
-        weaknessCount[i]++;
-      }
+    if (member){
+        let weak = (lookUpWeakness(member));
+        // loop over each type
+        for (let i in weak){
+          if (weak[i] < 1){
+            resistCount[i]++;
+          }
+          else if (weak[i] > 1){
+            weaknessCount[i]++;
+          }
+        }
     }
   }
   const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
