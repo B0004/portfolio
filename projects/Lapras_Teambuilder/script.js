@@ -94,6 +94,7 @@ function lookUpWeakness(pokemon){
 
     var pokemonTypes = pokedex[pokemon].types;
     var multiplyer = checkAbilityWeakness(getPokemonAbilityByName(pokemon));
+    console.log(pokemon, multiplyer);
 
 
     if (multiplyer){ 
@@ -172,6 +173,7 @@ function updateTypeTable(){
             return;
         }
 
+
     typeAside.style.display = "block";
 
     var weaknessCount = {
@@ -232,6 +234,10 @@ function updateTypeTable(){
   }
   const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
 const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
+
+isDarkMode = document.documentElement.classList.contains('dark');
+green = isDarkMode ? darkGreenGradient : greenGradient;
+red = isDarkMode ? darkRedGradient : redGradient;
 
   var rkeys = Object.keys(resistCount);
   rkeys.forEach((type, i) => {
@@ -336,9 +342,9 @@ const redGradient = ['#FFFFFF', '#FFE6E6', '#FFCCCC', '#FFB3B3', '#FF9999', '#FF
 const darkGreenGradient = ['#1A1A1A', '#4D6B4D', '#3B8F3B', '#2E6F2E', '#228922', '#1A7B1A', '#006600'];
 const darkRedGradient = ['#1A1A1A', '#6B4D4D', '#8F3B3B', '#6F2E2E', '#922222', '#7B1A1A', '#660000'];
 
-const isDarkMode = document.documentElement.classList.contains('dark');
-const green = isDarkMode ? darkGreenGradient : greenGradient;
-const red = isDarkMode ? darkRedGradient : redGradient;
+var isDarkMode = document.documentElement.classList.contains('dark');
+var green = isDarkMode ? darkGreenGradient : greenGradient;
+var red = isDarkMode ? darkRedGradient : redGradient;
 
 var allTeams = [];
 var strAllTeams = "";
