@@ -50,15 +50,28 @@ function multiplyValues(obj1, obj2) {
 }
 
 //typestrngths is the original table of multipliers, multiplers is like [fire, 0]
+// function applyMultipliers(typeStrengths, multipliers) {
+//     multipliers.forEach(([type, multiplier]) => {
+//         if (typeStrengths[type] !== undefined) {
+//             typeStrengths[type] *= multiplier;
+//         }
+//     });
+//     return typeStrengths;
+// }
 function applyMultipliers(typeStrengths, multipliers) {
+    // Create a shallow copy of typeStrengths to avoid modifying the original table
+    const modifiedTypeStrengths = { ...typeStrengths };
+
+    // Apply multipliers to the copied object
     multipliers.forEach(([type, multiplier]) => {
-        if (typeStrengths[type] !== undefined) {
-            typeStrengths[type] *= multiplier;
+        if (modifiedTypeStrengths[type] !== undefined) {
+            modifiedTypeStrengths[type] *= multiplier;
         }
     });
-    return typeStrengths;
-}
 
+    // Return the modified copy
+    return modifiedTypeStrengths;
+}
 function checkAbilityWeakness(ability){
     if (ability){
         var normalized = ability.toLowerCase().replace(/\s+/g, '');
@@ -68,16 +81,14 @@ function checkAbilityWeakness(ability){
     }
 }
 
-function getPokemonAbilityByName(pokemonName) {
-    // Access the current team using the currentTeam variable
-    if (!pokemonName){
+function getPokemonAbilityBySlot(x) {
+    if (!x){
         return;
     }
-    const team = allTeams[currentTeam];  // Use currentTeam to find the correct team
-
-    // If the team is found, search for the Pokémon by name
+    const team = allTeams[currentTeam].teamMembers;  // Use currentTeam to find the correct team
+    // If the team is found, search for the Pokémon by slot
     if (team) {
-        const pokemon = team.teamMembers.find(member => member.pokemonName.toLowerCase() === pokemonName.toLowerCase());
+        const pokemon = team[x];
 
         // If the Pokémon is found, return its ability
         if (pokemon) {
@@ -90,12 +101,10 @@ function getPokemonAbilityByName(pokemonName) {
     }
 }
   
-function lookUpWeakness(pokemon){
+function lookUpWeakness(x){
 
-    var pokemonTypes = pokedex[pokemon].types;
-    var multiplyer = checkAbilityWeakness(getPokemonAbilityByName(pokemon));
-    console.log(pokemon, multiplyer);
-
+    var pokemonTypes = pokedex[allTeams[currentTeam].teamMembers[x].pokemonName].types;
+    var multiplyer = checkAbilityWeakness(getPokemonAbilityBySlot(x));
 
     if (multiplyer){ 
             if (pokemonTypes.length == 1){
@@ -167,12 +176,12 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
 
 function updateTypeTable(){
 
+    //instead of of this, we're gonna
     var teamList = getPokemonNamesByTeamName(allTeams);
         if (!lookUpCurrentTeam() || !teamList) {
             typeAside.style.display = "none";
             return;
         }
-
 
     typeAside.style.display = "block";
 
@@ -217,39 +226,82 @@ function updateTypeTable(){
         "fairy": 0
       }
     
-  // loop over pokemon
-  for (let member of teamList){
-    if (member){
-        let weak = (lookUpWeakness(member));
-        // loop over each type
-        for (let i in weak){
-          if (weak[i] < 1){
-            resistCount[i]++;
-          }
-          else if (weak[i] > 1){
-            weaknessCount[i]++;
-          }
-        }
+      // new loop
+
+    var team = allTeams[currentTeam]?.teamMembers;
+
+    if (!team || team.length === 0) {
+        return; // If team is null, undefined, or empty, return early
     }
-  }
-  const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
-const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
 
-isDarkMode = document.documentElement.classList.contains('dark');
-green = isDarkMode ? darkGreenGradient : greenGradient;
-red = isDarkMode ? darkRedGradient : redGradient;
+    for (const curMember of team) {
 
-  var rkeys = Object.keys(resistCount);
-  rkeys.forEach((type, i) => {
-    resistedTypes[i].textContent = resistCount[type];
-    resistedTypes[i].parentElement.style.backgroundColor = green[resistCount[type]];
-  });
-  
-  var wkeys = Object.keys(weaknessCount);
-  wkeys.forEach((type, i) => {
-    weakToTypes[i].textContent = weaknessCount[type];
-    weakToTypes[i].parentElement.style.backgroundColor = red[weaknessCount[type]];
-  });
+        var curName = curMember.pokemonName;
+        console.log(curName);
+        if (curName){
+    
+            var pokemonTypes = pokedex[curName].types;
+            var multiplyer = checkAbilityWeakness(curMember.ability);
+    
+            let weak;
+    
+            if (multiplyer){ 
+                if (pokemonTypes.length == 1){
+                let type = pokemonTypes[0].toLowerCase();
+                weak = applyMultipliers(weaknessChart[type], multiplyer);
+                }
+                else if (pokemonTypes.length == 2){
+                    let type1 = pokemonTypes[0].toLowerCase();
+                    let type2 = pokemonTypes[1].toLowerCase();
+                    weak = applyMultipliers(multiplyValues(weaknessChart[type1], weaknessChart[type2]), multiplyer);
+                }
+            }
+            else{
+                if (pokemonTypes.length == 1){
+                    let type = pokemonTypes[0].toLowerCase();
+                    weak = weaknessChart[type];
+                }
+                else if (pokemonTypes.length == 2){
+                    let type1 = pokemonTypes[0].toLowerCase();
+                    let type2 = pokemonTypes[1].toLowerCase();
+                    weak = multiplyValues(weaknessChart[type1], weaknessChart[type2]);
+                }
+            }
+            for (let i in weak){
+                if (weak[i] < 1){
+                resistCount[i]++;
+                }
+                else if (weak[i] > 1){
+                weaknessCount[i]++;
+                }
+            }
+        }
+        else {
+            console.log(curMember, curName);
+        }
+
+    }
+
+
+
+    const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
+    const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
+
+    isDarkMode = document.documentElement.classList.contains('dark');
+    green = isDarkMode ? darkGreenGradient : greenGradient;
+    red = isDarkMode ? darkRedGradient : redGradient;
+
+    var rkeys = Object.keys(resistCount);
+    rkeys.forEach((type, i) => {
+        resistedTypes[i].textContent = resistCount[type];
+        resistedTypes[i].parentElement.style.backgroundColor = green[resistCount[type]];
+    });
+    
+    var wkeys = Object.keys(weaknessCount);
+    wkeys.forEach((type, i) => {
+        weakToTypes[i].textContent = weaknessCount[type];
+        weakToTypes[i].parentElement.style.backgroundColor = red[weaknessCount[type]];
+    });
   
 }
 
@@ -376,7 +428,7 @@ function processTeamsWithNames(teamsArray) {
             // Map the separated Pokémon details to the appropriate fields (12 fields)
             const teamMember = {
                 nickname: pokemonDetails[0] || '',
-                pokemonName: pokemonDetails[1].toLowerCase().replace(/[\s-]/g, '') || pokemonDetails[0].toLowerCase().replace(/[\s-]/g, ''),
+                pokemonName: pokemonDetails[1].toLowerCase().replace(/[\s-]/g, '') || pokemonDetails[0].toLowerCase().replace(/[\s-]/g, '' || ''),
                 item: pokemonDetails[2] || '',
                 ability: pokemonDetails[3] || '',
                 moveset: pokemonDetails[4] || '',
@@ -456,15 +508,6 @@ function lookUpCurrentTeam(){
 }
 
 
-function checkIfCurrentTeamModified(){
-    if (lookUpCurrentTeam()){
-        let tempTeam = allTeams[lookUpCurrentTeam()];
-        return true;
-    }
-    else {
-        return false;
-    }
-}
 
 landingPage();
 const callback = function(mutationsList, observer) {
