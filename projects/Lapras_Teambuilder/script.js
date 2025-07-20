@@ -63,7 +63,6 @@ function checkAbilityWeakness(ability){
     if (ability){
         var normalized = ability.toLowerCase().replace(/\s+/g, '');
         if (normalized in abilityModifierTable) {
-            console.log('found');
             return abilityModifierTable[normalized];
         }
     }
@@ -84,24 +83,20 @@ function getPokemonAbilityByName(pokemonName) {
         if (pokemon) {
             return pokemon.ability;
         } else {
-            console.log(`Pokemon ${pokemonName} not found in team ${currentTeam}`);
             return null;  // Return null if the Pokémon is not found
         }
     } else {
-        console.log(`Team ${currentTeam} not found`);
         return null;  // Return null if the team is not found
     }
 }
   
 function lookUpWeakness(pokemon){
-    console.log("looking up weakness of ");
-    console.log(pokemon);
+
     var pokemonTypes = pokedex[pokemon].types;
     var multiplyer = checkAbilityWeakness(getPokemonAbilityByName(pokemon));
 
 
     if (multiplyer){ 
-        console.log(multiplyer, multiplyer.length);
             if (pokemonTypes.length == 1){
             let type = pokemonTypes[0].toLowerCase();
             return applyMultipliers(weaknessChart[type], multiplyer);
@@ -169,7 +164,13 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
     return card;
 }
 
-function updateTypeTable(teamList){
+function updateTypeTable(){
+
+    var teamList = getPokemonNamesByTeamName(allTeams);
+        if (!lookUpCurrentTeam() || !teamList) {
+            typeAside.style.display = "none";
+            return;
+        }
 
     typeAside.style.display = "block";
 
@@ -297,7 +298,7 @@ function landingPage(){
     </div>`
 
     typeAside.innerHTML = typeTableTemplate;
-    typeAside.style.display = "none";
+    updateTypeTable();
 }
 
 function poopMon(){
@@ -340,6 +341,7 @@ const green = isDarkMode ? darkGreenGradient : greenGradient;
 const red = isDarkMode ? darkRedGradient : redGradient;
 
 var allTeams = [];
+var strAllTeams = "";
 
 outerPad.innerHTML = '';
 innerPad.appendChild(cardPad);
@@ -410,46 +412,69 @@ function getPokemonNamesByTeamName(allTeams) {
 
 
 
+function deepEqual(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
 // Function to retrieve and update team data
 function updateTeams() {
     // Get the showdown_teams from localStorage
     const showdown_teams = localStorage.getItem('showdown_teams');
-    
     // Check if showdown_teams exists in localStorage
     if (!showdown_teams) {
-        console.log('showdown_teams not found in localStorage');
         return;
     }
-
-    // Split the showdown_teams string into individual team lines
-    const teamsArray = showdown_teams.split('\n');
+    else if (showdown_teams === strAllTeams){
+        return;
+    }
+    else {
+        strAllTeams = showdown_teams;
+        // Split the showdown_teams string into individual team lines
+        const teamsArray = strAllTeams.split('\n');
+        allTeams = processTeamsWithNames(teamsArray);
     
-    allTeams = processTeamsWithNames(teamsArray);
-    console.log(allTeams);
-
-    var pokemonNames = getPokemonNamesByTeamName(allTeams);
-    console.log(pokemonNames);
-
-    if (pokemonNames && currentTeam){
-        updateTypeTable(pokemonNames);
+        if (lookUpCurrentTeam()){
+            updateTypeTable();
+        }
     }
 
 }
 
 
+function lookUpCurrentTeam(){
+    if (document.querySelector('button[name="back"]')){
+        return currentTeam;
+    }
+    else {
+        return null;
+    }
+}
 
+
+function checkIfCurrentTeamModified(){
+    if (lookUpCurrentTeam()){
+        let tempTeam = allTeams[lookUpCurrentTeam()];
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 landingPage();
 const callback = function(mutationsList, observer) {
     //something happened here
+    
+    //check if any changes have been made to the current team
+
 
     //check if new team
     var teamNameVariable = document.querySelector("#room-teambuilder > div > div > input");
     if (teamNameVariable){
-        //print out the team from local storage from teamName
         currentTeam = teamNameVariable.value
     }
-    
+
+    updateTeams();
+
     if (mutationsList.some(mutation => mutation.target.id === 'card-pad' && mutation.type === 'childList')) {
         return; // Do nothing if card-pad is the source of mutations
     }
@@ -465,23 +490,19 @@ const callback = function(mutationsList, observer) {
     if ((pokemonNameInputBox != null) && (document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))){
         if (currentPokemon != pokemonNameInputBox.value){
             currentPokemon = pokemonNameInputBox.value;
-            //console.log('update sets');
             newPokemonChosen(currentPokemon);
         }
         else{
-            console.log('chosen pokemon did not change');
             if (!(document.querySelector('a.roomtab[href="/teambuilder"]').classList.contains('cur'))) {
                 //moved away from tab
                 landingPage();
                 currentPokemon = '';
-                console.log('moved away from tab');
             } 
         }
     }
     else{
         landingPage();
         currentPokemon = '';
-        //console.log('none chosen');
     }
     
     
@@ -500,6 +521,11 @@ cardPad.addEventListener("click", (event) => {
     let clickedCard = event.target.closest('.card');
     
     if(clickedCard){ //paste in the info
+
+        document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setmenu > button:nth-child(2)").click();
+        document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > textarea").value = clickedCard.dataset.export;
+        document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
+        //again
         document.querySelector("#room-teambuilder > div > div.teamchartbox.individual > ol > li > div.setmenu > button:nth-child(2)").click();
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > textarea").value = clickedCard.dataset.export;
         document.querySelector("#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)").click();
