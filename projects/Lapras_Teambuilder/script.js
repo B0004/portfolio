@@ -132,7 +132,7 @@ function lookUpWeakness(x){
 
 function createCard(name, title, item, ability, nature, evs, ivs, teraType, move1, move2, move3, move4){
     if (!teraType){
-        teraType = 'None';
+        teraType = '';
     }
     let card = document.createElement("OL");
     card.classList.add('card')
@@ -144,7 +144,7 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
         <li class="ability top"><span class="field-title">Ability: </span>${ability}</li>
         <li class="nature top"><span class="field-title">Nature: </span>${nature}</li>
         <li class="ev top"><span class="field-title">EVs: </span><small class="evs">${evs}</small></li>
-        ${teraType !== 'None' ? `<li class="tera top"><span class="field-title">Tera Type: </span>
+        ${teraType !== '' ? `<li class="tera top"><span class="field-title">Tera Type: </span>
             <img src="https://play.pokemonshowdown.com/sprites/types/${teraType}.png" alt="${teraType}">
         </li>` : `<li class="tera top"><span class="field-title">Tera Type: </span> </li>`}  
         <li class="move"><img src="https://play.pokemonshowdown.com/sprites/types/${moveDex[move1].type}.png" alt="move icon"> <span>${move1}</span></li>
@@ -230,16 +230,12 @@ function updateTypeTable(){
     var team = allTeams[currentTeam]?.teamMembers;
 
     if (!team || team.length === 0) {
-        console.log('return here');
         return; // If team is null, undefined, or empty, return early
     }
 
     for (const curMember of team) {
 
         if (!curMember || !curMember.pokemonName){
-                    console.log('return here');
-                    console.log(team);
-
             continue;
         }
         else{
@@ -283,12 +279,6 @@ function updateTypeTable(){
                 }
             }
         }
-        else {
-                    console.log('return here');
-
-            console.log(curMember, curName);
-        }
-
     }
 
 
