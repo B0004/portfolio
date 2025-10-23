@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Bluebook Abbreviator</h1>
+      <cite>Sourced from the Western Society of Criminology, following guidelines of the 21st edition of The Bluebook: A Uniform System of Citation</cite>
+
+      <div class="grid">
+        <div>
+          <div class="row">
+            <label for="input">Enter text:</label>
+            <textarea id="input" placeholder="Type or paste text here..."></textarea>
+          </div>
+
+          <div class="row">
+            <label for="output">Result:</label>
+            <textarea id="output" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="row">
+            <label for="preview">Original with highlights:</label>
+            <div id="preview" style="white-space:pre-wrap; padding:8px; min-height:120px;"></div>
+          </div>
+          <div class="hint">Matches inside words are highlighted; replacements occur for whole phrases.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
