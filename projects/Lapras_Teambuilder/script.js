@@ -38,66 +38,20 @@ function formatEVs(ev){
     }
 }
 
-
-function multiplyValues(obj1, obj2) {
-    let result = {};
-    for (let key in obj1) {
-        if (obj2.hasOwnProperty(key)) {
-        result[key] = obj1[key] * obj2[key];
-        }
-    }
-    return result;
-}
-
-//typestrngths is the original table of multipliers, multiplers is like [fire, 0]
-// function applyMultipliers(typeStrengths, multipliers) {
-//     multipliers.forEach(([type, multiplier]) => {
-//         if (typeStrengths[type] !== undefined) {
-//             typeStrengths[type] *= multiplier;
-//         }
-//     });
-//     return typeStrengths;
-// }
-function applyMultipliers(typeStrengths, multipliers) {
-    // Create a shallow copy of typeStrengths to avoid modifying the original table
-    const modifiedTypeStrengths = { ...typeStrengths };
-
-    // Apply multipliers to the copied object
-    multipliers.forEach(([type, multiplier]) => {
-        if (modifiedTypeStrengths[type] !== undefined) {
-            modifiedTypeStrengths[type] *= multiplier;
-        }
-    });
-
-    // Return the modified copy
-    return modifiedTypeStrengths;
-}
-function checkAbilityWeakness(ability){
-    if (ability){
-        var normalized = ability.toLowerCase().replace(/\s+/g, '');
-        if (normalized in abilityModifierTable) {
-            return abilityModifierTable[normalized];
-        }
-    }
-}
-
 function getPokemonAbilityBySlot(x) {
     if (!x){
         return;
     }
-    const team = allTeams[currentTeam].teamMembers;  // Use currentTeam to find the correct team
-    // If the team is found, search for the Pokémon by slot
+    const team = allTeams[currentTeam]?.teamMembers;
     if (team) {
         const pokemon = team[x];
-
-        // If the Pokémon is found, return its ability
         if (pokemon) {
             return pokemon.ability;
         } else {
-            return null;  // Return null if the Pokémon is not found
+            return null;
         }
     } else {
-        return null;  // Return null if the team is not found
+        return null;
     }
 }
   
@@ -307,11 +261,81 @@ function updateTypeTable(){
   
 }
 
+// helper to compare two set objects
+function setObjectsEqual(a, b) {
+    //limit to ZA OU for now
+    if (!a || !b) return false;
+    if ((a.item || '') !== (b.item || '')) return false;
+    if ((a.nature || '') !== (b.nature || '')) return false;
+    if (JSON.stringify(a.evs || {}) !== JSON.stringify(b.evs || {})) return false;
+    if (JSON.stringify(a.ivs || {}) !== JSON.stringify(b.ivs || {})) return false;
+    const ma = a.moves || [];
+    const mb = b.moves || [];
+    if (ma.length !== mb.length) return false;
+    for (let i = 0; i < ma.length; i++) {
+        if (ma[i] !== mb[i]) return false;
+    }
+    return true;
+}
+
 // Function to be called when mutations are observed
 function newPokemonChosen(pokemonName){
 
     cardPad.innerHTML = '';
-    var setList = SETDEX_SV[pokemonName];
+
+        var setList = SETDEX_SV[pokemonName];
+
+        // If the Pokemon has Mega forms, prepend any Mega-only sets that are not
+        // present in the base form. Comparison checks all relevant fields (moves,
+        // item, ability, nature, evs, ivs, teraType) so sets with same name but
+        // different contents are treated as distinct.
+        if (setList) {
+            // work with an entries array so we can prepend
+            let entries = Object.entries(setList);
+
+            // check known mega suffixes; order here determines the relative order of prepended sets
+            const megaSuffixes = ['-Mega', '-Mega-X', '-Mega-Y', '-Mega-Z'];
+            const toPrepend = [];
+
+            for (const sfx of megaSuffixes) {
+                const megaKey = pokemonName + sfx;
+                const megaObj = SETDEX_SV[megaKey];
+                if (!megaObj) continue;
+                for (const [mName, mObj] of Object.entries(megaObj)) {
+                    // if this mega set doesn't match any existing base set, prepend it
+                    const exists = entries.some(([_n, obj]) => setObjectsEqual(obj, mObj));
+                    if (!exists) {
+                        toPrepend.push([mName, mObj]);
+                        // console.log(mName, mObj);
+                    }
+                }
+            }
+
+            if (toPrepend.length) {
+                // Prepend mega-only sets. Convert back to an object but ensure
+                // duplicate display names don't overwrite earlier entries by
+                // appending numeric suffixes (" (2)", " (3)") when needed.
+                entries = [...toPrepend, ...entries];
+                const used = new Set();
+                const obj = {};
+                for (const [name, o] of entries) {
+                    let key = name || '';
+                    if (used.has(key)) {
+                        let i = 2;
+                        let candidate = `${key} (${i})`;
+                        while (used.has(candidate)) {
+                            i++;
+                            candidate = `${key} (${i})`;
+                        }
+                        key = candidate;
+                    }
+                    used.add(key);
+                    obj[key] = o;
+                }
+                setList = obj;
+            }
+        }
+    
     if (setList === undefined) {
         if (pokemonName){
             poopMon();
@@ -320,22 +344,136 @@ function newPokemonChosen(pokemonName){
             landingPage();
         }
     }
-    else{
-        for (setName in setList){
-            let setObject = setList[setName];
-            let setItem = setObject.item;
-            let setAbility = setObject.ability;
-            let setNature = setObject.nature;
-            let setEVs = formatEVs(setObject.evs);
-            let setIVs = formatEVs(setObject.ivs);
-            let setTeraType = setObject.teraType;
-            let setMove1 = setObject.moves[0];
-            let setMove2 = setObject.moves[1];
-            let setMove3 = setObject.moves[2];
-            let setMove4 = setObject.moves[3];
 
-            cardPad.appendChild(createCard(pokemonName, setName, setItem, setAbility, setNature, setEVs, setIVs, setTeraType, setMove1, setMove2, setMove3, setMove4));
+
+    else{
+        // Group sets by tier and render each tier as a red bordered row.
+        // Tier detection is based on the beginning of the set name (case-insensitive).
+        const tierOrder = [
+            'Legends Z-A OU','Ubers','Anything Goes','Ubers UU','OU','UU','RU','NU','PU','ZU','LC','LC UU',
+            'Monotype','National Dex','CAP','BSS','VGC','Doubles','NFE','1v1','Almost Any Ability','Balanced Hackmons'
+        ];
+
+        // Build entries array from setList preserving order
+        const entries = Object.entries(setList || {});
+
+        // Prepare buckets
+        const buckets = {};
+        for (const t of tierOrder) buckets[t] = [];
+        const other = [];
+
+        for (const entry of entries) {
+            const sName = (entry[0] || '').toString();
+            const low = sName.toLowerCase();
+            let matched = false;
+
+            for (const t of tierOrder) {
+                const tl = t.toLowerCase();
+                if (low.startsWith(tl)) {
+                    buckets[t].push(entry);
+                    matched = true;
+                    break;
+                }
+            }
+
+            if (!matched) other.push(entry);
         }
+
+        // Clear current cards
+        cardPad.innerHTML = '';
+
+        // Load persisted collapsed state from localStorage
+        const COLLAPSE_KEY = 'lapras_tier_collapsed_v1';
+        let collapsedState = {};
+        try {
+            collapsedState = JSON.parse(localStorage.getItem(COLLAPSE_KEY) || '{}');
+        } catch (e) {
+            collapsedState = {};
+        }
+
+        // Helper to render a row for a tier (uses CSS classes and collapse control)
+        function renderRow(label, rows) {
+            const row = document.createElement('div');
+            row.className = 'tier-row';
+
+            const header = document.createElement('div');
+            header.className = 'tier-row-header';
+
+            const labelSpan = document.createElement('span');
+            labelSpan.className = 'tier-label';
+            labelSpan.textContent = `${label} (${rows.length})`;
+
+            const collapseBtn = document.createElement('button');
+            collapseBtn.className = 'tier-collapse-btn';
+            collapseBtn.setAttribute('aria-expanded', 'true');
+            collapseBtn.style.marginLeft = '8px';
+
+            header.appendChild(labelSpan);
+            // place collapse button immediately after the label on the left
+            header.appendChild(collapseBtn);
+            row.appendChild(header);
+
+            const container = document.createElement('div');
+            container.className = 'tier-row-container';
+
+            for (const e of rows) {
+                const name = e[0];
+                const o = e[1];
+                const setItem = o.item;
+                const setAbility = o.ability;
+                const setNature = o.nature;
+                const setEVs = formatEVs(o.evs);
+                const setIVs = formatEVs(o.ivs);
+                const setTeraType = o.teraType;
+                const setMove1 = o.moves ? o.moves[0] : undefined;
+                const setMove2 = o.moves ? o.moves[1] : undefined;
+                const setMove3 = o.moves ? o.moves[2] : undefined;
+                const setMove4 = o.moves ? o.moves[3] : undefined;
+
+                const card = createCard(pokemonName, name, setItem, setAbility, setNature, setEVs, setIVs, setTeraType, setMove1, setMove2, setMove3, setMove4);
+                container.appendChild(card);
+            }
+
+            row.appendChild(container);
+
+            // Apply persisted collapsed state if present
+            const saved = !!collapsedState[label];
+            if (saved) {
+                row.classList.add('collapsed');
+                collapseBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            // Toggle collapse on click
+            collapseBtn.addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                const isCollapsed = row.classList.toggle('collapsed');
+                collapseBtn.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                try {
+                    collapsedState[label] = isCollapsed;
+                    localStorage.setItem(COLLAPSE_KEY, JSON.stringify(collapsedState));
+                } catch (e) {
+                    // ignore storage errors
+                }
+            });
+
+            // Clicking anywhere in the tier row (except a card) should toggle collapse
+            row.addEventListener('click', (e) => {
+                // If click originated inside a card, don't toggle collapse
+                if (e.target.closest('.card')) return;
+                // If the click was on the collapse button, let its handler manage it (it stops propagation)
+                collapseBtn.click();
+            });
+
+            cardPad.appendChild(row);
+        }
+
+        // Render tiers in order
+        for (const t of tierOrder) {
+            if (buckets[t] && buckets[t].length) renderRow(t, buckets[t]);
+        }
+
+        // Render others
+        if (other.length) renderRow('Other', other);
     }
         if (currentTeam){
         updateTeams();
@@ -383,12 +521,15 @@ const outerPad = document.querySelector("#room-rooms");
 var currentTeam = "";
 
 const innerPad = document.createElement('div');
+const buttonPad = document.createElement("div");
 const cardPad = document.createElement("div");
 const typeAside = document.createElement("aside");
 
+buttonPad.setAttribute('id', 'button-pad');
 cardPad.setAttribute('id', 'card-pad');
 innerPad.setAttribute('id', 'inner-pad');
 typeAside.setAttribute('id', 'type-weakness-tab');
+
 typeAside.innerHTML = typeTableTemplate;
 
 const greenGradient = ['#FFFFFF', '#E6F9E6', '#CCF3CC', '#B3EDB3', '#99E699', '#80E080', '#00CC00'];
@@ -404,6 +545,7 @@ var allTeams = [];
 var strAllTeams = "";
 
 outerPad.innerHTML = '';
+// innerPad.appendChild(cardPad);
 innerPad.appendChild(cardPad);
 innerPad.appendChild(typeAside);
 outerPad.appendChild(innerPad);

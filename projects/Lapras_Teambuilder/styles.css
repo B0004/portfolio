@@ -1,10 +1,15 @@
+
+
 :root {
-    --secondary-blue: #ECF6FF;
+    --secondary-blue: #e4ebf3;
     --c2: #9ECEFF;
     --t2: #999999;
     --t4: #444444;
     --card-background: white;
     --ev-text: black;
+    --sorta-white: rgba(255, 255, 255, .6);
+    --sorta-black: rgba(0, 0, 0, .15);
+
 }
 
 html.dark {
@@ -14,11 +19,13 @@ html.dark {
     --t4: #DDDDDD;
     --card-background: #222527;
     --ev-text: #DDDDDD;
+    --sorta-black: rgba(255, 255, 255, .6);
+    --sorta-white: rgba(110, 110, 110, 0.65);
 }
 
 #room-rooms {
 
-    * {
+    * :not(.tier-row-header){
         box-sizing: border-box;
         font-family: "Roboto Mono", monospace;
     }
@@ -159,6 +166,7 @@ html.dark {
 }
 
 #type-weakness-tab{
+    display: none;
     background-color: var(--card-background);
     border: 3px solid var(--secondary-blue);
     border-radius: 10px 0px 0px 10px;
@@ -167,7 +175,6 @@ html.dark {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: fit-content;
     margin-top: 5px;
-    display: none;
 }
 
 #resistance-weakness-table{
@@ -183,4 +190,74 @@ html.dark {
     td > img{
         vertical-align: middle;
     }
+}
+
+/* Tier row styles for grouped sets */
+.tier-row{
+    /* only keep a dark bottom border, remove rounded corners */
+    border: none;
+    /* border-bottom: 2px solid var(--t4); */
+    border-radius: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    cursor: pointer; /* indicate row is clickable (except card clicks will be handled separately) */
+    transition: all 0.3s ease;
+
+}
+.tier-row-header{
+        transition: all 0.3s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* keep label and controls on the left */
+    /* margin-bottom: 8px; */
+        /* margin: 5px 0 0 -1px; */
+    padding: 3px 8px;
+    font-size: 1.2rem;
+    background: var(--secondary-blue);
+    font-weight: bold;
+    color: var(--ev-text);
+    border: 1px solid var(--t2);
+    text-shadow: 1px 1px 0 var(--sorta-white);
+    box-shadow: inset 1px 1px 0 var(--sorta-white), 0px 2px 2px var(--sorta-black);
+    box-shadow: inset 1px 1px 0 var(--sorta-white);
+}
+.tier-row-header:hover{
+    background: var(--sorta-white);
+}
+.tier-row:hover > .tier-row-header{
+    background: var(--sorta-white);
+}
+.tier-row-header .tier-label{
+    font-size: 1.2rem;
+
+}
+.tier-row-header .tier-controls{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.tier-collapse-btn{
+    background: transparent;
+    /* padding: 3px 3px; */
+    border: none;
+    cursor: pointer;
+}
+.tier-row-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    width: 100%;
+}
+.tier-row.collapsed .tier-row-container{
+    display: none;
+}
+.tier-row.collapsed .tier-collapse-btn::after{
+    content: '\25B6'; /* right-pointing triangle */
+    font-size: 12px;
+}
+.tier-row .tier-collapse-btn::after{
+    content: '\25BC'; /* down-pointing triangle */
+    font-size: 16px;
 }

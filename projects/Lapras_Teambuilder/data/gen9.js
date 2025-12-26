@@ -2942,14 +2942,14 @@ const SETDEX_SV = {
     "National Dex RU Showdown Usage": {"ability":"Flower Veil","item":"Leftovers","nature":"Calm","evs":{"hp":252,"df":4,"sd":252},"moves":["Moonblast","Wish","Defog","Aromatherapy"]}
   },
   "Meowstic": {
-    "Legends Z-A OU by community": {"ability":"Prankster","item":"Rocky Helmet","nature":"Calm","teraType":"Psychic","evs":{"hp":248,"df":192,"sd":68},"ivs":{"at":0},"moves":["Spikes","Stealth Rock","Taunt","Thunder Wave"]},
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Prankster","item":"Rocky Helmet","nature":"Calm","teraType":"Psychic","evs":{"hp":248,"df":192,"sd":68},"ivs":{"at":0},"moves":["Spikes","Stealth Rock","Taunt","Thunder Wave"]},
     "Monotype Dual Screens": {"ability":"Prankster","item":"Light Clay","nature":"Timid","ivs":{"at":0},"evs":{"hp":248,"df":156,"sp":104},"moves":["Light Screen","Reflect","Thunder Wave","Charm"]}
   },
   "Meowstic-F-Mega": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Psychic Surge","item":"Meowsticite","nature":"Timid","teraType":"Psychic","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Nasty Plot","Expanding Force","Earth Power","Moonblast"]}
   },
   "Meowstic-M-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Psychic Surge","item":"Meowsticite","nature":"Timid","teraType":"Psychic","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Nasty Plot","Expanding Force","Shadow Ball","Thunderbolt"]}
+    "Legends Z-A OU by community": {"ability":"Psychic Surge","item":"Meowsticite","nature":"Timid","teraType":"Psychic","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Nasty Plot","Expanding Force","Shadow Ball","Thunderbolt"]}
   },
   "Aegislash": {
     "National Dex UU SubToxic": {"ability":"Stance Change","item":"Leftovers","nature":"Modest","evs":{"hp":252,"sa":56,"sd":156,"sp":44},"moves":["Substitute","Toxic","King's Shield","Shadow Ball"]},
@@ -5650,10 +5650,10 @@ const SETDEX_SV = {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Levitate","item":"Chimechite","nature":"Bold","teraType":"Psychic","evs":{"hp":248,"df":156,"sd":100,"sp":4},"moves":["Knock Off","Psychic Noise","Recover","Flash Cannon"]}
   },
   "Raichu-Mega-X": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Levitate","item":"Raichunite X","nature":"Adamant","teraType":"Electric","evs":{"at":252,"df":4,"sp":252},"moves":["Volt Tackle","Extreme Speed","Play Rough","Knock Off"]}
+    "Legends Z-A OU Physical Attacker from pokeaimmd.com": {"ability":"Levitate","item":"Raichunite X","nature":"Adamant","teraType":"Electric","evs":{"at":252,"df":4,"sp":252},"moves":["Volt Tackle","Extreme Speed","Play Rough","Knock Off"]}
   },
   "Raichu-Mega-Y": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Transistor","item":"Raichunite Y","nature":"Timid","teraType":"Electric","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Surf","Alluring Voice","Thunderbolt","Volt Switch"]}
+    "Legends Z-A OU Special Attacker from pokeaimmd.com": {"ability":"Transistor","item":"Raichunite Y","nature":"Timid","teraType":"Electric","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Surf","Alluring Voice","Thunderbolt","Volt Switch"]}
   },
   "Lucario-Mega-Z": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Mind's Eye","item":"Lucarionite Z","nature":"Timid","teraType":"Fighting","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Nasty Plot","Aura Sphere","Flash Cannon","Vacuum Wave"]}
