@@ -175,6 +175,8 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
 }
 
 function updateTypeTable(){
+    //DISABLING THIS FUNCTION FOR NOW
+    return;
 
     //instead of of this, we're gonna
         if (!lookUpCurrentTeam()) {
@@ -233,6 +235,7 @@ function updateTypeTable(){
         return; // If team is null, undefined, or empty, return early
     }
 
+    
     for (const curMember of team) {
 
         if (!curMember || !curMember.pokemonName){
