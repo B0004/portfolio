@@ -1916,8 +1916,8 @@ const SETDEX_SV = {
     "National Dex UU Showdown Usage": {"ability":"Levitate","item":"Heavy-Duty Boots","nature":"Timid","evs":{"hp":252,"df":44,"sp":212},"moves":["Overheat","Volt Switch","Will-O-Wisp","Defog"]}
   },
   "Rotom-Wash": {
-    "Legends Z-A OU Defensive Pivot from pokeaimmd.com": {"ability":"Levitate","item":"Ability Shield","nature":"Bold","evs":{"hp":248,"df":252,"sd":8},"moves":["Volt Switch","Hydro Pump","Pain Split","Will-O-Wisp"]},
-    "Legends Z-A OU Offensive Pivot from pokeaimmd.com": {"ability":"Levitate","item":"Ability Shield","nature":"Modest","evs":{"hp":252,"sa":252,"df":4},"moves":["Parabolic Charge","Hydro Pump","Parting Shot","Will-O-Wisp"]},
+    "Legends Z-A OU Defensive Pivot by community": {"ability":"Levitate","item":"Ability Shield","nature":"Bold","evs":{"hp":248,"df":252,"sd":8},"moves":["Volt Switch","Hydro Pump","Pain Split","Will-O-Wisp"]},
+    "Legends Z-A OU Offensive Pivot by community": {"ability":"Levitate","item":"Ability Shield","nature":"Modest","evs":{"hp":252,"sa":252,"df":4},"moves":["Parabolic Charge","Hydro Pump","Parting Shot","Will-O-Wisp"]},
     "OU Defensive Pivot": {"ability":"Levitate","item":"Leftovers","nature":"Bold","teraType":"Steel","evs":{"hp":252,"df":212,"sp":44},"moves":["Volt Switch","Hydro Pump","Pain Split","Will-O-Wisp"]},
     "UU Physically Defensive": {"ability":"Levitate","item":"Leftovers","nature":"Bold","teraType":"Steel","ivs":{"at":0},"evs":{"hp":252,"df":160,"sa":12,"sd":84},"moves":["Will-O-Wisp","Hydro Pump","Pain Split","Volt Switch"]},
     "UU Specially Defensive": {"ability":"Levitate","item":"Leftovers","nature":"Calm","teraType":"Steel","ivs":{"at":0},"evs":{"hp":252,"df":44,"sa":12,"sd":200},"moves":["Thunder Wave","Hydro Pump","Pain Split","Volt Switch"]},
@@ -2942,7 +2942,7 @@ const SETDEX_SV = {
     "National Dex RU Showdown Usage": {"ability":"Flower Veil","item":"Leftovers","nature":"Calm","evs":{"hp":252,"df":4,"sd":252},"moves":["Moonblast","Wish","Defog","Aromatherapy"]}
   },
   "Meowstic": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Prankster","item":"Rocky Helmet","nature":"Calm","teraType":"Psychic","evs":{"hp":248,"df":192,"sd":68},"ivs":{"at":0},"moves":["Spikes","Stealth Rock","Taunt","Thunder Wave"]},
+    "Legends Z-A OU by community": {"ability":"Prankster","item":"Rocky Helmet","nature":"Calm","teraType":"Psychic","evs":{"hp":248,"df":192,"sd":68},"ivs":{"at":0},"moves":["Spikes","Stealth Rock","Taunt","Thunder Wave"]},
     "Monotype Dual Screens": {"ability":"Prankster","item":"Light Clay","nature":"Timid","ivs":{"at":0},"evs":{"hp":248,"df":156,"sp":104},"moves":["Light Screen","Reflect","Thunder Wave","Charm"]}
   },
   "Meowstic-F-Mega": {
@@ -3538,7 +3538,7 @@ const SETDEX_SV = {
     "Balanced Hackmons Sheer Force": {"ability":"Sheer Force","item":"Life Orb","nature":"Hasty","evs":{"hp":252,"at":252,"df":252,"sa":252,"sd":252,"sp":252},"moves":["Luster Purge","Bolt Strike","Blue Flare","Magical Torque"]}
   },
   "Magearna": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Soul-Heart","item":"Shuca Berry","nature":"Modest","evs":{"hp":248,"sa":248,"sp":12},"moves":["Thunder Wave","Ice Beam","Focus Blast","Fleur Cannon"]},
+    "Legends Z-A OU by community": {"ability":"Soul-Heart","item":"Shuca Berry","nature":"Modest","evs":{"hp":248,"sa":248,"sp":12},"moves":["Thunder Wave","Ice Beam","Focus Blast","Fleur Cannon"]},
     "Ubers Double Dance": {"ability":"Soul-Heart","item":"Leftovers","nature":"Bold","teraType":"Water","evs":{"hp":248,"df":252,"sd":8},"moves":["Iron Defense","Calm Mind","Draining Kiss","Stored Power"]},
     "Ubers Trick Room Setter": {"ability":"Soul-Heart","item":"Leftovers","nature":"Relaxed","teraType":"Water","evs":{"hp":248,"df":252,"sa":8},"moves":["Fleur Cannon","Trick Room","Spikes","Volt Switch"]},
     "Balanced Hackmons Defensive": {"ability":"Ice Scales","item":"Heavy-Duty Boots","nature":"Calm","ivs":{"at":0},"evs":{"hp":252,"df":252,"sa":252,"sd":252,"sp":252},"moves":["Shore Up","Moonblast","Topsy-Turvy","Teleport"]},
