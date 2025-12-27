@@ -72,12 +72,15 @@ function getTypeWeakness(types, abilityMultiplier = null){
     return abilityMultiplier ? applyMultipliers(weakness, abilityMultiplier) : weakness;
 }
 
-function lookUpWeakness(x){
+function lookUpWeakness(x) {
     const pokemon = allTeams[currentTeam]?.teamMembers[x];
+    if (!pokemon) return null; // safe guard
     const types = pokedex[pokemon.pokemonName]?.types;
+    if (!types) return null; // safe guard
     const multiplier = checkAbilityWeakness(pokemon.ability);
     return getTypeWeakness(types, multiplier);
 }
+
 
 function createCard(name, title, item, ability, nature, evs, ivs, teraType, move1, move2, move3, move4){
     if (!teraType){
@@ -122,129 +125,61 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
     card.dataset.export = strExport;
     return card;
 }
-
-function updateTypeTable(force = false){
-    if (!force && !lookUpCurrentTeam()) {
-        typeAside.style.display = "none";
+function updateTypeTable(force = false) {
+    const team = allTeams[currentTeam]?.teamMembers;
+    if (!team || team.length === 0) {
+        typeAside.style.display = 'none';
         return;
     }
 
-    typeAside.style.display = "block";
+    typeAside.style.display = 'block';
 
-    var weaknessCount = {
-        "normal": 0,
-        "fire": 0,
-        "water": 0,
-        "electric": 0,
-        "grass": 0,
-        "ice": 0,
-        "fighting": 0,
-        "poison": 0,
-        "ground": 0,
-        "flying": 0,
-        "psychic": 0,
-        "bug": 0,
-        "rock": 0,
-        "ghost": 0,
-        "dragon": 0,
-        "dark": 0,
-        "steel": 0,
-        "fairy": 0
-      }
-      var resistCount = {
-        "normal": 0,
-        "fire": 0,
-        "water": 0,
-        "electric": 0,
-        "grass": 0,
-        "ice": 0,
-        "fighting": 0,
-        "poison": 0,
-        "ground": 0,
-        "flying": 0,
-        "psychic": 0,
-        "bug": 0,
-        "rock": 0,
-        "ghost": 0,
-        "dragon": 0,
-        "dark": 0,
-        "steel": 0,
-        "fairy": 0
-      }
-    
-      // new loop
+    const weaknessCount = {};
+    const resistCount = {};
+    const typesList = ["normal","fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy"];
 
-    var team = allTeams[currentTeam]?.teamMembers;
+    typesList.forEach(type => {
+        weaknessCount[type] = 0;
+        resistCount[type] = 0;
+    });
 
-    if (!team || team.length === 0) {
-        return; // If team is null, undefined, or empty, return early
-    }
+    for (const member of team) {
+        if (!member || !member.pokemonName) continue;
 
-    
-    for (const curMember of team) {
+        const pokemonData = pokedex[member.pokemonName];
+        if (!pokemonData) continue;
 
-        if (!curMember || !curMember.pokemonName){
-            continue;
-        }
-        else{
-            var curName = curMember.pokemonName;
-        }
-        if (curName){
-    
-            var pokemonTypes = pokedex[curName].types;
-            var multiplyer = checkAbilityWeakness(curMember.ability);
-    
-            let weak;
-    
-            if (multiplyer){ 
-                if (pokemonTypes.length == 1){
-                let type = pokemonTypes[0].toLowerCase();
-                weak = applyMultipliers(weaknessChart[type], multiplyer);
-                }
-                else if (pokemonTypes.length == 2){
-                    let type1 = pokemonTypes[0].toLowerCase();
-                    let type2 = pokemonTypes[1].toLowerCase();
-                    weak = applyMultipliers(multiplyValues(weaknessChart[type1], weaknessChart[type2]), multiplyer);
-                }
-            }
-            else{
-                if (pokemonTypes.length == 1){
-                    let type = pokemonTypes[0].toLowerCase();
-                    weak = weaknessChart[type];
-                }
-                else if (pokemonTypes.length == 2){
-                    let type1 = pokemonTypes[0].toLowerCase();
-                    let type2 = pokemonTypes[1].toLowerCase();
-                    weak = multiplyValues(weaknessChart[type1], weaknessChart[type2]);
-                }
-            }
-            for (let i in weak){
-                if (weak[i] < 1){
-                resistCount[i]++;
-                }
-                else if (weak[i] > 1){
-                weaknessCount[i]++;
-                }
-            }
+        const types = pokemonData.types || [];
+        const multiplier = checkAbilityWeakness(member.ability);
+
+        let weak;
+        if (types.length === 1) weak = multiplier ? applyMultipliers(weaknessChart[types[0].toLowerCase()], multiplier) : weaknessChart[types[0].toLowerCase()];
+        else if (types.length === 2) {
+            const t1 = types[0].toLowerCase();
+            const t2 = types[1].toLowerCase();
+            weak = multiplier ? applyMultipliers(multiplyValues(weaknessChart[t1], weaknessChart[t2]), multiplier) : multiplyValues(weaknessChart[t1], weaknessChart[t2]);
+        } else continue;
+
+        for (const type of typesList) {
+            if (weak[type] < 1) resistCount[type]++;
+            else if (weak[type] > 1) weaknessCount[type]++;
         }
     }
-
 
     const green = getGradient('green');
     const red = getGradient('red');
+
     const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
     const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
-    
-    Object.keys(resistCount).forEach((type, i) => {
+
+    typesList.forEach((type, i) => {
         resistedTypes[i].textContent = resistCount[type];
         resistedTypes[i].parentElement.style.backgroundColor = green[resistCount[type]];
-    });
-    Object.keys(weaknessCount).forEach((type, i) => {
         weakToTypes[i].textContent = weaknessCount[type];
         weakToTypes[i].parentElement.style.backgroundColor = red[weaknessCount[type]];
     });
-  
 }
+
 
 // helper to compare two set objects
 function setObjectsEqual(a, b) {
@@ -462,6 +397,22 @@ function newPokemonChosen(pokemonName){
 
 }
 
+function updateTypeAsideVisibility() {
+    const teambuilderTab = document.querySelector('a.roomtab[href="/teambuilder"]');
+    const teamNameInput = document.querySelector(POKESHOWDOWN_SELECTORS.teamInput);
+    const pokemonEditButton = document.querySelector('#room-teambuilder > div > div.pad > button');
+
+    if (!teambuilderTab?.classList.contains('cur') || (!teamNameInput && !pokemonEditButton)) {
+        // Not on teambuilder tab, or on page 1 (no team selected)
+        typeAside.style.display = "none";
+    } else {
+        // On page 2 or page 3
+        typeAside.style.display = "block";
+    }
+}
+
+
+
 function landingPage(){
     cardPad.innerHTML = 
     `<div class="extension-landing">
@@ -477,6 +428,7 @@ function landingPage(){
 
     typeAside.innerHTML = typeTableTemplate;
     updateTypeTable();
+    updateTypeAsideVisibility();
 }
 
 function poopMon(){
@@ -504,6 +456,8 @@ const POKESHOWDOWN_SELECTORS = {
     importTextarea: "#room-teambuilder > div > div.teambuilder-pokemon-import > textarea",
     importBtn: "#room-teambuilder > div > div.teambuilder-pokemon-import > div.pokemonedit-buttons > button:nth-child(2)"
 };
+
+POKESHOWDOWN_SELECTORS.tab = 'a.roomtab[href="/teambuilder"]';
 
 let currentPokemon = "";
 let currentTeam = "";
@@ -609,18 +563,20 @@ function findModifiedTeam(oldTeams, newTeams) {
 function updateTeams() {
     const showdown_teams = localStorage.getItem('showdown_teams');
     if (!showdown_teams || showdown_teams === strAllTeams) return;
-    
+
     const oldTeams = allTeams;
     strAllTeams = showdown_teams;
     allTeams = processTeamsWithNames(strAllTeams.split('\n'));
-    
+
     // Find which team was modified
     const modifiedTeam = findModifiedTeam(oldTeams, allTeams);
     if (modifiedTeam) {
-        currentTeam = modifiedTeam;
+        currentTeam = modifiedTeam; // Set BEFORE updating type table
+        updateTypeAsideVisibility(); // make sure tab hides/shows correctly
         updateTypeTable(true);
     }
 }
+
 
 
 function lookUpCurrentTeam(){
@@ -681,37 +637,70 @@ document.body.addEventListener('click', (ev) => {
 
 // MutationObserver management: only observe the teambuilder subtree when present.
 // This reduces work compared to observing the entire document body.
-let teambuilderObserver = null;
+// --- TEAMBUIDER OBSERVER --- //
 
-function handleTeambuilderMutations(mutationsList) {
-    if (mutationsList.some(m => ['card-pad', 'type-weakness-tab'].includes(m.target?.id))) return;
-
-    // Update current team from DOM (team name input exists on page 2)
-    const teamNameInput = document.querySelector(POKESHOWDOWN_SELECTORS.teamInput);
-    if (teamNameInput) currentTeam = teamNameInput.value;
-
-    // Check if on teambuilder tab and pokemon is selected (page 3)
-    const pokemonInput = document.querySelector(POKESHOWDOWN_SELECTORS.pokemonInput);
+// 1️⃣ Define handleTeambuilderMutations first
+function handleTeambuilderMutations() {
     const teambuilderTab = document.querySelector('a.roomtab[href="/teambuilder"]');
+    const teamNameInput = document.querySelector(POKESHOWDOWN_SELECTORS.teamInput);
+    const page3Button = document.querySelector('#room-teambuilder > div > div.pad > button');
+    
+    // Teambuilder tab NOT active → Home page
+    if (!teambuilderTab || !teambuilderTab.classList.contains('cur')) {
+        currentTeam = '';
+        currentPokemon = '';
+        cardPad.innerHTML = '';
+        landingPage();
+        typeAside.style.display = 'none';
+        cardPad.style.display = 'block';
+        return;
+    }
 
-    if (pokemonInput && teambuilderTab?.classList.contains('cur')) {
-        if (currentPokemon !== pokemonInput.value) {
+    // Page 3 → Pokemon edit (show cards + type table)
+    if (page3Button) {
+        typeAside.style.display = 'block';
+        cardPad.style.display = 'block';
+        const pokemonInput = document.querySelector(POKESHOWDOWN_SELECTORS.pokemonInput);
+        if (pokemonInput && currentPokemon !== pokemonInput.value) {
             currentPokemon = pokemonInput.value;
-            newPokemonChosen(currentPokemon);
+            newPokemonChosen(currentPokemon); // fill cardPad
         }
+        return;
+    }
+
+    // Page 1 or 2 → landing page + type table if page 2
+    currentPokemon = '';  // reset pokemon selection
+    cardPad.innerHTML = '';
+    landingPage();
+    cardPad.style.display = 'block';
+
+    if (teamNameInput) {
+        // Page 2: team edit → show type table for current team
+        currentTeam = teamNameInput.value;
+        typeAside.style.display = 'block';
+        updateTypeTable(); // refresh type chart with current team
     } else {
-        if (currentPokemon) {
-            landingPage();
-            currentPokemon = '';
-        }
+        // Page 1: team list → hide type table
+        typeAside.style.display = 'none';
+        currentTeam = '';
     }
 }
 
-// Attach an observer to the teambuilder node when it appears
+
+
+// 2️⃣ Then attach your observers (as in previous code)
+
+let teambuilderObserver = null;
+
 function attachTeambuilderObserver(node) {
     if (teambuilderObserver) return;
-    teambuilderObserver = new MutationObserver(handleTeambuilderMutations);
-    teambuilderObserver.observe(node, { childList: true, subtree: true });
+
+    teambuilderObserver = new MutationObserver(() => {
+        handleTeambuilderMutations();
+    });
+
+    // Observe subtree changes: child additions, removals, attribute changes
+    teambuilderObserver.observe(node, { childList: true, subtree: true, attributes: true });
 }
 
 function detachTeambuilderObserver() {
@@ -720,39 +709,36 @@ function detachTeambuilderObserver() {
     teambuilderObserver = null;
 }
 
-// Observe the document for the teambuilder node appearing/removing. Keep this
-// observer lightweight by only watching for childList changes.
+// Observe document.body for insertion/removal of the teambuilder tab
 const tabObserver = new MutationObserver((mutations) => {
     for (const m of mutations) {
-        // Check added nodes for the teambuilder container
         for (const n of m.addedNodes || []) {
             if (!(n instanceof HTMLElement)) continue;
             if (n.id === 'room-teambuilder' || n.querySelector?.('#room-teambuilder')) {
-                const tb = n.id === 'room-teambuilder' ? n : n.querySelector('#room-teambuilder');
-                attachTeambuilderObserver(tb);
-                // run an initial pass to pick up current state
-                handleTeambuilderMutations([]);
-                return;
+                const tbNode = n.id === 'room-teambuilder' ? n : n.querySelector('#room-teambuilder');
+                attachTeambuilderObserver(tbNode);
+                handleTeambuilderMutations(); // initial pass
             }
         }
-        // If nodes were removed, and teambuilder was removed, detach its observer
         for (const n of m.removedNodes || []) {
             if (!(n instanceof HTMLElement)) continue;
             if (n.id === 'room-teambuilder' || n.querySelector?.('#room-teambuilder')) {
                 detachTeambuilderObserver();
                 currentPokemon = '';
-                return;
+                currentTeam = '';
+                landingPage(); // fallback to home
             }
         }
     }
 });
 
-// Start observing body for teambuilder insertion/removal (lightweight: childList)
+// Start observing body for teambuilder insertion/removal
 tabObserver.observe(document.body, { childList: true, subtree: true });
 
 // If teambuilder already exists on load, attach immediately
 const existingTB = document.querySelector('#room-teambuilder');
 if (existingTB) attachTeambuilderObserver(existingTB);
+
 
 cardPad.addEventListener("click", (event) => {
     const clickedCard = event.target.closest('.card');
