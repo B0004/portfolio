@@ -435,6 +435,7 @@ function setObjectsEqual(a, b) {
 // Function to be called when mutations are observed
 function newPokemonChosen(pokemonName){
     cardPad.innerHTML = '';
+    
 
         var setList = SETDEX_SV[pokemonName];
 
@@ -654,11 +655,13 @@ function poopMon(){
     `<div class="extension-landing">
         <h1>No Competitive Sets Were Found</h1>
         <h2>Sorry!</h2>
-        <a href="https://pokemondb.net/pokedex/magikarp"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/magikarp.gif" alt="Magikarp"></a>
+        <a href="https://pokemondb.net/pokedex/magikarp"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/unown.gif" alt="Unown"></a>
         <h2>This might be because</h2>
         <ol>
+            <li>You have not chosen a pokemon yet</li>
             <li>This pokemon was newly introduced and our data isn't updated yet</li>
-            <li>This pokemon is not competively relavent</li>
+            <li>This pokemon does not exist in Gen 9</li>
+            <li>This pokemon is not competitively relevant</li>
         </ol>
     </div>`
 }
