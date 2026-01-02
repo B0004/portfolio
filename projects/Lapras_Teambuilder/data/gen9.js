@@ -2017,9 +2017,6 @@ const SETDEX_SV = {
     "Balanced Hackmons Showdown Usage": {"ability":"Regenerator","item":"Assault Vest","nature":"Rash","evs":{"hp":252,"df":252,"sa":252,"sp":252},"moves":["U-turn","Stone Axe","Dragon Tail","Nuzzle"]},
     "CAP Showdown Usage": {"ability":"Flash Fire","item":"Leftovers","nature":"Timid","teraType":"Grass","evs":{"sa":252,"sd":4,"sp":252},"moves":["Earth Power","Magma Storm","Stealth Rock","Taunt"]}
   },
-  "Heatran-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Earth Eater","item":"Heatranite","nature":"Modest","teraType":"Fire","evs":{"hp":248,"sa":252,"sp":8},"ivs":{"at":0},"moves":["Magma Storm","Earth Power","Stealth Rock","Flash Cannon"]}
-  },
   "Giratina": {
     "Ubers Defog": {"ability":"Pressure","item":"Heavy-Duty Boots","nature":"Impish","teraType":"Fairy","evs":{"hp":252,"df":252,"sd":4},"moves":["Dragon Tail","Will-O-Wisp","Defog","Rest"]},
     "National Dex Ubers Physical Wall": {"ability":"Pressure","item":"Leftovers","nature":"Impish","teraType":"Fairy","evs":{"hp":252,"df":252,"sd":4},"moves":["Dragon Tail","Toxic","Defog","Rest"]},
@@ -4550,11 +4547,30 @@ const SETDEX_SV = {
     "1v1 Showdown Usage": {"ability":"Unaware","item":"Choice Band","nature":"Adamant","evs":{"hp":172,"at":140,"sd":196},"moves":["Earthquake","Wave Crash","Avalanche","Heavy Slam"]}
   },
   "Tatsugiri": {
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Storm Drain","item":"Tatsugirinite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sp":252,"sd":4},"moves":["Draco Meteor","Hydro Pump","Flip Turn","Rapid Spin"]},
+    "NU Offensive Spinner": {"ability":"Storm Drain","item":"White Herb","nature":"Timid","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"moves":["Nasty Plot","Draco Meteor","Surf","Rapid Spin"]},
+    "PU Nasty Plot": {"ability":"Storm Drain","item":"Heavy-Duty Boots","nature":"Timid","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"moves":["Nasty Plot","Draco Meteor","Surf","Rapid Spin"]},
+    "VGC 2025 Reg I Commander Support": {"level":50,"ability":"Commander","item":"Choice Scarf","nature":"Timid","teraType":"Ghost","ivs":{"at":0},"evs":{"hp":4,"sa":252,"sp":252},"moves":["Draco Meteor","Muddy Water","Icy Wind","Dragon Pulse"]}
+  },
+  "Tatsugiri-Droopy": {
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Storm Drain","item":"Tatsugirinite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sp":252,"sd":4},"moves":["Draco Meteor","Hydro Pump","Flip Turn","Rapid Spin"]},
+    "NU Offensive Spinner": {"ability":"Storm Drain","item":"White Herb","nature":"Timid","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"moves":["Nasty Plot","Draco Meteor","Surf","Rapid Spin"]},
+    "PU Nasty Plot": {"ability":"Storm Drain","item":"Heavy-Duty Boots","nature":"Timid","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"moves":["Nasty Plot","Draco Meteor","Surf","Rapid Spin"]},
+    "VGC 2025 Reg I Commander Support": {"level":50,"ability":"Commander","item":"Choice Scarf","nature":"Timid","teraType":"Ghost","ivs":{"at":0},"evs":{"hp":4,"sa":252,"sp":252},"moves":["Draco Meteor","Muddy Water","Icy Wind","Dragon Pulse"]}
+  },
+  "Tatsugiri-Stretchy": {
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Storm Drain","item":"Tatsugirinite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sp":252,"sd":4},"moves":["Draco Meteor","Hydro Pump","Flip Turn","Rapid Spin"]},
     "NU Offensive Spinner": {"ability":"Storm Drain","item":"White Herb","nature":"Timid","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"moves":["Nasty Plot","Draco Meteor","Surf","Rapid Spin"]},
     "PU Nasty Plot": {"ability":"Storm Drain","item":"Heavy-Duty Boots","nature":"Timid","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"moves":["Nasty Plot","Draco Meteor","Surf","Rapid Spin"]},
     "VGC 2025 Reg I Commander Support": {"level":50,"ability":"Commander","item":"Choice Scarf","nature":"Timid","teraType":"Ghost","ivs":{"at":0},"evs":{"hp":4,"sa":252,"sp":252},"moves":["Draco Meteor","Muddy Water","Icy Wind","Dragon Pulse"]}
   },
   "Tatsugiri-Curly-Mega": {
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Storm Drain","item":"Tatsugirinite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sp":252,"sd":4},"moves":["Draco Meteor","Hydro Pump","Flip Turn","Rapid Spin"]}
+  },
+  "Tatsugiri-Droopy-Mega": {
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Storm Drain","item":"Tatsugirinite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sp":252,"sd":4},"moves":["Draco Meteor","Hydro Pump","Flip Turn","Rapid Spin"]}
+  },
+  "Tatsugiri-Stretchy-Mega": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Storm Drain","item":"Tatsugirinite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sp":252,"sd":4},"moves":["Draco Meteor","Hydro Pump","Flip Turn","Rapid Spin"]}
   },
   "Annihilape": {
@@ -5641,7 +5657,7 @@ const SETDEX_SV = {
     "Almost Any Ability Showdown Usage": {"ability":"Prankster","item":"Focus Sash","nature":"Impish","evs":{"hp":248,"at":8,"df":252},"moves":["Sticky Web","Taunt","Circle Throw","Spikes"]}
   },
   "Golisopod-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Emergency Exit","item":"Golisopite","nature":"Adamant","teraType":"Bug","evs":{"hp":248,"at":172,"sd":80,"sp":8},"moves":["Swords Dance","Close Combat","Sucker Punch","Iron Head"]}
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Heatproof","item":"Golisopite","nature":"Adamant","teraType":"Bug","evs":{"hp":248,"at":252,"sd":8},"moves":["Swords Dance","Leech Life","Iron Head","Aqua Jet"]}
   },
   "Golurk-Mega": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Adaptability","item":"Golurkite","nature":"Adamant","teraType":"Ground","evs":{"hp":252,"at":252,"sd":4},"ivs":{"sp":0},"moves":["Stealth Rock","Poltergeist","Earthquake","Close Combat"]}
@@ -5659,10 +5675,12 @@ const SETDEX_SV = {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Mind's Eye","item":"Lucarionite Z","nature":"Timid","teraType":"Fighting","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Nasty Plot","Aura Sphere","Flash Cannon","Vacuum Wave"]}
   },
   "Excadrill-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Mold Breaker","item":"Excadrite","nature":"Jolly","teraType":"Ground","evs":{"at":252,"sd":4,"sp":252},"moves":["Earthquake","Iron Head","Rock Slide","Swords Dance"]}
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Sand Rush","item":"Excadrite","nature":"Jolly","teraType":"Ground","evs":{"at":252,"sd":4,"sp":252},"moves":["Earthquake","Iron Head","Rock Slide","Swords Dance"]}
   },
   "Chesnaught-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Bulletproof","item":"Chesnaughtite","nature":"Impish","teraType":"Grass","evs":{"hp":252,"df":20,"sd":236},"ivs":{"at":0},"moves":["Body Press","Iron Defense","Synthesis","Leech Seed"]}
+    "Legends Z-A OU Belly Drum Sweeper from pokeaimMD": {"ability":"Grassy Surge","item":"Chesnaughtite","nature":"Adamant","teraType":"Grass","evs":{"hp":252,"at":252,"df":4},"moves":["Belly Drum","Grassy Glide","Drain Punch","Knock Off"]},
+    "Legends Z-A OU Swords Dance Sweeper from pokeaimMD": {"ability":"Grassy Surge","item":"Chesnaughtite","nature":"Adamant","teraType":"Grass","evs":{"hp":4,"at":252,"sp":252},"moves":["Swords Dance","Grassy Glide","Close Combat","Knock Off"]},
+    "Legends Z-A OU IronPress from pokeaimmd.com": {"ability":"Grassy Surge","item":"Chesnaughtite","nature":"Impish","teraType":"Grass","evs":{"hp":252,"df":20,"sd":236},"ivs":{"at":0},"moves":["Body Press","Iron Defense","Synthesis","Leech Seed"]},
   },
   "Scrafty-Mega": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Shed Skin","item":"Scraftinite","nature":"Adamant","teraType":"Dark","evs":{"hp":52,"at":252,"sp":204},"moves":["Swords Dance","Iron Head","Drain Punch","Knock Off"]}
@@ -5677,7 +5695,7 @@ const SETDEX_SV = {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Regenerator","item":"Floettite","nature":"Timid","teraType":"Fairy","evs":{"hp":252,"sa":4,"sp":252},"ivs":{"at":0},"moves":["Moonblast","Calm Mind","Substitute","Protect"]}
   },
   "Clefable-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Serene Grace","item":"Clefablite","nature":"Modest","teraType":"Fairy","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Moonblast","Air Slash","Charge Beam","Fire Blast"]}
+    "Legends Z-A OU from pokeaimMD": {"ability":"Prankster","item":"Clefablite","nature":"Bold","teraType":"Fairy","evs":{"hp":252,"sd":4,"df":252},"ivs":{"at":0},"moves":["Calm Mind","Encore","Moonblast","Thunder Wave"]}
   },
   "Barbaracle-Mega": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Tough Claws","item":"Barbaracite","nature":"Adamant","teraType":"Rock","evs":{"at":252,"df":4,"sp":252},"moves":["Close Combat","Stone Edge","Night Slash","Shell Smash"]}
@@ -5701,13 +5719,14 @@ const SETDEX_SV = {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Contrary","item":"Malamarite","nature":"Calm","teraType":"Dark","evs":{"hp":252,"sd":212,"sp":44},"moves":["Close Combat","Stored Power","Rest","Sleep Talk"]}
   },
   "Drampa-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Drizzle","item":"Drampanite","nature":"Timid","teraType":"Normal","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Hydro Pump","Hyper Voice","Thunder","Earth Power"]}
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Adaptability","item":"Drampanite","nature":"Modest","teraType":"Normal","evs":{"sa":252,"df":4,"sp":252},"ivs":{"at":0},"moves":["Draco Meteor","Hyper Voice","Earth Power","Roost"]},
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Adaptability","item":"Drampanite","nature":"Modest","teraType":"Normal","evs":{"sa":252,"df":4,"sp":252},"ivs":{"at":0},"moves":["Draco Meteor","Hyper Voice","Flamethrower","Glare"]}
   },
   "Hawlucha-Mega": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Stamina","item":"Hawluchanite","nature":"Adamant","teraType":"Fighting","evs":{"hp":8,"at":252,"sp":248},"moves":["Swords Dance","Encore","Brave Bird","Close Combat"]}
   },
   "Dragonite-Mega": {
-    "Legends Z-A OU from pokeaimmd.com": {"ability":"Soul-Heart","item":"Dragoninite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Dragon Pulse","Flamethrower","Thunderbolt","Agility"]}
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Sheer Force","item":"Dragoninite","nature":"Timid","teraType":"Dragon","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Hurricane","Flamethrower","Ice Beam","Roost"]}
   },
   "Froslass-Mega (F)": {
     "Legends Z-A OU from pokeaimmd.com": {"ability":"Snow Warning","item":"Froslassite","nature":"Timid","teraType":"Ice","evs":{"df":4,"sa":252,"sp":252},"ivs":{"at":0},"moves":["Nasty Plot","Blizzard","Shadow Ball","Will-O-Wisp"]}
@@ -5746,6 +5765,9 @@ const SETDEX_SV = {
     "Legends Z-A OU by community": {"ability":"Volt Absorb","item":"Zeraorite","nature":"Jolly","teraType":"Electric","evs":{"at":252,"sd":4,"sp":252},"moves":["Bulk Up","Plasma Fists","Close Combat","Play Rough"]}
   },
   "Glimmora-Mega": {
-    "Legends Z-A OU by community": {"ability":"Rocky Payload","item":"Glimmoranite","nature":"Modest","teraType":"Rock","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Meteor Beam","Power Gem","Earth Power","Rock Polish"]}
+    "Legends Z-A OU by pokeaimMD": {"ability":"Levitate","item":"Glimmoranite","nature":"Timid","teraType":"Rock","evs":{"sa":252,"sd":4,"sp":252},"ivs":{"at":0},"moves":["Mortal Spin","Power Gem","Earth Power","Dazzling Gleam"]}
+  },
+  "Heatran-Mega": {
+    "Legends Z-A OU from pokeaimmd.com": {"ability":"Filter","item":"Heatranite","nature":"Modest","teraType":"Fire","evs":{"hp":248,"sa":252,"sp":8},"ivs":{"at":0},"moves":["Magma Storm","Earth Power","Stealth Rock","Flash Cannon"]}
   }
 };

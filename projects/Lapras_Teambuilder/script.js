@@ -22,9 +22,7 @@ function detectCurrentPage() {
     
     return 'unknown';
 }
-function updateUIForPage(page) {
-    console.log('Current page:', page);
-    
+function updateUIForPage(page) {    
     switch(page) {
         case 'tb-editor':
             // Show cards if pokemon is selected
@@ -216,8 +214,91 @@ function normalizePokemonName(name) {
     .replace(/'/g, "");
 }
 
+// Hardcoded types for Pokemon with special naming or API issues
+const HARDCODED_POKEMON_TYPES = {
+  // Silvally type forms
+  'silvally-bug': ['bug'],
+  'silvally-dark': ['dark'],
+  'silvally-dragon': ['dragon'],
+  'silvally-electric': ['electric'],
+  'silvally-fairy': ['fairy'],
+  'silvally-fighting': ['fighting'],
+  'silvally-fire': ['fire'],
+  'silvally-flying': ['flying'],
+  'silvally-ghost': ['ghost'],
+  'silvally-grass': ['grass'],
+  'silvally-ground': ['ground'],
+  'silvally-ice': ['ice'],
+  'silvally-poison': ['poison'],
+  'silvally-psychic': ['psychic'],
+  'silvally-rock': ['rock'],
+  'silvally-steel': ['steel'],
+  'silvally-water': ['water'],
+  
+  // Arceus type forms
+  'arceus-bug': ['bug'],
+  'arceus-dark': ['dark'],
+  'arceus-dragon': ['dragon'],
+  'arceus-electric': ['electric'],
+  'arceus-fairy': ['fairy'],
+  'arceus-fighting': ['fighting'],
+  'arceus-fire': ['fire'],
+  'arceus-flying': ['flying'],
+  'arceus-ghost': ['ghost'],
+  'arceus-grass': ['grass'],
+  'arceus-ground': ['ground'],
+  'arceus-ice': ['ice'],
+  'arceus-poison': ['poison'],
+  'arceus-psychic': ['psychic'],
+  'arceus-rock': ['rock'],
+  'arceus-steel': ['steel'],
+  'arceus-water': ['water'],
+  
+  // Tauros Paldea forms
+  'tauros-paldea-combat': ['fighting'],
+  'tauros-paldea-blaze': ['fighting', 'fire'],
+  'tauros-paldea-aqua': ['fighting', 'water'],
+  
+  // Necrozma forms
+  'necrozma-dusk-mane': ['psychic', 'steel'],
+  'necrozma-dawn-wings': ['psychic', 'ghost'],
+  'necrozma-ultra': ['psychic', 'dragon'],
+  
+  // Ogerpon forms
+  'ogerpon-wellspring': ['grass', 'water'],
+  'ogerpon-hearthflame': ['grass', 'fire'],
+  'ogerpon-cornerstone': ['grass', 'rock'],
+  'ogerpon-wellspring-mask': ['grass', 'water'],
+  'ogerpon-hearthflame-mask': ['grass', 'fire'],
+  'ogerpon-cornerstone-mask': ['grass', 'rock'],
+  
+};
+
 async function getPokemonTypes(curName) {
   const apiName = normalizePokemonName(curName);
+
+  // Check hardcoded types first (for special Pokemon)
+  if (HARDCODED_POKEMON_TYPES[apiName]) {
+    console.log("Using hardcoded types for:", apiName);
+    
+    // Still check/use cache
+    if (pokemonTypeMemoryCache[apiName]) {
+      return pokemonTypeMemoryCache[apiName];
+    }
+    
+    const storageCache = loadPokemonTypeStorageCache();
+    if (storageCache[apiName]) {
+      pokemonTypeMemoryCache[apiName] = storageCache[apiName];
+      return storageCache[apiName];
+    }
+    
+    // Use hardcoded types
+    const types = HARDCODED_POKEMON_TYPES[apiName];
+    pokemonTypeMemoryCache[apiName] = types;
+    storageCache[apiName] = types;
+    savePokemonTypeStorageCache(storageCache);
+    return types;
+  }
 
   // memory cache
   if (pokemonTypeMemoryCache[apiName]) {
@@ -233,7 +314,7 @@ async function getPokemonTypes(curName) {
     return storageCache[apiName];
   }
 
-  // fetch
+  // fetch (remove all the special case handling from Fallback 1.5)
   try {
     console.log("fetch:", apiName);
     let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
@@ -267,7 +348,6 @@ async function getPokemonTypes(curName) {
     const data = await res.json();
     const types = data.types.map(t => t.type.name.toLowerCase());
 
-    // Cache using the original normalized name
     pokemonTypeMemoryCache[apiName] = types;
     storageCache[apiName] = types;
     savePokemonTypeStorageCache(storageCache);
@@ -279,7 +359,6 @@ async function getPokemonTypes(curName) {
   }
 }
 async function updateTypeTable(force = false) {
-    console.log('updatetypetable');
   if (!force && !lookUpCurrentTeam()) {
     typeAside.style.display = "none";
     return;
@@ -355,7 +434,6 @@ function setObjectsEqual(a, b) {
 
 // Function to be called when mutations are observed
 function newPokemonChosen(pokemonName){
-
     cardPad.innerHTML = '';
 
         var setList = SETDEX_SV[pokemonName];
@@ -364,10 +442,9 @@ function newPokemonChosen(pokemonName){
         // present in the base form. Comparison checks all relevant fields (moves,
         // item, ability, nature, evs, ivs, teraType) so sets with same name but
         // different contents are treated as distinct.
-        if (setList) {
+        //if (setList) {
             // work with an entries array so we can prepend
-            let entries = Object.entries(setList);
-
+            let entries = Object.entries(setList || {});
             // check known mega suffixes; order here determines the relative order of prepended sets
             const megaSuffixes = ['-Mega', '-Mega-X', '-Mega-Y', '-Mega-Z'];
             const toPrepend = [];
@@ -381,7 +458,7 @@ function newPokemonChosen(pokemonName){
                     const exists = entries.some(([_n, obj]) => setObjectsEqual(obj, mObj));
                     if (!exists) {
                         toPrepend.push([mName, mObj]);
-                        // console.log(mName, mObj);
+                        console.log(mName, mObj);
                     }
                 }
             }
@@ -409,10 +486,13 @@ function newPokemonChosen(pokemonName){
                 }
                 setList = obj;
             }
-        }
+        //}
     
     if (setList === undefined) {
         if (pokemonName){
+            
+
+
             poopMon();
         }
         else{
@@ -690,10 +770,8 @@ function findModifiedTeam(oldTeams, newTeams) {
 
 // Function to retrieve and update team data
 function updateTeams() {
-    console.log("updateTeams called");
     const showdown_teams = localStorage.getItem('showdown_teams');
     if (!showdown_teams || showdown_teams === strAllTeams) {
-        console.log("updateTeams: returning early (no changes detected)");
         return;
     }
     
@@ -705,7 +783,6 @@ function updateTeams() {
     console.log("Modified team index:", modifiedTeam);
     if (modifiedTeam !== null) {
         currentTeam = modifiedTeam;
-        console.log("Calling updateTypeTable from updateTeams");
         updateTypeTable(true);
     }
 }
@@ -727,7 +804,6 @@ landingPage();
 // Listen for localStorage changes (from Pokémon Showdown)
 window.addEventListener('storage', (e) => {
     if (e.key === 'showdown_teams' && e.newValue && e.newValue !== strAllTeams) {
-        console.log("Storage event detected");
         updateTeams();
     }
 });
@@ -739,11 +815,9 @@ window.addEventListener('storage', (e) => {
 // type table when needed.
 let _debounceTimer = null;
 function debouncedUpdateTeams(delay = 150){
-    console.log("debouncedUpdateTeams triggered");
     if (_debounceTimer) clearTimeout(_debounceTimer);
     _debounceTimer = setTimeout(() => {
         try { 
-            console.log("Debounce timer fired, calling updateTeams");
             updateTeams(); 
         } catch (err) { 
             console.error("Error in updateTeams:", err);
@@ -763,12 +837,9 @@ document.body.addEventListener('click', (ev) => {
             
             // Now set currentTeam
             currentTeam = teamIndex;
-            console.log('Team selected - Index:', currentTeam);
             
             if (allTeams[currentTeam]) {
-                console.log('Team name:', allTeams[currentTeam].teamName);
-                console.log('Team data:', allTeams[currentTeam]);
-                
+
                 // Force update the type table after a short delay to allow DOM to update
                 setTimeout(() => {
                     updateTypeTable(true);
