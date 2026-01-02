@@ -56,8 +56,10 @@ html.dark {
     #card-pad{
         display: flex;
         flex-wrap: wrap;
-        flex-grow: 1;
+        flex-grow: 0;
         justify-content: center;
+        gap:0;
+        height: fit-content;
     }
 
     .card {
@@ -235,7 +237,7 @@ html.dark {
 }
 .tier-row-header .tier-controls{
     display: flex;
-    gap: 8px;
+    gap: 0px;
     align-items: center;
 }
 .tier-collapse-btn{
@@ -261,3 +263,45 @@ html.dark {
     content: '\25BC'; /* down-pointing triangle */
     font-size: 16px;
 }
+
+/* Button header row for collapse/expand all */
+.button-header-row {
+    display: block;
+    width: 100%;
+}
+
+/* Toggle button base styles */
+.tier-toggle-btn {
+box-shadow: 0 1px 2px rgba(0, 0, 0, .2), inset 0 -1px 2px rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    display: inline-block;
+    color: #222222;
+    text-shadow: 0 1px 0 white;
+    border: 1px solid #AAAAAA;
+    background: #e3e3e3;
+    background: linear-gradient(to bottom, #f6f6f6, #d3d3d3);
+    font-size: 9pt;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 5px 10px;
+}
+
+/* Collapse state (red) */
+/* .tier-toggle-btn.collapse-state {
+    background: #f44336;
+}
+
+.tier-toggle-btn.collapse-state:hover {
+    background: #da190b;
+}
+
+/* Expand state (green) */
+/* .tier-toggle-btn.expand-state {
+    background: #4CAF50;
+}
+
+.tier-toggle-btn.expand-state:hover {
+    background: #45a049;
+} */ 

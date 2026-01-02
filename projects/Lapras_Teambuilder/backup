@@ -535,24 +535,15 @@ function newPokemonChosen(pokemonName){
         }
 
         // Clear current cards
-// Clear current cards
-cardPad.innerHTML = '';
+        cardPad.innerHTML = '';
 
-// Create button header row with single toggle button
-const buttonHeaderRow = document.createElement('div');
-buttonHeaderRow.className = 'button-header-row';
-
-const toggleBtn = document.createElement('button');
-toggleBtn.textContent = 'Collapse All';
-toggleBtn.className = 'tier-toggle-btn collapse-state';
-toggleBtn.dataset.state = 'collapse'; // Track current state
-
-buttonHeaderRow.appendChild(toggleBtn);
-cardPad.appendChild(buttonHeaderRow);
-
-// Load from localStorage (synchronous)
-const collapsedState = JSON.parse(localStorage.getItem('tierCollapsed') || '{}');
-console.log('Loaded tier state:', collapsedState);
+        // Load persisted collapsed state from chrome.storage.local
+        let collapsedState = {};
+        chrome.storage.local.get('tierCollapsed', (result) => {
+            if (result.tierCollapsed) {
+                collapsedState = result.tierCollapsed;
+            }
+        });
 
         // Helper to render a row for a tier (uses CSS classes and collapse control)
         function renderRow(label, rows) {
@@ -607,17 +598,13 @@ console.log('Loaded tier state:', collapsedState);
             }
 
             // Toggle collapse on click
-collapseBtn.addEventListener('click', (ev) => {
-    ev.stopPropagation();
-    const isCollapsed = row.classList.toggle('collapsed');
-    collapseBtn.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-    
-    // Read, modify, save to localStorage
-    const state = JSON.parse(localStorage.getItem('tierCollapsed') || '{}');
-    state[label] = isCollapsed;
-    localStorage.setItem('tierCollapsed', JSON.stringify(state));
-    console.log(`Tier "${label}" marked as ${isCollapsed ? 'unfavored' : 'favored'}`, state);
-});
+            collapseBtn.addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                const isCollapsed = row.classList.toggle('collapsed');
+                collapseBtn.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                collapsedState[label] = isCollapsed;
+                chrome.storage.local.set({ tierCollapsed: collapsedState });
+            });
 
             // Clicking anywhere in the tier row (except a card) should toggle collapse
             row.addEventListener('click', (e) => {
@@ -629,59 +616,6 @@ collapseBtn.addEventListener('click', (ev) => {
 
             cardPad.appendChild(row);
         }
-
-// Add toggle button functionality
-toggleBtn.addEventListener('click', () => {
-    const allTierRows = cardPad.querySelectorAll('.tier-row');
-    
-    if (toggleBtn.dataset.state === 'expand') {
-    // Expand all tiers
-    allTierRows.forEach(row => {
-        row.classList.remove('collapsed');
-        const btn = row.querySelector('.tier-collapse-btn');
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-    });
-    
-    // Mark ALL tiers as favored
-// Mark ALL tiers as favored
-const state = JSON.parse(localStorage.getItem('tierCollapsed') || '{}');
-allTierRows.forEach(row => {
-    const label = row.querySelector('.tier-label')?.textContent?.split(' (')[0];
-    if (label) state[label] = false;
-});
-localStorage.setItem('tierCollapsed', JSON.stringify(state));
-console.log('All tiers marked as favored', state);
-    
-    // Change button to collapse mode
-    toggleBtn.textContent = 'Collapse All';
-    toggleBtn.dataset.state = 'collapse';
-    toggleBtn.className = 'tier-toggle-btn collapse-state';
-        
-    } else {
-        // Collapse all tiers
-        allTierRows.forEach(row => {
-            row.classList.add('collapsed');
-            const btn = row.querySelector('.tier-collapse-btn');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-        });
-        
-        // Update storage - set all as collapsed
-// Mark ALL tiers as unfavored
-const state = JSON.parse(localStorage.getItem('tierCollapsed') || '{}');
-allTierRows.forEach(row => {
-    const label = row.querySelector('.tier-label')?.textContent?.split(' (')[0];
-    if (label) state[label] = true;
-});
-localStorage.setItem('tierCollapsed', JSON.stringify(state));
-console.log('All tiers marked as unfavored', state);
-        
-        // Change button back to expand mode
-// Change button back to expand mode
-toggleBtn.textContent = 'Expand All';
-toggleBtn.dataset.state = 'expand';
-toggleBtn.className = 'tier-toggle-btn expand-state';
-    }
-});
 
         // Render tiers in order
         for (const t of tierOrder) {
