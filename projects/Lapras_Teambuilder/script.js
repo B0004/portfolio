@@ -1,11 +1,75 @@
+let currentPage = 'unknown'; // Track: 'tb-list', 'tb-summary', 'tb-editor', 'other'
+
+function detectCurrentPage() {
+    // Check if teambuilder tab is active
+    const teambuilderTab = document.querySelector('a.roomtab[href="/teambuilder"]');
+    const isTeambuilderActive = teambuilderTab?.classList.contains('cur');
+    
+    if (!isTeambuilderActive) {
+        return 'other'; // Home or other tabs
+    }
+    
+    // Check for unique elements in order (most specific to least specific)
+    if (document.querySelector('#room-teambuilder > div > div.teambar')) {
+        return 'tb-editor';
+    }
+    if (document.querySelector('#room-teambuilder > div > div > div.teamchartbox')) {
+        return 'tb-summary';
+    }
+    if (document.querySelector('#room-teambuilder > div.teampane')) {
+        return 'tb-list';
+    }
+    
+    return 'unknown';
+}
+function updateUIForPage(page) {
+    console.log('Current page:', page);
+    
+    switch(page) {
+        case 'tb-editor':
+            // Show cards if pokemon is selected
+            const pokemonInput = document.querySelector(POKESHOWDOWN_SELECTORS.pokemonInput);
+            if (pokemonInput?.value && currentPokemon !== pokemonInput.value) {
+                currentPokemon = pokemonInput.value;
+                newPokemonChosen(currentPokemon);
+            }
+            // Show type table
+            typeAside.style.display = 'block';
+            updateTypeTable(true);
+            break;
+            
+        case 'tb-summary':
+            // Show landing page
+            if (currentPokemon) {
+                landingPage();
+                currentPokemon = '';
+            }
+            // Show type table
+            typeAside.style.display = 'block';
+            updateTypeTable(true);
+            break;
+            
+        case 'tb-list':
+        case 'other':
+        case 'unknown':
+        default:
+            // Show landing page
+            if (currentPokemon) {
+                landingPage();
+                currentPokemon = '';
+            }
+            // Hide type table
+            typeAside.style.display = 'none';
+            break;
+    }
+}
+
 
 
 function getImgLink(type, str){
     if (type === "item"){
         return "https://www.serebii.net/itemdex/sprites/" + str.replace(/ /g, '').toLowerCase() + ".png";
     }
-
-
 }
 
 function formatEVs(ev){
@@ -123,128 +187,154 @@ function createCard(name, title, item, ability, nature, evs, ivs, teraType, move
     return card;
 }
 
-function updateTypeTable(force = false){
-    if (!force && !lookUpCurrentTeam()) {
-        typeAside.style.display = "none";
-        return;
-    }
+const pokemonTypeMemoryCache = {};
+const POKEMON_TYPE_STORAGE_KEY = "pokemonTypeCache";
 
-    typeAside.style.display = "block";
-
-    var weaknessCount = {
-        "normal": 0,
-        "fire": 0,
-        "water": 0,
-        "electric": 0,
-        "grass": 0,
-        "ice": 0,
-        "fighting": 0,
-        "poison": 0,
-        "ground": 0,
-        "flying": 0,
-        "psychic": 0,
-        "bug": 0,
-        "rock": 0,
-        "ghost": 0,
-        "dragon": 0,
-        "dark": 0,
-        "steel": 0,
-        "fairy": 0
-      }
-      var resistCount = {
-        "normal": 0,
-        "fire": 0,
-        "water": 0,
-        "electric": 0,
-        "grass": 0,
-        "ice": 0,
-        "fighting": 0,
-        "poison": 0,
-        "ground": 0,
-        "flying": 0,
-        "psychic": 0,
-        "bug": 0,
-        "rock": 0,
-        "ghost": 0,
-        "dragon": 0,
-        "dark": 0,
-        "steel": 0,
-        "fairy": 0
-      }
-    
-      // new loop
-
-    var team = allTeams[currentTeam]?.teamMembers;
-
-    if (!team || team.length === 0) {
-        return; // If team is null, undefined, or empty, return early
-    }
-
-    
-    for (const curMember of team) {
-
-        if (!curMember || !curMember.pokemonName){
-            continue;
-        }
-        else{
-            var curName = curMember.pokemonName;
-        }
-        if (curName){
-    
-            var pokemonTypes = pokedex[curName].types;
-            var multiplyer = checkAbilityWeakness(curMember.ability);
-    
-            let weak;
-    
-            if (multiplyer){ 
-                if (pokemonTypes.length == 1){
-                let type = pokemonTypes[0].toLowerCase();
-                weak = applyMultipliers(weaknessChart[type], multiplyer);
-                }
-                else if (pokemonTypes.length == 2){
-                    let type1 = pokemonTypes[0].toLowerCase();
-                    let type2 = pokemonTypes[1].toLowerCase();
-                    weak = applyMultipliers(multiplyValues(weaknessChart[type1], weaknessChart[type2]), multiplyer);
-                }
-            }
-            else{
-                if (pokemonTypes.length == 1){
-                    let type = pokemonTypes[0].toLowerCase();
-                    weak = weaknessChart[type];
-                }
-                else if (pokemonTypes.length == 2){
-                    let type1 = pokemonTypes[0].toLowerCase();
-                    let type2 = pokemonTypes[1].toLowerCase();
-                    weak = multiplyValues(weaknessChart[type1], weaknessChart[type2]);
-                }
-            }
-            for (let i in weak){
-                if (weak[i] < 1){
-                resistCount[i]++;
-                }
-                else if (weak[i] > 1){
-                weaknessCount[i]++;
-                }
-            }
-        }
-    }
-
-
-    const green = getGradient('green');
-    const red = getGradient('red');
-    const resistedTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(2) span');
-    const weakToTypes = document.querySelectorAll('#resistance-weakness-table tr td:nth-child(3) span');
-    
-    Object.keys(resistCount).forEach((type, i) => {
-        resistedTypes[i].textContent = resistCount[type];
-        resistedTypes[i].parentElement.style.backgroundColor = green[resistCount[type]];
-    });
-    Object.keys(weaknessCount).forEach((type, i) => {
-        weakToTypes[i].textContent = weaknessCount[type];
-        weakToTypes[i].parentElement.style.backgroundColor = red[weaknessCount[type]];
-    });
-  
+function loadPokemonTypeStorageCache() {
+  try {
+    return JSON.parse(localStorage.getItem(POKEMON_TYPE_STORAGE_KEY)) || {};
+  } catch {
+    return {};
+  }
 }
+
+function savePokemonTypeStorageCache(cache) {
+  localStorage.setItem(
+    POKEMON_TYPE_STORAGE_KEY,
+    JSON.stringify(cache)
+  );
+}
+
+
+
+function normalizePokemonName(name) {
+  return name
+    .toLowerCase()
+    .replace(/\./g, "")        // Remove periods first (Mr. Mime → Mr Mime)
+    .replace(/\s+/g, "-")      // Replace spaces with hyphens (Mr Mime → Mr-Mime)
+    .replace(/'/g, "")         // Remove apostrophes (both ' and ')
+    .replace(/'/g, "");
+}
+
+async function getPokemonTypes(curName) {
+  const apiName = normalizePokemonName(curName);
+
+  // memory cache
+  if (pokemonTypeMemoryCache[apiName]) {
+    console.log("memory cache");
+    return pokemonTypeMemoryCache[apiName];
+  }
+
+  // localStorage cache
+  const storageCache = loadPokemonTypeStorageCache();
+  if (storageCache[apiName]) {
+    console.log("localstorage cache");
+    pokemonTypeMemoryCache[apiName] = storageCache[apiName];
+    return storageCache[apiName];
+  }
+
+  // fetch
+  try {
+    console.log("fetch:", apiName);
+    let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
+    
+    // FALLBACK 1: If 404, try pokemon-species to get default variety
+    if (!res.ok && res.status === 404) {
+      console.log("Fallback 1: Trying pokemon-species for:", apiName);
+      const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${apiName}`);
+      
+      if (speciesRes.ok) {
+        const speciesData = await speciesRes.json();
+        const defaultVariety = speciesData.varieties.find(v => v.is_default);
+        
+        if (defaultVariety) {
+          const defaultName = defaultVariety.pokemon.name;
+          console.log(`Found default variety: ${defaultName}`);
+          res = await fetch(`https://pokeapi.co/api/v2/pokemon/${defaultName}`);
+        }
+      }
+    }
+    
+    // FALLBACK 2: If still 404 and has a dash, strip to base form
+    if (!res.ok && res.status === 404 && apiName.includes('-')) {
+      const baseName = apiName.split('-')[0];
+      console.log(`Fallback 2: Trying base form: ${baseName}`);
+      res = await fetch(`https://pokeapi.co/api/v2/pokemon/${baseName}`);
+    }
+    
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    const types = data.types.map(t => t.type.name.toLowerCase());
+
+    // Cache using the original normalized name
+    pokemonTypeMemoryCache[apiName] = types;
+    storageCache[apiName] = types;
+    savePokemonTypeStorageCache(storageCache);
+
+    return types;
+  } catch (e) {
+    console.error("Type fetch failed:", curName, e);
+    return null;
+  }
+}
+async function updateTypeTable(force = false) {
+    console.log('updatetypetable');
+  if (!force && !lookUpCurrentTeam()) {
+    typeAside.style.display = "none";
+    return;
+  }
+
+  typeAside.style.display = "block";
+
+  const weaknessCount = Object.fromEntries(
+    Object.keys(weaknessChart).map(t => [t, 0])
+  );
+  const resistCount = structuredClone(weaknessCount);
+
+  const team = allTeams[currentTeam]?.teamMembers;
+  if (!team?.length) return;
+
+  for (const curMember of team) {
+    const curName = curMember?.pokemonName;
+    if (!curName) continue;
+
+    const pokemonTypes = await getPokemonTypes(curName);
+    if (!pokemonTypes) continue;
+
+    const multiplier = checkAbilityWeakness(curMember.ability);
+    const weak = getTypeWeakness(pokemonTypes, multiplier);
+
+    for (const type in weak) {
+      if (weak[type] < 1) resistCount[type]++;
+      else if (weak[type] > 1) weaknessCount[type]++;
+    }
+  }
+
+  const green = getGradient("green");
+  const red = getGradient("red");
+
+  const resistedTypes = document.querySelectorAll(
+    "#resistance-weakness-table tr td:nth-child(2) span"
+  );
+  const weakToTypes = document.querySelectorAll(
+    "#resistance-weakness-table tr td:nth-child(3) span"
+  );
+
+  Object.keys(resistCount).forEach((type, i) => {
+    resistedTypes[i].textContent = resistCount[type];
+    resistedTypes[i].parentElement.style.backgroundColor =
+      green[resistCount[type]];
+  });
+
+  Object.keys(weaknessCount).forEach((type, i) => {
+    weakToTypes[i].textContent = weaknessCount[type];
+    weakToTypes[i].parentElement.style.backgroundColor =
+      red[weaknessCount[type]];
+  });
+}
+
+
 
 // helper to compare two set objects
 function setObjectsEqual(a, b) {
@@ -476,7 +566,7 @@ function landingPage(){
     </div>`
 
     typeAside.innerHTML = typeTableTemplate;
-    updateTypeTable();
+    updateTypeTable(true);
 }
 
 function poopMon(){
@@ -506,7 +596,7 @@ const POKESHOWDOWN_SELECTORS = {
 };
 
 let currentPokemon = "";
-let currentTeam = "";
+let currentTeam = null; // Now stores index number instead of team name
 
 const innerPad = document.createElement('div');
 const cardPad = document.createElement("div");
@@ -537,7 +627,7 @@ innerPad.appendChild(typeAside);
 outerPad.appendChild(innerPad);
 
 function processTeamsWithNames(teamsArray) {
-    return teamsArray.reduce((acc, teamString) => {
+    return teamsArray.map((teamString) => {
         // Split the team string by "]" character
         const parts = teamString.split(']');
 
@@ -551,24 +641,23 @@ function processTeamsWithNames(teamsArray) {
 
             if (index === 0) {
                 // Extract the team name from the first Pokémon (pokemonDetails[0])
-                nameOfTeam = pokemonDetails[0]; // This is the team name for the first Pokémon
-                pokemonDetails.shift(); // Remove the team name from the first Pokémon's details
+                nameOfTeam = pokemonDetails[0];
+                pokemonDetails.shift();
             }
             if (pokemonDetails.length < 12){
                 return null;
             }
 
-            // Map the separated Pokémon details to the appropriate fields (12 fields)
             const teamMember = {
                 nickname: pokemonDetails[0] || '',
-                pokemonName: pokemonDetails[1].toLowerCase().replace(/[\s-]/g, '') || pokemonDetails[0].toLowerCase().replace(/[\s-]/g, '' || ''),
+                pokemonName: pokemonDetails[1] || pokemonDetails[0] || '',
                 item: pokemonDetails[2] || '',
                 ability: pokemonDetails[3] || '',
                 moveset: pokemonDetails[4] || '',
                 nature: pokemonDetails[5] || '',
                 evSpread: pokemonDetails[6] || '',
                 gender: pokemonDetails[7] || '',
-                ivSpread: pokemonDetails[8] || '', // IV spread
+                ivSpread: pokemonDetails[8] || '',
                 shiny: pokemonDetails[9] || '',
                 level: pokemonDetails[10] || '',
                 teraType: pokemonDetails[11] || ''
@@ -577,29 +666,23 @@ function processTeamsWithNames(teamsArray) {
             return teamMember;
         });
 
-        // Set the team name correctly from the first Pokémon and add the team to the accumulator
-        acc[nameOfTeam || ''] = {
+        return {
+            teamName: nameOfTeam || '',
             teamFormat: teamFormat,
             teamMembers: teamMembers
         };
-
-        return acc;
-    }, {}); // Initialize the accumulator as an empty object
+    });
 }
-
-
-
-
 
 // Function to find which team was modified by comparing old and new team data
 function findModifiedTeam(oldTeams, newTeams) {
-    for (const teamName in newTeams) {
-        const oldTeam = oldTeams[teamName];
-        const newTeam = newTeams[teamName];
+    for (let i = 0; i < newTeams.length; i++) {
+        const oldTeam = oldTeams[i];
+        const newTeam = newTeams[i];
         
         // Team is new or has been modified
         if (!oldTeam || !deepEqual(oldTeam, newTeam)) {
-            return teamName;
+            return i; // Return index instead of name
         }
     }
     return null;
@@ -607,17 +690,22 @@ function findModifiedTeam(oldTeams, newTeams) {
 
 // Function to retrieve and update team data
 function updateTeams() {
+    console.log("updateTeams called");
     const showdown_teams = localStorage.getItem('showdown_teams');
-    if (!showdown_teams || showdown_teams === strAllTeams) return;
+    if (!showdown_teams || showdown_teams === strAllTeams) {
+        console.log("updateTeams: returning early (no changes detected)");
+        return;
+    }
     
     const oldTeams = allTeams;
     strAllTeams = showdown_teams;
     allTeams = processTeamsWithNames(strAllTeams.split('\n'));
     
-    // Find which team was modified
     const modifiedTeam = findModifiedTeam(oldTeams, allTeams);
-    if (modifiedTeam) {
+    console.log("Modified team index:", modifiedTeam);
+    if (modifiedTeam !== null) {
         currentTeam = modifiedTeam;
+        console.log("Calling updateTypeTable from updateTeams");
         updateTypeTable(true);
     }
 }
@@ -639,7 +727,7 @@ landingPage();
 // Listen for localStorage changes (from Pokémon Showdown)
 window.addEventListener('storage', (e) => {
     if (e.key === 'showdown_teams' && e.newValue && e.newValue !== strAllTeams) {
-        // Update teams using updateTeams which finds modified team
+        console.log("Storage event detected");
         updateTeams();
     }
 });
@@ -651,11 +739,46 @@ window.addEventListener('storage', (e) => {
 // type table when needed.
 let _debounceTimer = null;
 function debouncedUpdateTeams(delay = 150){
+    console.log("debouncedUpdateTeams triggered");
     if (_debounceTimer) clearTimeout(_debounceTimer);
     _debounceTimer = setTimeout(() => {
-        try { updateTeams(); } catch (err) { /* swallow */ }
+        try { 
+            console.log("Debounce timer fired, calling updateTeams");
+            updateTeams(); 
+        } catch (err) { 
+            console.error("Error in updateTeams:", err);
+        }
     }, delay);
 }
+//check for team click
+// Listen for team selection clicks on the team list page
+document.body.addEventListener('click', (ev) => {
+    // Check if click is on a team element or within one
+    const teamElement = ev.target.closest('div.team[data-value]');
+    if (teamElement) {
+        const teamIndex = parseInt(teamElement.getAttribute('data-value'), 10);
+        if (!isNaN(teamIndex)) {
+            // First, ensure allTeams is populated from localStorage
+            updateTeams();
+            
+            // Now set currentTeam
+            currentTeam = teamIndex;
+            console.log('Team selected - Index:', currentTeam);
+            
+            if (allTeams[currentTeam]) {
+                console.log('Team name:', allTeams[currentTeam].teamName);
+                console.log('Team data:', allTeams[currentTeam]);
+                
+                // Force update the type table after a short delay to allow DOM to update
+                setTimeout(() => {
+                    updateTypeTable(true);
+                }, 100);
+            } else {
+                console.log('Team not found in allTeams array. allTeams length:', allTeams.length);
+            }
+        }
+    }
+}, { capture: true });
 
 // Delegated listeners on the document body scoped to the teambuilder node.
 // We check `closest('#room-teambuilder')` so we only react to relevant UI.
@@ -683,30 +806,57 @@ document.body.addEventListener('click', (ev) => {
 // This reduces work compared to observing the entire document body.
 let teambuilderObserver = null;
 
+// Detect page changes on clicks (tab switches, navigation buttons)
+document.body.addEventListener('click', (ev) => {
+    // Small delay to let DOM update after click
+    setTimeout(() => {
+        const newPage = detectCurrentPage();
+        if (newPage !== currentPage) {
+            currentPage = newPage;
+            updateUIForPage(currentPage);
+        }
+    }, 50);
+}, { capture: true });
+
 function handleTeambuilderMutations(mutationsList) {
     if (mutationsList.some(m => ['card-pad', 'type-weakness-tab'].includes(m.target?.id))) return;
 
-    // Update current team from DOM (team name input exists on page 2)
-    const teamNameInput = document.querySelector(POKESHOWDOWN_SELECTORS.teamInput);
-    if (teamNameInput) currentTeam = teamNameInput.value;
-
-    // Check if on teambuilder tab and pokemon is selected (page 3)
-    const pokemonInput = document.querySelector(POKESHOWDOWN_SELECTORS.pokemonInput);
-    const teambuilderTab = document.querySelector('a.roomtab[href="/teambuilder"]');
-
-    if (pokemonInput && teambuilderTab?.classList.contains('cur')) {
-        if (currentPokemon !== pokemonInput.value) {
-            currentPokemon = pokemonInput.value;
+    // Detect current page
+    const newPage = detectCurrentPage();
+    const pageChanged = newPage !== currentPage;
+    
+    if (pageChanged) {
+        currentPage = newPage;
+        updateUIForPage(currentPage);
+    }
+    
+    // Check for pokemon changes on tb-editor (even if page didn't change)
+    if (currentPage === 'tb-editor') {
+        const pokemonInput = document.querySelector(POKESHOWDOWN_SELECTORS.pokemonInput);
+        const newPokemonName = pokemonInput?.value || '';
+        
+        if (newPokemonName && newPokemonName !== currentPokemon) {
+            // Pokemon changed - show cards
+            currentPokemon = newPokemonName;
             newPokemonChosen(currentPokemon);
+        } else if (!newPokemonName && currentPokemon) {
+            // No pokemon selected anymore - show landing page
+            currentPokemon = '';
+            landingPage();
         }
     } else {
+        // Not on editor - clear currentPokemon if it was set
         if (currentPokemon) {
-            landingPage();
             currentPokemon = '';
+            landingPage();
         }
     }
+    
+    // Trigger team updates when mutations occur in teambuilder
+    if (currentPage === 'tb-editor' || currentPage === 'tb-summary') {
+        debouncedUpdateTeams(150);
+    }
 }
-
 // Attach an observer to the teambuilder node when it appears
 function attachTeambuilderObserver(node) {
     if (teambuilderObserver) return;
